@@ -36,3 +36,7 @@ pnpm lint
 ## Contributing
 
 All contributions are welcomed, but firstly read our [Contribution Guidelines](https://github.com/mindenit/nure-schedule-vue/blob/main/CONTRIBUTING.md).
+
+## License
+
+Nure Schedule is [GNU GPLv3.0 licenced](https://github.com/mindenit/nure-schedule-vue/blob/main/LICENSE)
