@@ -88,6 +88,9 @@ devDependencies:
   prettier:
     specifier: ^3.0.3
     version: 3.1.1
+  sass:
+    specifier: ^1.69.7
+    version: 1.69.7
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
@@ -96,7 +99,7 @@ devDependencies:
     version: 5.3.3
   vite:
     specifier: ^5.0.11
-    version: 5.0.11(@types/node@18.19.6)
+    version: 5.0.11(@types/node@18.19.6)(sass@1.69.7)
   vue-tsc:
     specifier: ^1.8.25
     version: 1.8.27(typescript@5.3.3)
@@ -1641,7 +1644,7 @@ packages:
       '@babel/core': 7.23.7
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.23.7)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.23.7)
-      vite: 5.0.11(@types/node@18.19.6)
+      vite: 5.0.11(@types/node@18.19.6)(sass@1.69.7)
       vue: 3.4.10(typescript@5.3.3)
     transitivePeerDependencies:
       - supports-color
@@ -1657,7 +1660,7 @@ packages:
       vite: ^4.0.0 || ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.11(@types/node@18.19.6)
+      vite: 5.0.11(@types/node@18.19.6)(sass@1.69.7)
       vue: 3.4.10(typescript@5.3.3)
     dev: true
 
@@ -3435,6 +3438,13 @@ packages:
     engines: { node: '>= 4' }
     dev: true
 
+  /immutable@4.3.4:
+    resolution:
+      {
+        integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==
+      }
+    dev: true
+
   /import-fresh@3.3.0:
     resolution:
       {
@@ -4944,6 +4954,19 @@ packages:
       }
     dev: true
 
+  /sass@1.69.7:
+    resolution:
+      {
+        integrity: sha512-rzj2soDeZ8wtE2egyLXgOOHQvaC2iosZrkF6v3EUG+tBwEvhqUCzm0VP3k9gHF9LXbSrRhT5SksoI56Iw8NPnQ==
+      }
+    engines: { node: '>=14.0.0' }
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.3.4
+      source-map-js: 1.0.2
+    dev: true
+
   /semver@5.7.2:
     resolution:
       {
@@ -5517,7 +5540,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite@5.0.11(@types/node@18.19.6):
+  /vite@5.0.11(@types/node@18.19.6)(sass@1.69.7):
     resolution:
       {
         integrity: sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==
@@ -5552,6 +5575,7 @@ packages:
       esbuild: 0.19.11
       postcss: 8.4.33
       rollup: 4.9.4
+      sass: 1.69.7
     optionalDependencies:
       fsevents: 2.3.3
     dev: true

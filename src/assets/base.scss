@@ -1,0 +1,136 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --vt-c-light-cyan: #bcf3ff;
+  --vt-c-dark-indigo: #381e72;
+  --vt-c-light-lavender: #e6e0e9;
+  --vt-c-dark-teal: #445458;
+  --vt-c-white: #ffffff;
+  --vt-c-black: #000000;
+
+  --vt-c-brown: #601410;
+  --vt-c-red: #b3261e;
+  --vt-c-light-red: #f2b8b5;
+
+  --vt-c-light-gray-2: #e0eceb;
+  --vt-c-light-gray-3: #ccc2dc;
+  --vt-c-light-gray-4: #f7feff;
+
+  --vt-c-dark-purple: #4a4458;
+  --vt-c-dark-purple-3: #1d192b;
+
+  --vt-c-purple: #625b71;
+  --vt-c-dark-purple-2: #4f378b;
+  --vt-c-light-purple: #cac4d0;
+  --vt-c-light-purple-2: #eaddff;
+
+  --vt-c-almost-black: #211f26;
+  --vt-c-almost-black-2: #1d1b20;
+  --vt-c-almost-black-3: #191919;
+  --vt-c-almost-black-4: #141218;
+
+  --vt-c-light-gray: #eff6f7;
+  --vt-c-dark-gray: #49454f;
+  --vt-c-medium-gray: #808080;
+
+  --vt-c-blue: #5086a4;
+  --vt-c-light-blue: #def3f8;
+  --vt-c-light-blue-2: #edf3f7;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-primary: var(--vt-c-blue);
+  --color-primary-text: var(--vt-c-white);
+  --color-secondary: var(--vt-c-purple);
+  --color-secondary-container: var(--vt-c-light-blue);
+  --color-surface-container: var(--vt-c-light-blue-2);
+  --color-navbar-chip: var(--vt-c-light-blue);
+  --color-modal-bg: var(--vt-c-white);
+  --color-modal-close-element: var(--vt-c-black);
+  --color-active-card: var(--vt-c-light-gray);
+  --color-app-background: var(--vt-c-light-gray-4);
+  --color-window-background: var(--vt-c-white);
+  --color-surface: var(--vt-c-light-gray-4);
+  --color-surface-variant: var(--vt-c-light-gray-2);
+  --color-desktop-header: var(--vt-c-light-gray-4);
+  --color-text: var(--vt-c-dark-gray);
+  --color-text-darker: var(--vt-c-almost-black-2);
+  --color-text-contrast: var(--vt-c-black);
+  --color-text-calendar: var(--vt-c-medium-gray);
+  --color-emoji-color: var(--vt-c-dark-purple);
+  --color-iconColor: var(--vt-c-dark-gray);
+  --color-bgError: var(--vt-c-red);
+  --color-textError: var(--vt-c-white);
+  --color-outline: var(--vt-c-light-purple);
+  --color-primaryContainer: var(--vt-c-light-purple-2);
+  --color-onPrimaryContainer: var(--vt-c-dark-purple-2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: var(--vt-c-light-cyan);
+    --color-primary-text: var(--vt-c-dark-indigo);
+    --color-secondary: var(--vt-c-light-gray-3);
+    --color-secondary-container: var(--vt-c-dark-purple);
+    --color-surface-container: var(--vt-c-almost-black);
+    --color-navbar-chip: var(--vt-c-dark-teal);
+    --color-modal-bg: var(--vt-c-black);
+    --color-modal-close-element: var(--vt-c-white);
+    --color-active-card: var(--vt-c-almost-black-3);
+    --color-app-background: var(--vt-c-almost-black-4);
+    --color-window-background: var(--vt-c-almost-black-4);
+    --color-surface: var(--vt-c-almost-black-2);
+    --color-surface-variant: var(--vt-c-dark-purple-3);
+    --color-desktop-header: var(--vt-c-black);
+    --color-text: var(--vt-c-light-purple);
+    --color-text-darker: var(--vt-c-white);
+    --color-text-contrast: var(--vt-c-white);
+    --color-text-calendar: var(--vt-c-medium-gray);
+    --color-emoji-color: var(--vt-c-light-lavender);
+    --color-iconColor: var(--vt-c-light-purple);
+    --color-bgError: var(--vt-c-light-red);
+    --color-textError: var(--vt-c-brown);
+    --color-outline: var(--vt-c-light-purple);
+    --color-primaryContainer: var(--vt-c-dark-purple-2);
+    --color-onPrimaryContainer: var(--vt-c-light-purple-2);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+body {
+  min-height: 100dvh;
+  color: var(--color-text);
+  background: var(--color-app-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
