@@ -66,58 +66,32 @@
   --color-onPrimaryContainer: var(--vt-c-dark-purple-2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: var(--vt-c-light-cyan);
-    --color-primary-text: var(--vt-c-dark-indigo);
-    --color-secondary: var(--vt-c-light-gray-3);
-    --color-secondary-container: var(--vt-c-dark-purple);
-    --color-surface-container: var(--vt-c-almost-black);
-    --color-navbar-chip: var(--vt-c-dark-teal);
-    --color-modal-bg: var(--vt-c-black);
-    --color-modal-close-element: var(--vt-c-white);
-    --color-active-card: var(--vt-c-almost-black-3);
-    --color-app-background: var(--vt-c-almost-black-4);
-    --color-window-background: var(--vt-c-almost-black-4);
-    --color-surface: var(--vt-c-almost-black-2);
-    --color-surface-variant: var(--vt-c-dark-purple-3);
-    --color-desktop-header: var(--vt-c-black);
-    --color-text: var(--vt-c-light-purple);
-    --color-text-darker: var(--vt-c-white);
-    --color-text-contrast: var(--vt-c-white);
-    --color-text-calendar: var(--vt-c-medium-gray);
-    --color-emoji-color: var(--vt-c-light-lavender);
-    --color-iconColor: var(--vt-c-light-purple);
-    --color-bgError: var(--vt-c-light-red);
-    --color-textError: var(--vt-c-brown);
-    --color-outline: var(--vt-c-light-purple);
-    --color-primaryContainer: var(--vt-c-dark-purple-2);
-    --color-onPrimaryContainer: var(--vt-c-light-purple-2);
-  }
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-}
-
-img,
-picture,
-svg,
-video {
-  display: block;
-  max-width: 100%;
-}
-
-input,
-textarea,
-button,
-select {
-  font: inherit;
+.dark {
+  --color-primary: var(--vt-c-light-cyan);
+  --color-primary-text: var(--vt-c-dark-indigo);
+  --color-secondary: var(--vt-c-light-gray-3);
+  --color-secondary-container: var(--vt-c-dark-purple);
+  --color-surface-container: var(--vt-c-almost-black);
+  --color-navbar-chip: var(--vt-c-dark-teal);
+  --color-modal-bg: var(--vt-c-black);
+  --color-modal-close-element: var(--vt-c-white);
+  --color-active-card: var(--vt-c-almost-black-3);
+  --color-app-background: var(--vt-c-almost-black-4);
+  --color-window-background: var(--vt-c-almost-black-4);
+  --color-surface: var(--vt-c-almost-black-2);
+  --color-surface-variant: var(--vt-c-dark-purple-3);
+  --color-desktop-header: var(--vt-c-black);
+  --color-text: var(--vt-c-light-purple);
+  --color-text-darker: var(--vt-c-white);
+  --color-text-contrast: var(--vt-c-white);
+  --color-text-calendar: var(--vt-c-medium-gray);
+  --color-emoji-color: var(--vt-c-light-lavender);
+  --color-iconColor: var(--vt-c-light-purple);
+  --color-bgError: var(--vt-c-light-red);
+  --color-textError: var(--vt-c-brown);
+  --color-outline: var(--vt-c-light-purple);
+  --color-primaryContainer: var(--vt-c-dark-purple-2);
+  --color-onPrimaryContainer: var(--vt-c-light-purple-2);
 }
 
 body {
