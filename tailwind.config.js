@@ -30,6 +30,9 @@ export default {
         outline: 'var(--color-outline)',
         'primary-container': 'var(--color-primaryContainer)',
         'on-primary-container': 'var(--color-onPrimaryContainer)'
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif']
       }
     }
   },

@@ -11,6 +11,13 @@
   font-weight: normal;
 }
 
+button {
+  @apply cursor-pointer;
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
 a,
 .green {
   text-decoration: none;

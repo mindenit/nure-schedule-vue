@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTheme } from '@/core/composables'
+import { Button } from '@/components/ui/Button'
 
 defineProps<{
   msg: string
@@ -11,7 +12,7 @@ const { toggleTheme } = useTheme()
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
-    <button @click="toggleTheme()">Toggle theme</button>
+    <Button variant="text" @click="toggleTheme()">Toggle theme</Button>
   </div>
 </template>
 
