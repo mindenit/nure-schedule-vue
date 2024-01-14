@@ -32,7 +32,8 @@ export default {
         'on-primary-container': 'var(--color-onPrimaryContainer)'
       },
       fontFamily: {
-        roboto: ['Roboto', 'sans-serif']
+        roboto: ['Roboto', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif']
       }
     }
   },
