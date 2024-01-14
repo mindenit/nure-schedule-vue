@@ -1,18 +1,27 @@
 <script lang="ts" setup>
 interface ButtonProps {
   variant?: 'filled' | 'outlined' | 'text'
+  type?: 'default' | 'icon'
 }
 
-const props = withDefaults(defineProps<ButtonProps>(), { variant: 'filled' })
+const props = withDefaults(defineProps<ButtonProps>(), { variant: 'filled', type: 'default' })
 </script>
 <template>
-  <button :class="`Button variant-${props.variant}`">
-    <slot />
+  <button :class="`Button variant-${props.variant} type-${props.type}`">
+    <slot></slot>
   </button>
 </template>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .Button {
-  @apply inline-flex flex-row items-center justify-center text-center shrink-0 font-roboto text-sm leading-5 tracking-tight gap-2 px-6 py-2 rounded-full;
+  @apply inline-flex flex-row items-center justify-center text-center shrink-0 font-roboto text-sm leading-5 tracking-tight rounded-full;
+
+  &:where(.type-default) {
+    @apply gap-2 px-6 py-2;
+  }
+
+  &:where(.type-icon) {
+    @apply p-2 size-10;
+  }
 
   &:where(.variant-filled) {
     @apply text-primary-foreground bg-primary;
