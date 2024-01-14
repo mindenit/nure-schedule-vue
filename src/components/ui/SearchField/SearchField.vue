@@ -12,9 +12,9 @@ const emit = defineEmits(['update:modelValue'])
 const model = useVModel(props, 'modelValue', emit)
 </script>
 <template>
-  <div class="Container flex justify-between items-center w-full p-[15px_15px_15px_20px]">
+  <div class="SearchFieldContainer flex justify-between items-center w-full p-[15px_15px_15px_20px]">
     <input
-      class="InputField font-bold text-xl leading-6 w-full tracking-tight border-none outline-none bg-transparent"
+      class="SearchField"
       type="text"
       :name="props.name"
       v-model="model"
@@ -23,11 +23,11 @@ const model = useVModel(props, 'modelValue', emit)
   </div>
 </template>
 <style lang="css" scoped>
-.Container {
+.SearchFieldContainer {
   @apply bg-secondary-container rounded-3xl;
 }
-.InputField {
-  @apply text-contrast font-montserrat;
+.SearchField {
+  @apply text-contrast font-montserrat font-bold text-xl leading-6 w-full tracking-tight border-none outline-none bg-transparent;
 }
 .Icon {
   @apply text-emoji;
