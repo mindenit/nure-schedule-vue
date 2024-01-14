@@ -25,14 +25,15 @@ export default {
         calendar: 'var(--vt-c-medium-gray)',
         emoji: 'var(--color-iconColor)',
         icon: 'var(--color-bgError)',
-        'error-bg': 'var(--color-textError)',
+        'error-bg': 'var(--color-bgError)',
         'error-text': 'var(--color-textError)',
         outline: 'var(--color-outline)',
         'primary-container': 'var(--color-primaryContainer)',
         'on-primary-container': 'var(--color-onPrimaryContainer)'
       },
       fontFamily: {
-        roboto: ['Roboto', 'sans-serif']
+        roboto: ['Roboto', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif']
       }
     }
   },
