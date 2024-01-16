@@ -17,23 +17,13 @@ const model = useVModel(props, 'modelValue', emit)
 
 <template>
   <div class="flex flex-col relative">
-    <input
-      class="TextField"
-      :type="props.type"
-      :id="props.id"
-      :placeholder="props.placeholder"
-      v-model="model"
-    />
-    <label
-      class="Placeholder"
-      :id="props.id"
-      :for="props.id"
-    >
-      <div class="Text bg-transparent text-xl leading-6 font-bold">
-        {{ props.placeholder }}
+    <input class="TextField" :type="type" :id="id" :placeholder="placeholder" v-model="model" />
+    <label class="Placeholder" :id="id" :for="id">
+      <div class="Text">
+        {{ placeholder }}
       </div>
     </label>
-    <div class="ErrorMessage text-xs font-light" v-if="props.error !== null">{{ error }}</div>
+    <div class="ErrorMessage" v-if="error !== null">{{ error }}</div>
   </div>
 </template>
 
@@ -43,7 +33,7 @@ const model = useVModel(props, 'modelValue', emit)
 }
 
 .Text {
-  @apply text-calendar font-montserrat px-2 py-0;
+  @apply text-calendar font-montserrat px-2 py-0 bg-transparent text-xl leading-6 font-bold;
   transform: translate(0);
   transition:
     transform 0.15s ease-out,
@@ -75,6 +65,6 @@ const model = useVModel(props, 'modelValue', emit)
 }
 
 .ErrorMessage {
-  @apply font-roboto text-error-bg;
+  @apply font-roboto text-error-bg text-xs font-light;
 }
 </style>
