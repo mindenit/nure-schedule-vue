@@ -36,7 +36,7 @@ const { icon, toggle } = useTheme()
           {{ elem.name }}
         </NavbarItem>
 
-        <Button variant="text" type="icon">
+        <Button variant="text" appearance="icon">
           <Icon :icon="icon" @click="toggle()" />
         </Button>
       </div>
