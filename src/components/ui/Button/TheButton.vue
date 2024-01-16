@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 interface ButtonProps {
   variant?: 'filled' | 'outlined' | 'text'
-  type?: 'default' | 'icon'
+  appearance?: 'default' | 'icon'
 }
 
-const props = withDefaults(defineProps<ButtonProps>(), { variant: 'filled', type: 'default' })
+const props = withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'default' })
 </script>
 <template>
-  <button :class="`Button variant-${props.variant} type-${props.type}`">
+  <button :class="`Button variant-${props.variant} appearance-${props.appearance}`">
     <slot></slot>
   </button>
 </template>
@@ -15,11 +15,11 @@ const props = withDefaults(defineProps<ButtonProps>(), { variant: 'filled', type
 .Button {
   @apply inline-flex flex-row items-center justify-center text-center shrink-0 font-roboto text-sm leading-5 tracking-tight rounded-full;
 
-  &:where(.type-default) {
+  &:where(.appearance-default) {
     @apply gap-2 px-6 py-2;
   }
 
-  &:where(.type-icon) {
+  &:where(.appearance-icon) {
     @apply p-2 size-10;
   }
 
