@@ -36,7 +36,7 @@ const forwarded = useForwardPropsEmits(props, emits)
   }
 
   @media not (max-width: theme('screens.md')) {
-    @apply w-[400px] max-h-40 rounded-3xl left-1/2 top-1/2;
+    @apply w-[400px] min-h-40 rounded-3xl left-1/2 top-1/2;
     transform: translate(-50%, -50%);
   }
 
