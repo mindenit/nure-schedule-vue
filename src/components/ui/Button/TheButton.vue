@@ -4,10 +4,10 @@ interface ButtonProps {
   appearance?: 'default' | 'icon'
 }
 
-const props = withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'default' })
+withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'default' })
 </script>
 <template>
-  <button :class="`Button variant-${props.variant} appearance-${props.appearance}`">
+  <button :class="`Button variant-${variant} appearance-${appearance}`">
     <slot></slot>
   </button>
 </template>

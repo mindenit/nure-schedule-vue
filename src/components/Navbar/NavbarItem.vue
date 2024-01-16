@@ -1,18 +1,13 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import NavbarIcon from './NavbarIcon.vue'
 
-const props = withDefaults(defineProps<{ name: string; icon: string; isActive?: boolean }>(), {
+withDefaults(defineProps<{ name: string; icon: string; isActive?: boolean }>(), {
   isActive: false
-})
-
-const activeClass = computed(() => {
-  return props.isActive ? 'active' : ''
 })
 </script>
 <template>
-  <RouterLink :to="{ name }" :class="`NavbarItem ${activeClass}`">
+  <RouterLink :to="{ name }" :class="[{ isActive: 'active' }, 'NavbarItem']">
     <NavbarIcon :icon="icon" />
     <slot></slot>
   </RouterLink>
