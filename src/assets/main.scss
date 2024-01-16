@@ -13,3 +13,38 @@ button {
 #app {
   @apply h-dvh;
 }
+
+.Container {
+  width: min(100% - 30px, 1300px);
+  margin-inline: auto;
+}
+
+.CardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-width: 1px;
+  border-style: solid;
+  @apply border-outline bg-surface;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  width: 350px;
+
+  transition: 0.2s;
+
+  &:focus,
+  &:active {
+    @apply bg-active-card;
+  }
+
+  &-full {
+    width: 100% !important;
+  }
+
+  @media (max-width: 540px) {
+    width: 100%;
+  }
+}
