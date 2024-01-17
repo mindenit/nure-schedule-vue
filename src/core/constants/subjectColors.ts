@@ -1,4 +1,4 @@
-const SUBJECT_COLORS = {
+export const SUBJECT_COLORS = {
   lecture: '#5086A4',
   lab: '#21005D',
   practise: '#625B71',
@@ -7,5 +7,3 @@ const SUBJECT_COLORS = {
   exam: '#852b23',
   checkCode: '#000000'
 }
-
-export default SUBJECT_COLORS

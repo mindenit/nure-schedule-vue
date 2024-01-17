@@ -6,18 +6,15 @@ interface Props {
   color: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 <template>
-  <div
-    class="flex justify-center items-center shrink-0 rounded-[50%] text-center w-[48px] h-[48px]"
-    :style="{ background: props.color }"
-  >
-    <Title class="White text-center" variant="medium">{{ props.letters }}</Title>
+  <div class="AvatarContainer" :style="{ background: color }">
+    <Title class="text-white text-center" variant="medium">{{ letters }}</Title>
   </div>
 </template>
 <style lang="scss" scoped>
-.White {
-  color: white;
+.AvatarContainer {
+  @apply flex justify-center items-center shrink-0 rounded-[50%] text-center w-[48px] h-[48px];
 }
 </style>

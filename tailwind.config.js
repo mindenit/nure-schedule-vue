@@ -33,7 +33,27 @@ export default {
       },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif']
+        montserrat: ['Montserrat', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif']
+      },
+      keyframes: {
+        'loader-spin': {
+          '100%': { transform: 'rotate(1turn)' }
+        },
+        'fade-out': {
+          '0%': {
+            opacity: '1',
+            height: '100%'
+          },
+          '100%': {
+            opacity: '0',
+            height: '0'
+          }
+        }
+      },
+      animation: {
+        'loader-spin': 'loader-spin 1s infinite linear',
+        'fade-out': 'fade-out'
       }
     }
   },

@@ -13,16 +13,20 @@ interface Props {
   onClick: () => void
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 <template>
   <div class="CardContainer">
-    <div class="w-full flex flex-row flex-nowrap justify-between items-center gap-4">
-      <div class="w-full" @click="props.onClick">
-        <Title variant="big">{{ props.group.name }}</Title>
+    <div class="InnerContainer">
+      <div class="w-full" @click="onClick">
+        <Title variant="big">{{ group.name }}</Title>
       </div>
-      <Icon icon="ic:baseline-close" @click="props.onCloseClick" />
+      <Icon icon="ic:baseline-close" @click="onCloseClick" />
     </div>
   </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.InnerContainer {
+  @apply w-full flex flex-row flex-nowrap justify-between items-center gap-4;
+}
+</style>

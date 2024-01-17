@@ -8,24 +8,18 @@ interface Props {
   isFullWidth?: boolean
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
-  <div class="CardContainer" :class="{ 'CardContainer-full': props.isFullWidth }">
+  <div class="CardContainer" :class="{ 'CardContainer-full': isFullWidth }">
     <div>
-      <Title v-if="props.title" variant="big">{{ title }}</Title>
-      <h5
-        class="Text font-montserrat text-lg leading-[20px] font-medium tracking-[0.016rem]"
-        v-if="props.subtitle"
-      >
+      <Title v-if="title" variant="big">{{ title }}</Title>
+      <h5 class="Text" v-if="subtitle">
         {{ subtitle }}
       </h5>
     </div>
-    <h5
-      class="Text font-montserrat text-lg leading-[20px] font-medium tracking-[0.016rem]"
-      v-if="props.desc"
-    >
+    <h5 class="Text" v-if="desc">
       {{ desc }}
     </h5>
   </div>
@@ -33,6 +27,6 @@ const props = defineProps<Props>()
 
 <style lang="scss" scoped>
 .Text {
-  @apply text-muted;
+  @apply text-muted font-montserrat text-lg leading-[20px] font-medium tracking-[0.016rem];
 }
 </style>
