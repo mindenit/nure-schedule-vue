@@ -7,7 +7,7 @@ withDefaults(defineProps<{ name: string; icon: string; isActive?: boolean }>(), 
 })
 </script>
 <template>
-  <RouterLink :to="{ name }" :class="[{ isActive: 'active' }, 'NavbarItem']">
+  <RouterLink :to="{ name }" :class="[{ active: isActive }, 'NavbarItem']">
     <NavbarIcon :icon="icon" />
     <slot></slot>
   </RouterLink>
