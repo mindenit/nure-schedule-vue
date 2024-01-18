@@ -1,4 +1,4 @@
-import { SUBJECT_COLORS } from '@/core/constants/subjectColors'
+import { SUBJECT_COLORS } from '@/core/constants/'
 import type { SubjectType } from '@/core/types/ui.types'
 
 export function getCardDetails(brief: SubjectType): any {

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { IValidationError } from '@/core/types/validation.types'
 import { useVModel } from '@vueuse/core'
 type TextFieldType = 'email' | 'text' | 'password' | 'search'
 
@@ -6,13 +7,13 @@ interface TextFieldProps {
   id: string
   placeholder: string
   type: TextFieldType
-  modelValue: string
-  error?: string | null
+  value: string
+  error?: IValidationError | string | null
 }
 const props = defineProps<TextFieldProps>()
 
-const emit = defineEmits(['update:modelValue'])
-const model = useVModel(props, 'modelValue', emit)
+const emit = defineEmits(['update:value'])
+const model = useVModel(props, 'value', emit)
 </script>
 
 <template>

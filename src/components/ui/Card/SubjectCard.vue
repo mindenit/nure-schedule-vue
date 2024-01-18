@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { Title } from '@/components/ui/Title'
 import { CardAvatar } from '.'
 import type { SubjectType } from '@/core/types/ui.types'
-import { getCardDetails } from '@/core/utils/getCardDetails'
+import { getCardDetails } from '@/core/utils/'
 
 interface Props {
   startTime: string
