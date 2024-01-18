@@ -36,7 +36,11 @@ const selectedTab = ref('groups')
           :key="index"
           :value="DIALOG_TABS[index].value"
         >
-          <p v-if="query.isLoading" class="flex items-center justify-center w-full py-4 box-border">
+          <p
+            v-if="query.isLoading"
+            class="flex items-center justify-center w-full py-4 box-border"
+            v-auto-animate
+          >
             Завантаження...
           </p>
           <ListView

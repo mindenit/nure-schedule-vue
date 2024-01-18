@@ -15,7 +15,9 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
 </script>
 <template>
   <template v-if="!data.length">
-    <p class="flex w-full justify-center p-4">Елементи за вашим запитом не були знайдені</p>
+    <p class="flex w-full justify-center p-4 animate-fadeIn">
+      Елементи за вашим запитом не були знайдені
+    </p>
   </template>
   <template v-if="data.length > 0">
     <NavigationRoot>
@@ -26,6 +28,7 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
             query: { type, name: item[select] }
           }"
           @click="$emit('click', item)"
+          class="animate-fadeIn"
         >
           {{ item[select] }}
         </NavigationItem>

@@ -44,4 +44,14 @@ const forwarded = useForwardPropsEmits(props, emits)
     @apply hidden;
   }
 }
+
+.DialogOverlay[data-state='open'],
+.DialogContent[data-state='open'] {
+  @apply animate-fadeIn;
+}
+
+.DialogOverlay[data-state='closed'],
+.DialogContent[data-state='closed'] {
+  @apply animate-fadeOut;
+}
 </style>
