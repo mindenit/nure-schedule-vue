@@ -24,7 +24,7 @@ const forwarded = useForwardProps(props)
     @apply bg-navbar-chip text-contrast;
 
     .Dot {
-      @apply flex size-3 bg-contrast rounded-lg;
+      @apply flex size-3 bg-contrast rounded-lg transition-all ease-in duration-300;
     }
   }
 }

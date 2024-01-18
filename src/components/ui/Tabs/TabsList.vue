@@ -18,7 +18,7 @@ const forwarded = useForwardProps(props)
 
   @media not (max-width: theme('screens.sm')) {
     .TabsTrigger {
-      @apply flex items-center justify-center min-w-32 max-w-[300px] py-2 px-3 flex-1 whitespace-nowrap overflow-hidden text-ellipsis;
+      @apply flex items-center justify-center w-full py-2 px-3 flex-1 whitespace-nowrap overflow-hidden text-ellipsis;
       transition: flex 0.3s ease;
     }
   }
@@ -40,7 +40,7 @@ const forwarded = useForwardProps(props)
 
     &:where(.variant-default) {
       .TabsTrigger {
-        @apply flex items-center justify-center grow text-sm py-2;
+        @apply flex items-center justify-center grow text-[10px] py-2;
       }
     }
   }

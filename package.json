@@ -39,7 +39,7 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@tanstack/vue-query": "^5.17.9",
+    "@tanstack/vue-query": "^5.17.15",
     "@vueuse/core": "^10.7.1",
     "nurekit": "^0.4.3",
     "pinia": "^2.1.7",

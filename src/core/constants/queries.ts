@@ -1,0 +1,5 @@
+const GROUPS_QUERY_KEY = 'groups'
+const AUDITORIUMS_QUERY_KEY = 'auditoriums'
+const TEACHERS_QUERY_KEY = 'teachers'
+
+export { GROUPS_QUERY_KEY, AUDITORIUMS_QUERY_KEY, TEACHERS_QUERY_KEY }
