@@ -9,9 +9,6 @@ const router = createRouter({
       meta: {
         title: 'Головна'
       },
-      props(to) {
-        to.params.id = 'd'
-      },
       name: 'home',
       component: HomeView
     },
