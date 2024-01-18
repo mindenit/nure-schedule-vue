@@ -13,7 +13,7 @@ const model = useVModel(props, 'modelValue', emit)
 </script>
 <template>
   <div class="SearchFieldContainer">
-    <input class="SearchField" type="text" :name="name" v-model="model" />
+    <input v-bind="$attrs" class="SearchField" type="text" :name="name" v-model="model" />
     <Icon class="Icon" icon="ic:outline-search" />
   </div>
 </template>

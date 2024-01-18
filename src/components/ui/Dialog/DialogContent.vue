@@ -3,9 +3,9 @@ import {
   DialogContent,
   DialogOverlay,
   DialogPortal,
-  type DialogContentProps,
+  useForwardPropsEmits,
   type DialogContentEmits,
-  useForwardPropsEmits
+  type DialogContentProps
 } from 'radix-vue'
 
 const props = defineProps<DialogContentProps>()
@@ -27,7 +27,7 @@ const forwarded = useForwardPropsEmits(props, emits)
 }
 
 .DialogContent {
-  @apply flex flex-col justify-start items-start fixed bg-modal-bg overflow-y-scroll box-border p-4 z-20;
+  @apply flex flex-col justify-start items-start fixed bg-modal-bg overflow-y-scroll box-border gap-4 p-4 z-20;
   -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -36,7 +36,7 @@ const forwarded = useForwardPropsEmits(props, emits)
   }
 
   @media not (max-width: theme('screens.md')) {
-    @apply w-[400px] min-h-40 rounded-3xl left-1/2 top-1/2;
+    @apply w-[420px] min-h-40  max-h-[600px] rounded-3xl left-1/2 top-1/2;
     transform: translate(-50%, -50%);
   }
 
