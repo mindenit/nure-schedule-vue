@@ -1,3 +1,10 @@
 type SubjectType = 'Лк' | 'Лб' | 'Пз' | 'Конс' | 'Зал' | 'Екз'
 
-export type { SubjectType }
+interface ViewProps<T> {
+  // TODO: Fix issue with types
+  data: T[]
+  select: 'name' | 'shortName'
+  type: string
+}
+
+export type { SubjectType, ViewProps }
