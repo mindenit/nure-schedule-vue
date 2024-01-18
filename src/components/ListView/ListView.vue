@@ -3,6 +3,7 @@ import { usePagination } from '@/core/composables'
 import type { ViewProps } from '@/core/types/ui.types'
 import { Button } from '../ui/Button'
 import { ListItem, ListRoot } from '../ui/List'
+import { Loader } from '../ui/Loader'
 
 defineEmits<{
   click: [item: T]
@@ -14,7 +15,9 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
 </script>
 <template>
   <template v-if="!data.length">
-    <p class="flex w-full justify-center p-4">Елементи за вашим запитом не були знайдені</p>
+    <p class="flex w-full justify-center p-4 animate-fadeIn">
+      Елементи за вашим запитом не були знайдені
+    </p>
   </template>
   <template v-if="data.length > 0">
     <ListRoot>
@@ -26,6 +29,7 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
           query: { type, name: item[select] }
         }"
         @click="$emit('click', item)"
+        class="animate-fadeIn"
       >
         {{ item[select] }}
       </ListItem>

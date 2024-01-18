@@ -49,11 +49,21 @@ export default {
             opacity: '0',
             height: '0'
           }
+        },
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 }
+        },
+        fadeOut: {
+          from: { opacity: 1 },
+          to: { opacity: 0 }
         }
       },
       animation: {
         'loader-spin': 'loader-spin 1s infinite linear',
-        'fade-out': 'fade-out'
+        'fade-out': 'fade-out',
+        fadeIn: 'fadeIn 300ms ease-out',
+        fadeOut: 'fadeOut 300ms ease-in'
       }
     }
   },

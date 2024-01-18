@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
 import DialogClose from './DialogClose.vue'
+import { DialogTitle } from 'radix-vue'
 </script>
 <template>
   <header class="DialogHeader">
-    <h3 class="DialogHeaderTitle">
+    <DialogTitle class="DialogHeaderTitle">
       <slot></slot>
-    </h3>
+    </DialogTitle>
     <DialogClose as-child>
       <button class="DialogHeaderClose">
         <Icon icon="ic:baseline-close" />

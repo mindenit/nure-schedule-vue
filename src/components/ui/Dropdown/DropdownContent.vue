@@ -22,5 +22,13 @@ const forwarded = useForwardPropsEmits(props, emits)
 <style lang="scss">
 .DropdownContent {
   @apply flex flex-col p-3 min-w-52 w-auto bg-surface shadow-lg shadow-black/40 rounded-xl box-border;
+
+  &[data-state='open'] {
+    @apply animate-fadeIn;
+  }
+
+  &[data-state='closed'] {
+    @apply animate-fadeOut;
+  }
 }
 </style>
