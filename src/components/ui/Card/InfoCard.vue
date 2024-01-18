@@ -27,6 +27,6 @@ defineProps<Props>()
 
 <style lang="scss" scoped>
 .Text {
-  @apply text-muted font-montserrat text-lg leading-[20px] font-medium tracking-[0.016rem];
+  @apply text-muted font-montserrat text-lg leading-5 font-medium tracking-[0.016rem];
 }
 </style>

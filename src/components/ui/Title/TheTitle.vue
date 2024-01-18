@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), { variant: 'medium' })
   @apply font-montserrat Muted text-sm leading-[18px] font-medium tracking-[0.009rem];
 }
 .BigTitle {
-  @apply font-montserrat text-xl leading-[24px] tracking-wide font-bold Contrast;
+  @apply font-montserrat text-xl leading-6 tracking-wide font-bold Contrast;
 }
 .LargeTitle {
   @apply font-montserrat text-[32px] leading-10 font-extrabold Contrast mb-[10px];

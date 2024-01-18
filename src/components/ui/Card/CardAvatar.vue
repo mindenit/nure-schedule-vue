@@ -15,6 +15,6 @@ defineProps<Props>()
 </template>
 <style lang="scss" scoped>
 .AvatarContainer {
-  @apply flex justify-center items-center shrink-0 rounded-[50%] text-center w-[48px] h-[48px];
+  @apply flex justify-center items-center shrink-0 rounded-full text-center size-12;
 }
 </style>

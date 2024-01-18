@@ -11,7 +11,7 @@
 }
 
 .Spinner {
-  @apply border-r-primary animate-loader-spin grid w-[56px] h-[56px] border-4 border-solid border-[#0000] rounded-[50%];
+  @apply border-r-primary animate-loader-spin grid size-14 border-4 border-[#0000] rounded-[50%];
 
   &::before,
   &::after {
@@ -26,6 +26,6 @@
 }
 
 .Loader {
-  @apply font-poppins text-[#4a4a4a] font-medium text-[25px] box-content h-[40px] p-[10px] flex rounded-lg;
+  @apply font-poppins text-[#4a4a4a] font-medium text-2xl box-content h-10 p-[10px] flex rounded-lg;
 }
 </style>
