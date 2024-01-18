@@ -13,3 +13,23 @@ button {
 #app {
   @apply h-dvh;
 }
+
+@layer components {
+  .Container {
+    width: min(100% - 30px, 1300px);
+    margin-inline: auto;
+  }
+
+  .CardContainer {
+    @apply flex flex-col items-start shrink-0 self-stretch border border-solid border-outline bg-surface rounded-xl p-4 cursor-pointer w-[350px] duration-200 max-sm:w-full;
+
+    &:focus,
+    &:active {
+      @apply bg-active-card;
+    }
+
+    &-full {
+      @apply w-full;
+    }
+  }
+}
