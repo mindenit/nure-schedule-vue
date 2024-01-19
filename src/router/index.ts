@@ -35,6 +35,22 @@ const router = createRouter({
       },
       name: 'changes',
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/login',
+      meta: {
+        title: 'Вхід'
+      },
+      name: 'login',
+      component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/signup',
+      meta: {
+        title: 'Реєстрація'
+      },
+      name: 'signup',
+      component: () => import('../views/AboutView.vue')
     }
   ]
 })

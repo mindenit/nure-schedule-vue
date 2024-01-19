@@ -7,13 +7,13 @@ interface TextFieldProps {
   id: string
   placeholder: string
   type: TextFieldType
-  value: string
+  modelValue: string
   error?: IValidationError | string | null
 }
 const props = defineProps<TextFieldProps>()
 
-const emit = defineEmits(['update:value'])
-const model = useVModel(props, 'value', emit)
+const emit = defineEmits(['update:modelValue'])
+const model = useVModel(props, 'modelValue', emit)
 </script>
 
 <template>

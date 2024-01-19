@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useSignin } from '.'
 import type { IValidationError } from '@/core/types/validation.types'
 import { getFormData, handleFieldError } from '@/core/utils'
@@ -10,17 +10,9 @@ export const useSigninForm = () => {
   const emailValue = ref('')
   const passwordValue = ref('')
   const validationError = ref<IValidationError | null>(null)
-  const isDisabled = ref([emailValue.value, passwordValue.value].some((val) => val === ''))
-
-  const handleEmailChange = (e: any) => {
-    const value = e.target.value
-    emailValue.value = value
-  }
-
-  const handlePasswordChange = (e: any) => {
-    const value = e.target.value
-    passwordValue.value = value
-  }
+  const isDisabled = computed(() => {
+    return [emailValue.value, passwordValue.value].some((val) => val === '')
+  })
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -43,8 +35,6 @@ export const useSigninForm = () => {
   return {
     emailValue,
     passwordValue,
-    handleEmailChange,
-    handlePasswordChange,
     handleSubmit,
     isDisabled,
     validationError,
