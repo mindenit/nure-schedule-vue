@@ -17,12 +17,12 @@ defineProps<Props>()
 </template>
 <style lang="scss" scoped>
 .Layout {
-  @apply flex flex-col justify-center items-center w-full h-[100dvh];
+  @apply flex flex-col justify-center items-center w-full h-dvh;
 }
 .LayoutContainer {
   @apply flex flex-col justify-center items-center bg-transparent gap-5;
 
-  @media (min-width: 900px) {
+  @media (min-width: theme('screens.md')) {
     @apply border-2 border-outline w-[420px] h-fit rounded-[20px] p-8 box-border;
   }
 }
