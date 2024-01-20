@@ -18,6 +18,11 @@ const ROUTES_META = [
     name: 'Питання',
     route: 'questions',
     icon: 'ic:outline-quiz'
+  },
+  {
+    name: 'Акаунт',
+    route: 'login',
+    icon: 'ic:baseline-account-circle'
   }
 ]
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { MainLayout } from './layouts/MainLayout'
+import { useTheme } from '@/core/composables'
+
+useTheme()
 </script>
 
 <template>

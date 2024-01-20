@@ -32,4 +32,8 @@ button {
       @apply w-full;
     }
   }
+
+  .ErrorText {
+    @apply bg-error-text;
+  }
 }
