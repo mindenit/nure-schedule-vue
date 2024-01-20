@@ -4,14 +4,12 @@ import { Button } from '../ui/Button'
 import { NavigationItem, NavigationRoot } from '../ui/Navigation'
 import { DialogClose } from '../ui/Dialog'
 import type { ViewProps } from '@/core/types/ui.types'
-
-defineEmits<{
-  click: [item: T]
-}>()
+import { useScheduleStore } from '@/core/stores'
 
 const props = defineProps<ViewProps<T>>()
 
 const { displayedItems, showButton, loadMore } = usePagination(props.data)
+const store = useScheduleStore()
 </script>
 <template>
   <template v-if="!data.length">
@@ -27,7 +25,7 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
             name: 'home',
             query: { type, name: item[select] }
           }"
-          @click="$emit('click', item)"
+          @click="() => store.addSchedule({ type, name: item[select] })"
           class="animate-fadeIn"
         >
           {{ item[select] }}

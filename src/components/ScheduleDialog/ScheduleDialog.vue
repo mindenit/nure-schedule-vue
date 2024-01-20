@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useDataQueries } from '@/core/composables'
+import { DIALOG_TABS } from '@/core/constants'
 import { search } from '@/core/utils/search'
 import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
@@ -8,7 +9,6 @@ import { Button } from '../ui/Button'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
 import { SearchField } from '../ui/SearchField'
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
-import { DIALOG_TABS } from '@/core/constants'
 
 const result = useDataQueries()
 const searchValue = ref('')

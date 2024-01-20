@@ -2,7 +2,9 @@
 import { Navbar } from '@/components/Navbar'
 </script>
 <template>
-  <Navbar />
-  <slot></slot>
+  <main class="flex flex-col h-dvh box-border">
+    <Navbar />
+    <slot></slot>
+  </main>
 </template>
 <style lang="css" scoped></style>
