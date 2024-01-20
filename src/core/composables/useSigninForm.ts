@@ -1,12 +1,19 @@
-import { ref, computed } from 'vue'
-import { useSignin } from '.'
 import type { IValidationError } from '@/core/types/validation.types'
 import { getFormData, handleFieldError } from '@/core/utils'
+import { useMutation } from '@tanstack/vue-query'
 import { flatten, parse } from 'valibot'
+import { computed, ref } from 'vue'
 import { authSchema } from '../schemas/auth.schema'
+import { useAuthStore } from '../stores/auth'
+import type { TAuthInput } from '../types/auth.types'
 
 export const useSigninForm = () => {
-  const { signin, isLoading, error } = useSignin()
+  const authStore = useAuthStore()
+  const { mutateAsync, isPending, error } = useMutation({
+    mutationKey: ['signup'],
+    mutationFn: async (data: TAuthInput) => await authStore.signin(data)
+  })
+
   const emailValue = ref('')
   const passwordValue = ref('')
   const validationError = ref<IValidationError | null>(null)
@@ -20,7 +27,7 @@ export const useSigninForm = () => {
 
     try {
       const parsedData = parse(authSchema, data)
-      await signin(parsedData)
+      await mutateAsync(parsedData)
     } catch (error: any) {
       handleFieldError({
         error: flatten(error),
@@ -38,7 +45,7 @@ export const useSigninForm = () => {
     handleSubmit,
     isDisabled,
     validationError,
-    isLoading,
+    isPending,
     formError: error
   }
 }

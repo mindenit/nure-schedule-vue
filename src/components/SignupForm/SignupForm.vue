@@ -14,7 +14,7 @@ const {
   handleSubmit,
   validationError,
   isDisabled,
-  isLoading,
+  isPending,
   formError
 } = useSignupForm()
 
@@ -48,8 +48,8 @@ const passwordError = computed(() => {
       :error="passwordError"
     />
     <p class="ErrorText" v-if="validationError !== null">{{ formError }}</p>
-    <Button type="submit" :disabled="isDisabled || isLoading">
-      {{ isLoading ? 'Реєстратиція...' : 'Зареєструватися' }}
+    <Button type="submit" :disabled="isDisabled || isPending">
+      {{ isPending ? 'Реєстратиція...' : 'Зареєструватися' }}
     </Button>
     <div class="TextContainer">
       <div class="flex justify-center items-center gap-1">

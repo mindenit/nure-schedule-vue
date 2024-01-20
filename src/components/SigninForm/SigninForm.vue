@@ -14,7 +14,7 @@ const {
   handleSubmit,
   validationError,
   isDisabled,
-  isLoading,
+  isPending,
   formError
 } = useSigninForm()
 
@@ -48,8 +48,8 @@ const passwordError = computed(() => {
       :error="passwordError"
     />
     <p class="ErrorText" v-if="validationError !== null">{{ formError }}</p>
-    <Button type="submit" :disabled="isDisabled || isLoading">
-      {{ isLoading ? 'Вхід...' : 'Увійти' }}
+    <Button type="submit" :disabled="isDisabled || isPending">
+      {{ isPending ? 'Вхід...' : 'Увійти' }}
     </Button>
     <div class="TextContainer">
       <div class="flex gap-1">

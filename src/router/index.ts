@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import { useAuthStore } from '@/core/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,7 +40,8 @@ const router = createRouter({
     {
       path: '/login',
       meta: {
-        title: 'Вхід'
+        title: 'Вхід',
+        showAuthrized: false
       },
       name: 'login',
       component: () => import('../views/LoginView.vue')
@@ -47,7 +49,8 @@ const router = createRouter({
     {
       path: '/signup',
       meta: {
-        title: 'Реєстрація'
+        title: 'Реєстрація',
+        showAuthrized: false
       },
       name: 'signup',
       component: () => import('../views/SignupView.vue')
@@ -56,6 +59,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
+  const auth = useAuthStore()
+
+  if (!to.meta.showAuthrized && auth.isAuthorized) {
+    return { name: 'home' }
+  }
+
   // @ts-ignore
   document.title = to.meta?.title ?? 'Default Title'
 })
