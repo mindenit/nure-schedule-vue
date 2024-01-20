@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { Logo } from '@/components/ui/Logo'
-
 interface Props {
   title: string
 }
