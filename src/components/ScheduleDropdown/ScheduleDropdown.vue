@@ -35,7 +35,7 @@ const getItemIcon = (type: ScheduleType) => {
 <template>
   <DropdownRoot>
     <DropdownTrigger>
-      <span class="flex flex-row gap-2 items-center justify-start">
+      <span class="Trigger">
         <Icon v-if="activeSchedule" class="size-5" :icon="getItemIcon(activeSchedule.type)" />
         {{ fallback }}
       </span>
@@ -47,10 +47,7 @@ const getItemIcon = (type: ScheduleType) => {
           :key="index"
           :value="schedule.name"
         >
-          <span
-            class="flex flex-row gap-2 items-center justify-start select-none"
-            @click="store.changeActiveSchedule(schedule)"
-          >
+          <span class="TriggerText" @click="store.changeActiveSchedule(schedule)">
             <Icon class="size-5" :icon="getItemIcon(schedule.type)" />
             {{ schedule.name }}
           </span>
@@ -62,3 +59,12 @@ const getItemIcon = (type: ScheduleType) => {
     </DropdownContent>
   </DropdownRoot>
 </template>
+<style lang="scss" scoped>
+.Trigger {
+  @apply flex flex-row gap-2 items-center justify-start;
+}
+
+.TriggerText {
+  @apply flex flex-row gap-2 w-full items-center justify-start select-none touch-none;
+}
+</style>

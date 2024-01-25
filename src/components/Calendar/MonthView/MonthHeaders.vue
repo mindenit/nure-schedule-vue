@@ -14,7 +14,7 @@ import { CALENDAR_HEADERS } from '@/core/constants/calendar'
 }
 
 .MonthHeader {
-  @apply flex items-center justify-start w-full h-fit bg-transparent text-sm font-medium font-roboto leading-5 tracking-tight p-2 ml-7 box-border;
+  @apply flex items-center justify-start w-full h-fit bg-transparent text-sm font-medium font-roboto leading-5 tracking-tight p-2 ml-7 touch-none select-none box-border;
 
   @media (max-width: theme('screens.sm')) {
     @apply ml-2;

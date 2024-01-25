@@ -1,14 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import type { RecentSchedule } from '../types/schedule.types'
 
 export const useScheduleStore = defineStore(
   'schedule',
   () => {
-    const router = useRouter()
-    const route = useRoute()
-
     const activeSchedule = ref<RecentSchedule | null>()
     const recentSchedules = ref<RecentSchedule[]>([])
 
@@ -31,31 +27,14 @@ export const useScheduleStore = defineStore(
         if (activeSchedule.value && activeSchedule.value.name === name) {
           if (recentSchedules.value.length === 1) {
             activeSchedule.value = null
-            router.replace({ name: 'home', query: {} })
           }
 
           if (previosSchedule !== undefined) {
             activeSchedule.value = { ...previosSchedule }
-            router.replace({
-              name: 'home',
-              query: {
-                ...route.query,
-                type: activeSchedule.value.type,
-                name: activeSchedule.value.name
-              }
-            })
           }
 
           if (nextSchedule !== undefined) {
             activeSchedule.value = { ...nextSchedule }
-            router.replace({
-              name: 'home',
-              query: {
-                ...route.query,
-                type: activeSchedule.value.type,
-                name: activeSchedule.value.name
-              }
-            })
           }
         }
 
@@ -65,14 +44,6 @@ export const useScheduleStore = defineStore(
 
     const changeActiveSchedule = (schedule: RecentSchedule) => {
       activeSchedule.value = { ...schedule }
-      router.replace({
-        name: 'home',
-        query: {
-          ...route.query,
-          type: activeSchedule.value.type,
-          name: activeSchedule.value.name
-        }
-      })
     }
 
     return {
