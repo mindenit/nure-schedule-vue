@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { TIMELINE } from '@/core/constants/calendar'
+import { TIMELINE } from '@/core/constants'
 </script>
 <template>
   <div class="WeekTimeline">
@@ -10,7 +10,7 @@ import { TIMELINE } from '@/core/constants/calendar'
 </template>
 <style lang="scss" scoped>
 .WeekTimeline {
-  @apply flex flex-col items-center justify-between h-full;
+  @apply flex h-full flex-col items-center justify-between;
 }
 
 .WeekTimelineItem {

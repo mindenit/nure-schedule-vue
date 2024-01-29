@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useScheduleStore } from '@/core/stores'
-import type { ScheduleType } from '@/core/types/schedule.types'
+import type { ScheduleType } from '@/core/types'
 import { Icon } from '@iconify/vue'
 import { Button } from '../ui/Button'
 import {
@@ -61,10 +61,10 @@ const getItemIcon = (type: ScheduleType) => {
 </template>
 <style lang="scss" scoped>
 .Trigger {
-  @apply flex flex-row gap-2 items-center justify-start;
+  @apply flex flex-row items-center justify-start gap-2;
 }
 
 .TriggerText {
-  @apply flex flex-row gap-2 w-full items-center justify-start select-none touch-none;
+  @apply flex w-full touch-none select-none flex-row items-center justify-start gap-2;
 }
 </style>

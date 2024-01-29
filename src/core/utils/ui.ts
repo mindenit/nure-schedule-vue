@@ -1,7 +1,7 @@
-import { SUBJECT_COLORS } from '@/core/constants/subjectColors'
-import type { SubjectType } from '@/core/types/ui.types'
+import { SUBJECT_COLORS } from '@/core/constants/ui'
+import type { SubjectShortType } from '@/core/types/ui'
 
-export function getCardDetails(brief: SubjectType): any {
+const getCardDetails = (brief: SubjectShortType): any => {
   switch (brief) {
     case 'Лк':
       return { avatarColor: SUBJECT_COLORS.lecture, subjectType: 'Лекція' }
@@ -37,3 +37,5 @@ export function getCardDetails(brief: SubjectType): any {
       }
   }
 }
+
+export { getCardDetails }

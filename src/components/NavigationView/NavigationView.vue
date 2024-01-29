@@ -3,7 +3,7 @@ import { usePagination } from '@/core/composables'
 import { Button } from '../ui/Button'
 import { NavigationItem, NavigationRoot } from '../ui/Navigation'
 import { DialogClose } from '../ui/Dialog'
-import type { ViewProps } from '@/core/types/ui.types'
+import type { ViewProps } from '@/core/types'
 import { useScheduleStore } from '@/core/stores'
 
 const props = defineProps<ViewProps<T>>()
@@ -13,7 +13,7 @@ const store = useScheduleStore()
 </script>
 <template>
   <template v-if="!data.length">
-    <p class="flex w-full justify-center p-4 animate-fadeIn">
+    <p class="flex w-full animate-fadeIn justify-center p-4">
       Елементи за вашим запитом не були знайдені
     </p>
   </template>
@@ -28,7 +28,7 @@ const store = useScheduleStore()
         </NavigationItem>
       </DialogClose>
     </NavigationRoot>
-    <div v-if="showButton" class="flex items-center justify-center w-full py-4 box-border">
+    <div v-if="showButton" class="box-border flex w-full items-center justify-center py-4">
       <Button variant="outlined" type="button" @click="loadMore()">Завантажити ще</Button>
     </div>
   </template>

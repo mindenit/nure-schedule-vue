@@ -6,7 +6,7 @@ const props = defineProps<DialogCloseProps>()
 const forwarded = useForwardProps(props)
 </script>
 <template>
-  <DialogClose v-bind="forwarded" :as-child="true">
+  <DialogClose v-bind="forwarded" as-child>
     <slot></slot>
   </DialogClose>
 </template>

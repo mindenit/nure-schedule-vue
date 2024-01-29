@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { CalendarDay } from '@/core/types/calendar.types'
+import type { CalendarDay } from '@/core/types'
 import { dayjsClient } from '@/libs/dayjs'
 import { computed } from 'vue'
 
@@ -18,7 +18,7 @@ const fallback = computed(() => {
 </template>
 <style lang="scss" scoped>
 .WeekHeader {
-  @apply flex items-center justify-center w-full rounded-full p-2 box-border select-none touch-none;
+  @apply box-border flex w-full touch-none select-none items-center justify-center rounded-full p-2;
 
   &:where(.active) {
     @apply bg-primary text-app-bg;

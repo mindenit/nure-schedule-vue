@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useCalendar } from '@/core/composables'
-import type { CalendarView } from '@/core/types/calendar.types'
+import type { CalendarView } from '@/core/types'
 import { provide, ref } from 'vue'
 import { ScheduleDialog } from '../ScheduleDialog'
 import { ScheduleDropdown } from '../ScheduleDropdown'
@@ -41,6 +41,6 @@ provide('calendar', {
 </template>
 <style lang="scss" scoped>
 .CalendarHeader {
-  @apply flex flex-row items-center justify-between w-full h-fit px-5 box-border;
+  @apply box-border flex h-fit w-full flex-row items-center justify-between px-5;
 }
 </style>

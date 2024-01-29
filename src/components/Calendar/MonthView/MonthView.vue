@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Title } from '@/components/ui/Title'
 import { DATE_FORMAT } from '@/core/constants/calendar'
-import type { CalendarDay } from '@/core/types/calendar.types'
+import type { CalendarDay } from '@/core/types'
 import { toDateWithMonth, toMonthName } from '@/core/utils/dayjs'
 import { dayjsClient } from '@/libs/dayjs'
 import type { Dayjs } from 'dayjs'
@@ -38,8 +38,8 @@ const asideTitle = computed(() => {
     <aside class="flex flex-col p-4">
       <Title variant="large">{{ asideTitle }}</Title>
     </aside>
-    <div class="flex flex-col bg-app-bg box-border rounded-[3rem] p-7 gap-3">
-      <div class="flex flex-row justify-between items-center w-full">
+    <div class="box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7">
+      <div class="flex w-full flex-row items-center justify-between">
         <Title variant="big">{{ monthTitle }}</Title>
         <DateSelector
           :current-date="today"
@@ -56,10 +56,10 @@ const asideTitle = computed(() => {
 </template>
 <style lang="scss" scoped>
 .MonthView {
-  @apply grid grid-cols-[1fr_2fr] flex-row w-full h-full gap-x-4 bg-surface-container p-7 box-border rounded-[5rem];
+  @apply box-border grid h-full w-full grid-cols-[1fr_2fr] flex-row gap-x-4 rounded-[5rem] bg-surface-container p-7;
 }
 
 .MonthDays {
-  @apply grid flex-row flex-wrap grid-cols-7 list-none w-full h-full;
+  @apply grid h-full w-full list-none grid-cols-7 flex-row flex-wrap;
 }
 </style>

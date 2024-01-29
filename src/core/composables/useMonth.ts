@@ -1,8 +1,8 @@
 import { dayjsClient } from '@/libs/dayjs'
 import { computed, type ComputedRef, type Ref } from 'vue'
-import { DATE_FORMAT, MONTH_FORMAT, YEAR_FORMAT } from '@/core/constants/calendar'
-import type { CalendarDay } from '@/core/types/calendar.types'
-import { getNextMonth, getPreviousMonth, getWeekday } from '@/core/utils/dayjs'
+import { DATE_FORMAT, MONTH_FORMAT, YEAR_FORMAT } from '@/core/constants'
+import type { CalendarDay } from '@/core/types'
+import { getNextMonth, getPreviousMonth, getWeekday } from '@/core/utils'
 import type { Dayjs } from 'dayjs'
 
 interface Args {

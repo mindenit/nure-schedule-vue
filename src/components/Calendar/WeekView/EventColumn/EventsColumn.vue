@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { TIMELINE } from '@/core/constants/calendar'
+import { TIMELINE } from '@/core/constants'
 import { WeekEventCell } from '../EventCell'
 </script>
 <template>
@@ -9,6 +9,6 @@ import { WeekEventCell } from '../EventCell'
 </template>
 <style lang="scss" scoped>
 .WeekEventColumn {
-  @apply flex flex-col w-full min-w-24 h-full;
+  @apply flex h-full w-full min-w-24 flex-col;
 }
 </style>

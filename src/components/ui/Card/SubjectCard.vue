@@ -2,14 +2,14 @@
 import { computed } from 'vue'
 import { Title } from '@/components/ui/Title'
 import { CardAvatar } from '.'
-import type { SubjectType } from '@/core/types/ui.types'
-import { getCardDetails } from '@/core/utils/getCardDetails'
+import type { SubjectShortType } from '@/core/types'
+import { getCardDetails } from '@/core/utils'
 
 interface Props {
   startTime: string
   endTime: string
   auditory: string
-  type: SubjectType
+  type: SubjectShortType
   subjectBrief: string
   subjectName: string
   isFullWidth?: boolean
@@ -40,6 +40,7 @@ const avatarText = computed(() => {
 
 <style lang="scss" scoped>
 .InnerContainer {
-  @apply flex flex-row flex-nowrap justify-between items-center gap-4;
+  @apply flex flex-row flex-nowrap items-center justify-between gap-4;
 }
 </style>
+@/core/types/ui

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { CalendarDay } from '@/core/types/calendar.types'
+import type { CalendarDay } from '@/core/types'
 import dayjs from 'dayjs'
 import { RadioGroupItem, useForwardProps, type RadioGroupItemProps } from 'radix-vue'
 import { computed } from 'vue'
@@ -30,7 +30,7 @@ const label = computed(() => {
 </template>
 <style lang="scss" scoped>
 .Day {
-  @apply flex flex-col items-start justify-start w-full h-full border-l border-t border-outline text-lg leading-3 tracking-tight p-3 box-border select-none touch-none;
+  @apply box-border flex h-full w-full touch-none select-none flex-col items-start justify-start border-l border-t border-outline p-3 text-lg leading-3 tracking-tight;
 
   &:nth-child(1) {
     @apply rounded-tl-2xl;
@@ -57,7 +57,7 @@ const label = computed(() => {
   }
 
   .Indicator {
-    @apply flex items-center justify-center size-7 rounded-full text-base text-contrast font-bold font-montserrat box-border;
+    @apply box-border flex size-7 items-center justify-center rounded-full font-montserrat text-base font-bold text-contrast;
   }
 
   &[data-state='checked'] {

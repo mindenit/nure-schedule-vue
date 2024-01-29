@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { RecentSchedule } from '../types/schedule.types'
+import type { RecentSchedule } from '../types/schedule'
 
 export const useScheduleStore = defineStore(
   'schedule',

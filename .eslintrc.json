@@ -9,5 +9,13 @@
   ],
   "parserOptions": {
     "ecmaVersion": "latest"
+  },
+  "plugins": ["tailwindcss"],
+  "rules": {
+    "tailwind/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "warn",
+    "tailwindcss/enforces-shorthand": "error",
+    "tailwindcss/no-contradicting-classname": "error",
+    "tailwindcss/no-arbitrary-value": "warn"
   }
 }

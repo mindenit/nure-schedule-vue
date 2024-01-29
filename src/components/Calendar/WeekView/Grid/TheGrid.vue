@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { CalendarDay } from '@/core/types/calendar.types'
+import type { CalendarDay } from '@/core/types'
 import { WeekTimeline } from '../Timeline'
 import { WeekEventsColumn } from '../EventColumn'
 
@@ -15,11 +15,10 @@ defineProps<{ days: CalendarDay[] }>()
 </template>
 <style lang="scss" scoped>
 .WeekGrid {
-  @apply grid grid-cols-[40px_auto_40px] w-full h-full gap-x-4 px-3;
+  @apply grid h-full w-full grid-cols-[40px_auto_40px] gap-x-4 px-3;
 }
 
 .WeekEventsColumns {
-  @apply flex flex-row w-full h-full divide-x divide-outline;
+  @apply flex h-full w-full flex-row divide-x divide-outline;
 }
 </style>
-./EventColumn

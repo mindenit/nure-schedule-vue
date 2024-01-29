@@ -2,7 +2,7 @@ import { dayjsClient } from '@/libs/dayjs'
 import type { Dayjs } from 'dayjs'
 import { computed, type ComputedRef, type Ref } from 'vue'
 import { DATE_FORMAT } from '../constants/calendar'
-import type { CalendarDay } from '../types/calendar.types'
+import type { CalendarDay } from '../types/calendar'
 
 interface Args {
   selectedDate: Ref<Dayjs>

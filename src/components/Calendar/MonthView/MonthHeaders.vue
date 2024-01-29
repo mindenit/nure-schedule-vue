@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CALENDAR_HEADERS } from '@/core/constants/calendar'
+import { CALENDAR_HEADERS } from '@/core/constants'
 </script>
 <template>
   <section class="MonthHeadersRoot">
@@ -10,11 +10,11 @@ import { CALENDAR_HEADERS } from '@/core/constants/calendar'
 </template>
 <style lang="scss" scoped>
 .MonthHeadersRoot {
-  @apply flex flex-row w-full h-fit;
+  @apply flex h-fit w-full flex-row;
 }
 
 .MonthHeader {
-  @apply flex items-center justify-start w-full h-fit bg-transparent text-sm font-medium font-roboto leading-5 tracking-tight p-2 ml-7 touch-none select-none box-border;
+  @apply ml-7 box-border flex h-fit w-full touch-none select-none items-center justify-start bg-transparent p-2 font-roboto text-sm font-medium leading-5 tracking-tight;
 
   @media (max-width: theme('screens.sm')) {
     @apply ml-2;

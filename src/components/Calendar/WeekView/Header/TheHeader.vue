@@ -43,10 +43,11 @@ const selectNext = () => {
 </template>
 <style lang="scss" scoped>
 .Wrapper {
-  @apply flex flex-row items-center justify-between w-full bg-surface gap-4 rounded-full p-3;
+  @apply flex w-full flex-row items-center justify-between gap-4 rounded-full bg-surface p-3;
 }
 
 .HeadersContainer {
-  @apply flex flex-row w-full h-fit gap-4;
+  @apply flex h-fit w-full flex-row gap-4;
 }
 </style>
+@/core/types/calendar

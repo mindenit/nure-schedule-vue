@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { DATE_FORMAT } from '@/core/constants/calendar'
-import type { CalendarDay } from '@/core/types/calendar.types'
+import { DATE_FORMAT } from '@/core/constants'
+import type { CalendarDay } from '@/core/types'
 import { dayjsClient } from '@/libs/dayjs'
 import type { Dayjs } from 'dayjs'
 import { inject, ref, type Ref } from 'vue'
@@ -29,6 +29,6 @@ const { selectedDate } = inject<{
 </template>
 <style lang="css" scoped>
 .WeekView {
-  @apply flex flex-row items-center justify-between w-full;
+  @apply flex w-full flex-row items-center justify-between;
 }
 </style>
