@@ -9,19 +9,22 @@ interface IData {
 
 interface Props {
   group: IData
-  onCloseClick: () => void
-  onClick: () => void
 }
 
 defineProps<Props>()
+
+defineEmits<{
+  close: []
+  click: []
+}>()
 </script>
 <template>
   <div class="CardContainer">
     <div class="InnerContainer">
-      <div class="w-full" @click="onClick">
+      <div class="w-full" @click="$emit('click')">
         <Title variant="big">{{ group.name }}</Title>
       </div>
-      <Icon icon="ic:baseline-close" @click="onCloseClick" />
+      <Icon icon="ic:baseline-close" @click="$emit('close')" />
     </div>
   </div>
 </template>

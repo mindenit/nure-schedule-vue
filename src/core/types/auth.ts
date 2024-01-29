@@ -1,4 +1,4 @@
-import { authSchema } from '@/core/schemas/auth.schema'
+import { authSchema } from '@/core/validations/auth'
 import type { Output } from 'valibot'
 
 export type TAuthInput = Output<typeof authSchema>

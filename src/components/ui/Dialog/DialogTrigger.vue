@@ -6,7 +6,7 @@ const props = defineProps<DialogTriggerProps>()
 const forwarded = useForwardProps(props)
 </script>
 <template>
-  <DialogTrigger v-bind="forwarded" :as-child="true">
+  <DialogTrigger v-bind="forwarded" as-child>
     <slot></slot>
   </DialogTrigger>
 </template>

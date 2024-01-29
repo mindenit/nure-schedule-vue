@@ -1,11 +1,11 @@
-import type { IValidationError } from '@/core/types/validation.types'
+import type { IValidationError } from '@/core/types/validation'
 import { getFormData, handleFieldError } from '@/core/utils'
 import { useMutation } from '@tanstack/vue-query'
 import { flatten, parse } from 'valibot'
 import { computed, ref } from 'vue'
-import { authSchema } from '../schemas/auth.schema'
+import { authSchema } from '../validations/auth'
 import { useAuthStore } from '../stores/auth'
-import type { TAuthInput } from '../types/auth.types'
+import type { TAuthInput } from '../types/auth'
 
 export const useSigninForm = () => {
   const authStore = useAuthStore()

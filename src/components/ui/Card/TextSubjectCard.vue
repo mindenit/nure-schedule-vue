@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { SubjectType } from '@/core/types/ui.types'
+import type { SubjectShortType } from '@/core/types'
 import { Title } from '@/components/ui/Title'
 
 interface IData {
@@ -11,7 +11,7 @@ interface Props {
   weekday: string
   date: string
   startTime: string
-  subjectType: SubjectType
+  subjectType: SubjectShortType
   subjectName: string
   auditory: string
   teacher: string
@@ -29,8 +29,6 @@ defineProps<Props>()
 
     <Title variant="medium">Група(-и):</Title>
     <div class="flex gap-1">
-      <!-- I can't remove the ternary operator from here. If I remove it, the code will stop working. I tried -->
-      <!-- !Delete this comments before merging -->
       <span v-for="group in groups ? groups : []" :key="group.id">{{ group.name }}</span>
     </div>
   </div>

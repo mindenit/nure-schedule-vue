@@ -25,6 +25,10 @@ const emailError = computed(() => {
 const passwordError = computed(() => {
   return !validationError ? validationError['password'] : ''
 })
+
+const buttonText = computed(() => {
+  return isPending ? 'Вхід...' : 'Увійти'
+})
 </script>
 <template>
   <form class="Form" @submit.prevent="handleSubmit">
@@ -49,14 +53,14 @@ const passwordError = computed(() => {
     />
     <p class="ErrorText" v-if="validationError !== null">{{ formError }}</p>
     <Button type="submit" :disabled="isDisabled || isPending">
-      {{ isPending ? 'Вхід...' : 'Увійти' }}
+      {{ buttonText }}
     </Button>
     <div class="TextContainer">
       <div class="flex gap-1">
-        <Title variant="medium">Немає аккаунту? </Title>
-        <RouterLink :to="{ name: 'signup' }"
-          ><Title variant="medium">Зареєструватися</Title></RouterLink
-        >
+        <Title variant="medium">Немає аккаунту?</Title>
+        <RouterLink :to="{ name: 'signup' }">
+          <Title variant="medium">Зареєструватися</Title>
+        </RouterLink>
       </div>
       <RouterLink :to="{ name: 'home' }">Продовжити як гість</RouterLink>
     </div>

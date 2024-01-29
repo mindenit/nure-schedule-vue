@@ -1,4 +1,4 @@
-import type { IAuthTokens } from './auth.types'
+import type { IAuthTokens } from './auth'
 
 export interface IUser extends IAuthTokens {
   id: number

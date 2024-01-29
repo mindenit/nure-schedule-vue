@@ -2,14 +2,14 @@
 import { computed } from 'vue'
 import { Title } from '@/components/ui/Title'
 import { CardAvatar } from '.'
-import type { SubjectType } from '@/core/types/ui.types'
-import { getCardDetails } from '@/core/utils/'
+import type { SubjectShortType } from '@/core/types'
+import { getCardDetails } from '@/core/utils'
 
 interface Props {
   startTime: string
   endTime: string
   auditory: string
-  type: SubjectType
+  type: SubjectShortType
   subjectBrief: string
   subjectName: string
   isFullWidth?: boolean
