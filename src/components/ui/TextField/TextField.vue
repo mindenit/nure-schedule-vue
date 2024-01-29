@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { IValidationError } from '@/core/types/validation.types'
+import type { IValidationError } from '@/core/types'
 import { useVModel } from '@vueuse/core'
 type TextFieldType = 'email' | 'text' | 'password' | 'search'
 
@@ -69,3 +69,4 @@ const model = useVModel(props, 'modelValue', emit)
   @apply font-roboto text-error-bg text-xs font-light;
 }
 </style>
+@/core/types/validation

@@ -3,7 +3,7 @@ import { usePagination } from '@/core/composables'
 import { Button } from '../ui/Button'
 import { NavigationItem, NavigationRoot } from '../ui/Navigation'
 import { DialogClose } from '../ui/Dialog'
-import type { ViewProps } from '@/core/types/ui.types'
+import type { ViewProps } from '@/core/types'
 
 defineEmits<{
   click: [item: T]
@@ -39,3 +39,4 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
     </div>
   </template>
 </template>
+@/core/types/ui

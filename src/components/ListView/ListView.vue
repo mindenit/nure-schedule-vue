@@ -1,9 +1,8 @@
 <script lang="ts" setup generic="T extends Record<string, any>">
 import { usePagination } from '@/core/composables'
-import type { ViewProps } from '@/core/types/ui.types'
+import type { ViewProps } from '@/core/types'
 import { Button } from '../ui/Button'
 import { ListItem, ListRoot } from '../ui/List'
-import { Loader } from '../ui/Loader'
 
 defineEmits<{
   click: [item: T]
@@ -39,3 +38,4 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
     </div>
   </template>
 </template>
+@/core/types/ui
