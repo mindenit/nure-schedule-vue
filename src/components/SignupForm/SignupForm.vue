@@ -56,7 +56,7 @@ const buttonText = computed(() => {
       {{ buttonText }}
     </Button>
     <div class="TextContainer">
-      <div class="flex justify-center items-center gap-1">
+      <div class="flex items-center justify-center gap-1">
         <Title variant="medium">Вже є аккаунт?</Title>
         <RouterLink :to="{ name: 'login' }"><Title variant="medium">Увійти</Title></RouterLink>
       </div>
@@ -66,10 +66,10 @@ const buttonText = computed(() => {
 </template>
 <style lang="scss" scoped>
 .Form {
-  @apply flex flex-col w-full gap-5;
+  @apply flex w-full flex-col gap-5;
 }
 
 .TextContainer {
-  @apply flex flex-col justify-center items-center w-full gap-3;
+  @apply flex w-full flex-col items-center justify-center gap-3;
 }
 </style>

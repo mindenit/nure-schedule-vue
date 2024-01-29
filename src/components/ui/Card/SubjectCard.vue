@@ -27,7 +27,7 @@ const avatarText = computed(() => {
   <div class="CardContainer" :class="{ 'CardContainer-full': isFullWidth }">
     <div class="InnerContainer">
       <CardAvatar :letters="avatarText" :color="avatarColor" />
-      <div class="flex flex-col gap-y-[5px]">
+      <div class="flex flex-col gap-y-1">
         <Title class="font-bold" variant="medium">
           {{ startTime }} - {{ endTime }} {{ auditory }}
           {{ subjectType }}
@@ -40,6 +40,6 @@ const avatarText = computed(() => {
 
 <style lang="scss" scoped>
 .InnerContainer {
-  @apply flex flex-row flex-nowrap justify-between items-center gap-4;
+  @apply flex flex-row flex-nowrap items-center justify-between gap-4;
 }
 </style>

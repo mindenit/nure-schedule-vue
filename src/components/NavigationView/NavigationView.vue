@@ -15,7 +15,7 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
 </script>
 <template>
   <template v-if="!data.length">
-    <p class="flex w-full justify-center p-4 animate-fadeIn">
+    <p class="flex w-full animate-fadeIn justify-center p-4">
       Елементи за вашим запитом не були знайдені
     </p>
   </template>
@@ -34,7 +34,7 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
         </NavigationItem>
       </DialogClose>
     </NavigationRoot>
-    <div v-if="showButton" class="flex items-center justify-center w-full py-4 box-border">
+    <div v-if="showButton" class="box-border flex w-full items-center justify-center py-4">
       <Button variant="outlined" type="button" @click="loadMore()">Завантажити ще</Button>
     </div>
   </template>
