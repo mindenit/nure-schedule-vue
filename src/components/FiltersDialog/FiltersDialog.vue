@@ -25,7 +25,7 @@ const selectedTab = ref('groups')
     <DialogContent>
       <DialogHeader>Фільтри</DialogHeader>
       <SearchField name="search" inputmode="text" placeholder="Пошук..." v-model="searchValue" />
-      <TabsRoot class="flex flex-col w-full gap-4" v-model="selectedTab">
+      <TabsRoot class="flex w-full flex-col gap-4" v-model="selectedTab">
         <TabsList>
           <TabsTrigger v-for="(tab, index) in DIALOG_TABS" :key="index" :value="tab.value">
             {{ tab.fallback }}
@@ -38,7 +38,7 @@ const selectedTab = ref('groups')
         >
           <p
             v-if="query.isLoading"
-            class="flex items-center justify-center w-full py-4 box-border"
+            class="box-border flex w-full items-center justify-center py-4"
             v-auto-animate
           >
             Завантаження...

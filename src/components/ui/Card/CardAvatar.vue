@@ -10,11 +10,11 @@ defineProps<Props>()
 </script>
 <template>
   <div class="AvatarContainer" :style="{ background: color }">
-    <Title class="text-white text-center" variant="medium">{{ letters }}</Title>
+    <Title class="text-center text-white" variant="medium">{{ letters }}</Title>
   </div>
 </template>
 <style lang="scss" scoped>
 .AvatarContainer {
-  @apply flex justify-center items-center shrink-0 rounded-full text-center size-12;
+  @apply flex size-12 shrink-0 items-center justify-center rounded-full text-center;
 }
 </style>
