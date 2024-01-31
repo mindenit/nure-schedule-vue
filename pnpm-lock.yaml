@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@tanstack/query-persist-client-core':
+    specifier: ^5.17.19
+    version: 5.17.19
+  '@tanstack/query-sync-storage-persister':
+    specifier: ^5.17.19
+    version: 5.17.19
   '@tanstack/vue-query':
     specifier: ^5.17.15
     version: 5.17.15(vue@3.4.10)
@@ -1426,6 +1432,32 @@ packages:
       {
         integrity: sha512-QURxpu77/ICA4d61aPvV7EcJ2MwmksxUejKBaq/xLcO2TUJAlXf4PFKHC/WxnVFI/7F1jeLx85AO3Vpk0+uBXw==
       }
+    dev: false
+
+  /@tanstack/query-core@5.17.19:
+    resolution:
+      {
+        integrity: sha512-Lzw8FUtnLCc9Jwz0sw9xOjZB+/mCCmJev38v2wHMUl/ioXNIhnNWeMxu0NKUjIhAd62IRB3eAtvxAGDJ55UkyA==
+      }
+    dev: false
+
+  /@tanstack/query-persist-client-core@5.17.19:
+    resolution:
+      {
+        integrity: sha512-gDpISmHOjzoLYvGRKtuWbh/lwfyKroqywfUUEab6weBSDJmYc9V1USNfJJpwA5tasSmI+ktCDX2jqt+7EwPSxw==
+      }
+    dependencies:
+      '@tanstack/query-core': 5.17.19
+    dev: false
+
+  /@tanstack/query-sync-storage-persister@5.17.19:
+    resolution:
+      {
+        integrity: sha512-rGcKm6OOXF8o+tM2ZOgvb+cParxF3DDFmGEWiseZIRc3Ze2X5hGOxtkmtYfIlziY9G/O82xBXxWG1/v6ocBwsg==
+      }
+    dependencies:
+      '@tanstack/query-core': 5.17.19
+      '@tanstack/query-persist-client-core': 5.17.19
     dev: false
 
   /@tanstack/vue-query@5.17.15(vue@3.4.10):

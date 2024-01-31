@@ -1,38 +1,45 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { Title } from '@/components/ui/Title'
-import { CardAvatar } from '.'
 import type { SubjectShortType } from '@/core/types'
-import { getCardDetails } from '@/core/utils'
+import { getCardDetails, getCardIcon, toTime } from '@/core/utils'
+import type { ISchedule } from 'nurekit'
+import { computed, toRefs } from 'vue'
+import { CardAvatar } from '.'
 
 interface Props {
-  startTime: string
-  endTime: string
-  auditory: string
-  type: SubjectShortType
-  subjectBrief: string
-  subjectName: string
+  pair: ISchedule
   isFullWidth?: boolean
 }
 
 const props = defineProps<Props>()
 
-const { avatarColor, subjectType } = getCardDetails(props.type)
-const avatarText = computed(() => {
-  return props.subjectBrief.slice(0, 2)
+const { type, startTime, endTime, subject, auditory } = toRefs(props.pair)
+
+const { avatarColor, subjectType } = getCardDetails(type.value as SubjectShortType)
+
+const avatarIcon = computed(() => {
+  return getCardIcon(type.value as SubjectShortType)
+})
+
+const start = computed(() => {
+  return toTime(startTime.value)
+})
+
+const end = computed(() => {
+  return toTime(endTime.value)
 })
 </script>
 
 <template>
   <div class="CardContainer" :class="{ 'CardContainer-full': isFullWidth }">
     <div class="InnerContainer">
-      <CardAvatar :letters="avatarText" :color="avatarColor" />
-      <div class="flex flex-col gap-y-[5px]">
-        <Title class="font-bold" variant="medium">
-          {{ startTime }} - {{ endTime }} {{ auditory }}
+      <CardAvatar :letters="avatarIcon" :color="avatarColor" as-icon />
+      <div class="flex flex-col gap-y-1">
+        <Title variant="medium">
+          {{ start }}-{{ end }} {{ auditory }}
           {{ subjectType }}
         </Title>
-        <Title variant="big">{{ subjectName }}</Title>
+        <Title variant="big">{{ subject.title }}</Title>
       </div>
     </div>
   </div>
@@ -43,4 +50,3 @@ const avatarText = computed(() => {
   @apply flex flex-row flex-nowrap items-center justify-between gap-4;
 }
 </style>
-@/core/types/ui

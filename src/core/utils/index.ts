@@ -1,4 +1,5 @@
 export * from './dayjs'
+export * from './i18n'
 export * from './schedule'
 export * from './search'
 export * from './string'

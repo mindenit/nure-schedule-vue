@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import type { CalendarDay } from '@/core/types'
+import { getPairsCountPlural } from '@/core/utils'
 import dayjs from 'dayjs'
+import type { ISchedule } from 'nurekit'
 import { RadioGroupItem, useForwardProps, type RadioGroupItemProps } from 'radix-vue'
 import { computed } from 'vue'
 
 interface Props extends RadioGroupItemProps {
   day: CalendarDay
+  pairs: ISchedule[]
 }
 
 const props = defineProps<Props>()
@@ -13,8 +16,11 @@ const props = defineProps<Props>()
 const forwarded = useForwardProps(props)
 
 const label = computed(() => {
-  // @ts-ignore
   return dayjs(props.day.date).format('D')
+})
+
+const pairsCount = computed(() => {
+  return getPairsCountPlural(props.pairs.length)
 })
 </script>
 <template>
@@ -26,11 +32,14 @@ const label = computed(() => {
     <span class="Indicator">
       {{ label }}
     </span>
+    <span v-if="pairs.length" class="Pairs">
+      {{ pairsCount }}
+    </span>
   </RadioGroupItem>
 </template>
 <style lang="scss" scoped>
 .Day {
-  @apply box-border flex h-full w-full touch-none select-none flex-col items-start justify-start border-l border-t border-outline p-3 text-lg leading-3 tracking-tight;
+  @apply box-border flex h-full min-h-20 w-full touch-none select-none flex-col items-start justify-between border-l border-t border-outline p-3 text-lg leading-3 tracking-tight;
 
   &:nth-child(1) {
     @apply rounded-tl-2xl;
@@ -57,12 +66,16 @@ const label = computed(() => {
   }
 
   .Indicator {
-    @apply box-border flex size-7 items-center justify-center rounded-full font-montserrat text-base font-bold text-contrast;
+    @apply box-border flex items-center justify-center rounded-full font-montserrat text-base font-bold text-contrast;
+  }
+
+  .Pairs {
+    @apply box-border flex h-6 w-auto flex-row items-center justify-center rounded-full bg-error-text px-2 text-sm text-white;
   }
 
   &[data-state='checked'] {
     .Indicator {
-      @apply bg-primary text-app-bg;
+      @apply size-7 bg-primary text-app-bg;
     }
   }
 

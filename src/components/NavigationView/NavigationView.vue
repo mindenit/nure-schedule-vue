@@ -4,12 +4,12 @@ import { Button } from '../ui/Button'
 import { NavigationItem, NavigationRoot } from '../ui/Navigation'
 import { DialogClose } from '../ui/Dialog'
 import type { ViewProps } from '@/core/types'
-import { useScheduleStore } from '@/core/stores'
+import { useSchedulesStore } from '@/core/stores'
 
 const props = defineProps<ViewProps<T>>()
 
 const { displayedItems, showButton, loadMore } = usePagination(props.data)
-const store = useScheduleStore()
+const store = useSchedulesStore()
 </script>
 <template>
   <template v-if="!data.length">

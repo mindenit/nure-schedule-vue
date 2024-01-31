@@ -88,7 +88,17 @@ export const useMonth = ({ selectedDate, today }: Args) => {
     return [...previousMonthDays.value, ...currentDays.value, ...nextMonthDays.value]
   })
 
+  const firstDay = computed(() => {
+    return days.value[0].date
+  })
+
+  const lastDay = computed(() => {
+    return days.value[days.value.length - 1].date
+  })
+
   return {
-    days
+    days,
+    firstDay,
+    lastDay
   }
 }

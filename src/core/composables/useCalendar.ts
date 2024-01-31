@@ -11,7 +11,7 @@ export const useCalendar = () => {
     return dayjsClient().format(DATE_FORMAT)
   })
 
-  const { days: monthDays } = useMonth({ today, selectedDate })
+  const { days: monthDays, firstDay, lastDay } = useMonth({ today, selectedDate })
   const { days: weekDays } = useWeek({ today, selectedDate })
 
   const selectDate = (date: Dayjs) => {
@@ -23,6 +23,8 @@ export const useCalendar = () => {
     today,
     monthDays,
     weekDays,
-    selectDate
+    selectDate,
+    firstDay,
+    lastDay
   }
 }

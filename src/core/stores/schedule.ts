@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { RecentSchedule } from '../types/schedule'
 
-export const useScheduleStore = defineStore(
-  'schedule',
+export const useSchedulesStore = defineStore(
+  'recent_schedules',
   () => {
     const activeSchedule = ref<RecentSchedule | null>()
     const recentSchedules = ref<RecentSchedule[]>([])

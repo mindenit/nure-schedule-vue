@@ -3,7 +3,7 @@ import { dayjsClient } from '@/libs/dayjs'
 import { Icon } from '@iconify/vue'
 import { Dayjs } from 'dayjs'
 import { toRefs } from 'vue'
-import { Button } from '../../ui/Button'
+import { Button } from '@/components/ui/Button'
 
 const props = defineProps<{
   currentDate: string

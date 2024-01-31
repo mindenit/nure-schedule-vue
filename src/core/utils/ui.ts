@@ -38,4 +38,21 @@ const getCardDetails = (brief: SubjectShortType): any => {
   }
 }
 
-export { getCardDetails }
+const getCardIcon = (type: SubjectShortType) => {
+  switch (type) {
+    case 'Екз':
+      return 'ic:baseline-text-snippet'
+    case 'Зал':
+      return 'ic:baseline-text-snippet'
+    case 'Конс':
+      return 'ic:baseline-help'
+    case 'Лб':
+      return 'ic:baseline-science'
+    case 'Лк':
+      return 'ic:baseline-library-books'
+    case 'Пз':
+      return 'ic:baseline-menu-book'
+  }
+}
+
+export { getCardDetails, getCardIcon }

@@ -2,16 +2,19 @@
 import { Title } from '@/components/ui/Title'
 import { DATE_FORMAT } from '@/core/constants/calendar'
 import type { CalendarDay } from '@/core/types'
-import { toDateWithMonth, toMonthName } from '@/core/utils/dayjs'
+import { getDayPairs } from '@/core/utils'
+import { toMonthName } from '@/core/utils/dayjs'
 import { dayjsClient } from '@/libs/dayjs'
 import type { Dayjs } from 'dayjs'
+import type { ISchedule } from 'nurekit'
 import { RadioGroupRoot } from 'radix-vue'
 import { computed, inject, ref, type ComputedRef, type Ref } from 'vue'
-import DateSelector from './DateSelector.vue'
-import MonthDay from './MonthDay.vue'
-import MonthHeaders from './MonthHeaders.vue'
+import { DateSelector } from './DateSelector'
+import { MonthAside } from './MonthAside'
+import { MonthDay } from './MonthDay'
+import { MonthHeaders } from './MonthHeaders'
 
-defineProps<{ days: CalendarDay[] }>()
+defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
 
 defineEmits<{ selectDate: [date: Dayjs] }>()
 
@@ -28,18 +31,12 @@ const radioStateSingle = ref(today.value)
 const monthTitle = computed(() => {
   return `${toMonthName(selectedDate.value)} ${selectedDate.value.year()}`
 })
-
-const asideTitle = computed(() => {
-  return toDateWithMonth(radioStateSingle.value)
-})
 </script>
 <template>
   <section class="MonthView">
-    <aside class="flex flex-col p-4">
-      <Title variant="large">{{ asideTitle }}</Title>
-    </aside>
-    <div class="box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7">
-      <div class="flex w-full flex-row items-center justify-between">
+    <MonthAside :active-date="radioStateSingle" :pairs="getDayPairs(radioStateSingle, pairs)" />
+    <div class="Wrapper">
+      <div class="Header">
         <Title variant="big">{{ monthTitle }}</Title>
         <DateSelector
           :current-date="today"
@@ -49,7 +46,12 @@ const asideTitle = computed(() => {
       </div>
       <MonthHeaders />
       <RadioGroupRoot v-model="radioStateSingle" :default-value="today" class="MonthDays">
-        <MonthDay v-for="day in days" :key="day.date" :day="day" />
+        <MonthDay
+          v-for="day in days"
+          :key="day.date"
+          :day="day"
+          :pairs="getDayPairs(day.date, pairs)"
+        />
       </RadioGroupRoot>
     </div>
   </section>
@@ -57,6 +59,14 @@ const asideTitle = computed(() => {
 <style lang="scss" scoped>
 .MonthView {
   @apply box-border grid h-full w-full grid-cols-[1fr_2fr] flex-row gap-x-4 rounded-[5rem] bg-surface-container p-7;
+}
+
+.Wrapper {
+  @apply box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7;
+}
+
+.Header {
+  @apply flex w-full flex-row items-center justify-between;
 }
 
 .MonthDays {

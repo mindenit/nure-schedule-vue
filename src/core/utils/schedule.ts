@@ -1,7 +1,10 @@
 import { nurekit } from '@/libs/nurekit'
-import type { ScheduleQueryFn } from '../types/schedule'
+import type { ScheduleFnArgs, ScheduleQueryFn } from '../types/schedule'
+import type { ISchedule } from 'nurekit'
+import { dayjsClient } from '@/libs/dayjs'
+import { DATE_FORMAT } from '../constants'
 
-const getSchedule = ({ type, ...rest }: ScheduleQueryFn) => {
+const getSchedule = async ({ type, ...rest }: ScheduleQueryFn) => {
   switch (type) {
     case 'auditoriums':
       return getAuditoriumSchedule(rest)
@@ -12,7 +15,7 @@ const getSchedule = ({ type, ...rest }: ScheduleQueryFn) => {
   }
 }
 
-const getTeacherSchedule = ({ name, startTime, endTime }: Schedule) => {
+const getTeacherSchedule = async ({ name, startTime, endTime }: ScheduleFnArgs) => {
   return nurekit.teachers.getSchedule({
     startTime,
     endTime,
@@ -20,15 +23,17 @@ const getTeacherSchedule = ({ name, startTime, endTime }: Schedule) => {
   })
 }
 
-const getGroupSchedule = ({ name, startTime, endTime }: Args) => {
-  return nurekit.groups.getSchedule({
+const getGroupSchedule = async ({ name, startTime, endTime }: ScheduleFnArgs) => {
+  const schedule = await nurekit.groups.getSchedule({
     startTime,
     endTime,
     groupName: name
   })
+
+  return schedule
 }
 
-const getAuditoriumSchedule = ({ name, startTime, endTime }: Args) => {
+const getAuditoriumSchedule = async ({ name, startTime, endTime }: ScheduleFnArgs) => {
   return nurekit.auditoriums.getSchedule({
     startTime,
     endTime,
@@ -36,4 +41,10 @@ const getAuditoriumSchedule = ({ name, startTime, endTime }: Args) => {
   })
 }
 
-export { getSchedule }
+const getDayPairs = (date: string, pairs: ISchedule[]) => {
+  return pairs.filter((pair) => {
+    return dayjsClient.unix(pair.startTime).format(DATE_FORMAT) === date
+  })
+}
+
+export { getSchedule, getDayPairs }

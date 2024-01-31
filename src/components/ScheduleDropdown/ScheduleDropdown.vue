@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useScheduleStore } from '@/core/stores'
+import { useSchedulesStore } from '@/core/stores'
 import type { ScheduleType } from '@/core/types'
 import { Icon } from '@iconify/vue'
 import { Button } from '../ui/Button'
@@ -13,7 +13,7 @@ import {
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 
-const store = useScheduleStore()
+const store = useSchedulesStore()
 
 const { activeSchedule, recentSchedules } = storeToRefs(store)
 
