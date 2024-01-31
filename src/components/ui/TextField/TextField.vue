@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { IValidationError } from '@/core/types'
 import { useVModel } from '@vueuse/core'
 type TextFieldType = 'email' | 'text' | 'password' | 'search'
 
@@ -7,7 +8,7 @@ interface TextFieldProps {
   placeholder: string
   type: TextFieldType
   modelValue: string
-  error?: string | null
+  error?: IValidationError | string | null
 }
 const props = defineProps<TextFieldProps>()
 
@@ -16,7 +17,7 @@ const model = useVModel(props, 'modelValue', emit)
 </script>
 
 <template>
-  <div class="flex flex-col relative">
+  <div class="relative flex flex-col">
     <input class="TextField" :type="type" :id="id" :placeholder="placeholder" v-model="model" />
     <label class="Placeholder" :id="id" :for="id">
       <div class="Text">
@@ -29,11 +30,11 @@ const model = useVModel(props, 'modelValue', emit)
 
 <style lang="scss" scoped>
 .Placeholder {
-  @apply border-[3px] border-transparent flex items-center absolute top-0 bottom-0 left-0 right-0 bg-transparent pointer-events-none ml-2;
+  @apply pointer-events-none absolute bottom-0 left-0 right-0 top-0 ml-2 flex items-center border-[3px] border-transparent bg-transparent;
 }
 
 .Text {
-  @apply text-calendar font-montserrat px-2 py-0 bg-transparent text-xl leading-6 font-bold;
+  @apply bg-transparent px-2 py-0 font-montserrat text-xl font-bold leading-6 text-calendar;
   transform: translate(0);
   transition:
     transform 0.15s ease-out,
@@ -43,28 +44,29 @@ const model = useVModel(props, 'modelValue', emit)
 }
 
 .TextField {
-  @apply flex justify-start items-center w-auto bg-app-bg text-contrast border-navbar-chip font-montserrat min-w-52 h-14 rounded-md border-2 border-solid box-border py-2 pr-0 pl-4;
+  @apply box-border flex h-14 w-auto min-w-52 items-center justify-start rounded-md border-2 border-solid border-navbar-chip bg-app-bg py-2 pl-4 pr-0 font-montserrat text-contrast;
 
   &:hover,
   &:focus {
-    @apply outline-none border-2 border-outline;
+    @apply border-2 border-outline outline-none;
   }
 
   &:focus + .Placeholder .Text {
-    @apply bg-app-bg text-outline text-lg;
+    @apply bg-app-bg text-lg text-outline;
     transform: translate(0, -170%);
   }
 
   &:focus + .Placeholder .Text {
-    @apply text-contrast font-roboto text-xs leading-4 font-light;
+    @apply font-roboto text-xs font-light leading-4 text-contrast;
   }
 
   &:not(&:focus):not(&[value='']) + .Placeholder .Text {
-    @apply text-[0px] text-transparent overflow-hidden;
+    @apply overflow-hidden text-[0px] text-transparent;
   }
 }
 
 .ErrorMessage {
-  @apply font-roboto text-error-bg text-xs font-light;
+  @apply font-roboto text-xs font-light text-error-bg;
 }
 </style>
+@/core/types/validation

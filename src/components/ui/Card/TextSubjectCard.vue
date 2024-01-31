@@ -20,7 +20,6 @@ const startTime = computed(() => toTime(props.pair.startTime))
     <Title variant="big">{{ pair.subject.title }}</Title>
     <Title variant="medium">Авдиторія: {{ pair.auditory }}</Title>
     <Title variant="medium">Викладач: {{ pair.teachers[0].fullName }}</Title>
-
     <div class="flex flex-wrap gap-1">
       <Title variant="medium">Група(-и):</Title>
       <div class="flex gap-1">

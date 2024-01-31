@@ -1,7 +1,12 @@
-import { SUBJECT_COLORS } from '@/core/constants/ui'
+import { SUBJECT_COLORS } from '@/core/constants/'
 import type { SubjectShortType } from '@/core/types/ui'
 
-const getCardDetails = (brief: SubjectShortType): any => {
+interface CardDetails {
+  avatarColor: string
+  subjectType: string
+}
+
+const getCardDetails = (brief: SubjectShortType): CardDetails => {
   switch (brief) {
     case 'Лк':
       return { avatarColor: SUBJECT_COLORS.lecture, subjectType: 'Лекція' }

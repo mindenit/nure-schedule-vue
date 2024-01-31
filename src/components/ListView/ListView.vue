@@ -38,3 +38,4 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
     </div>
   </template>
 </template>
+@/core/types/ui
