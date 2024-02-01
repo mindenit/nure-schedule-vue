@@ -23,4 +23,13 @@ interface ScheduleFnArgs {
   endTime: string
 }
 
-export type { RecentSchedule, ScheduleType, ScheduleQueryFn, ScheduleFnArgs, ScheduleQueryArgs }
+type SubjectShortType = 'Лк' | 'Лб' | 'Пз' | 'Конс' | 'Зал' | 'Екз'
+
+export type {
+  RecentSchedule,
+  ScheduleType,
+  ScheduleQueryFn,
+  ScheduleFnArgs,
+  ScheduleQueryArgs,
+  SubjectShortType
+}

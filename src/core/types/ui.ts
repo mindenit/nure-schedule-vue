@@ -1,7 +1,5 @@
 import type { ScheduleType } from './schedule'
 
-type SubjectShortType = 'Лк' | 'Лб' | 'Пз' | 'Конс' | 'Зал' | 'Екз'
-
 interface ViewProps<T> {
   // TODO: Fix issue with types
   data: T[]
@@ -9,4 +7,4 @@ interface ViewProps<T> {
   type: ScheduleType
 }
 
-export type { SubjectShortType, ViewProps }
+export type { ViewProps }

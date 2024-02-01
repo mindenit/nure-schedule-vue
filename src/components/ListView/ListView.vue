@@ -8,7 +8,11 @@ defineEmits<{
   click: [item: T]
 }>()
 
-const props = defineProps<ViewProps<T>>()
+interface Props extends Omit<ViewProps<T>, 'type'> {
+  checked: (item: T) => boolean
+}
+
+const props = defineProps<Props>()
 
 const { displayedItems, showButton, loadMore } = usePagination(props.data)
 </script>
@@ -18,17 +22,14 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
       Елементи за вашим запитом не були знайдені
     </p>
   </template>
-  <template v-if="data.length > 0">
+  <template v-if="data.length">
     <ListRoot>
       <ListItem
         v-for="(item, index) in displayedItems"
         :key="index"
-        :to="{
-          name: 'home',
-          query: { type, name: item[select] }
-        }"
         @click="$emit('click', item)"
         class="animate-fadeIn"
+        :checked="checked(item)"
       >
         {{ item[select] }}
       </ListItem>
@@ -38,4 +39,3 @@ const { displayedItems, showButton, loadMore } = usePagination(props.data)
     </div>
   </template>
 </template>
-@/core/types/ui

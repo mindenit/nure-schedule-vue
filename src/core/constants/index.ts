@@ -1,4 +1,5 @@
 export * from './calendar'
+export * from './filters'
 export * from './pagination'
 export * from './queries'
 export * from './routes'

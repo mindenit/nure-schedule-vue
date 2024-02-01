@@ -19,7 +19,7 @@ const router = createRouter({
         title: 'Фільтри'
       },
       name: 'filters',
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/FiltersView.vue')
     },
     {
       path: '/questions',
