@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useCalendar } from '@/core/composables'
-import { useSchedulesStore } from '@/core/stores'
+import { useFiltersStore, useSchedulesStore } from '@/core/stores'
 import type { CalendarView, ScheduleType } from '@/core/types'
 import { getSchedule } from '@/core/utils'
 import { useQuery } from '@tanstack/vue-query'
@@ -17,6 +17,7 @@ const view = ref<CalendarView>('month')
 const { today, selectedDate, monthDays, weekDays, selectDate, firstDay, lastDay } = useCalendar()
 
 const recentSchedules = useSchedulesStore()
+const filtersStore = useFiltersStore()
 const { activeSchedule } = toRefs(recentSchedules)
 
 const { data, isLoading } = useQuery({
@@ -54,7 +55,11 @@ provide('calendar', {
     <CalendarLoader v-if="isLoading" />
     <template v-if="data">
       <TabsContent value="month" as-child>
-        <MonthView :days="monthDays" :pairs="data" @select-date="(date) => selectDate(date)" />
+        <MonthView
+          :days="monthDays"
+          :pairs="filtersStore.applyFilers(data)"
+          @select-date="(date) => selectDate(date)"
+        />
       </TabsContent>
       <TabsContent value="week" as-child>
         <WeekView :days="weekDays" @select-date="(date) => selectDate(date)" />
