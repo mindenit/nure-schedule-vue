@@ -20,15 +20,17 @@ const { selectedDate } = inject<{
 })
 </script>
 <template>
-  <WeekHeader
-    :days="days"
-    :selected-date="selectedDate"
-    @select-date="(date) => $emit('selectDate', date)"
-  />
-  <WeekGrid :days="days" />
+  <div class="WeekView">
+    <WeekHeader
+      :days="days"
+      :selected-date="selectedDate"
+      @select-date="(date) => $emit('selectDate', date)"
+    />
+    <WeekGrid :days="days" />
+  </div>
 </template>
 <style lang="css" scoped>
 .WeekView {
-  @apply flex w-full flex-row items-center justify-between;
+  @apply flex w-full flex-col items-center justify-between;
 }
 </style>

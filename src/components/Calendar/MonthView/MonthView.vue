@@ -45,7 +45,7 @@ const monthTitle = computed(() => {
         />
       </div>
       <MonthHeaders />
-      <RadioGroupRoot v-model="radioStateSingle" :default-value="today" class="MonthDays">
+      <RadioGroupRoot v-model="radioStateSingle" :default-value="today" as="ul" class="MonthDays">
         <MonthDay
           v-for="day in days"
           :key="day.date"
@@ -58,7 +58,7 @@ const monthTitle = computed(() => {
 </template>
 <style lang="scss" scoped>
 .MonthView {
-  @apply box-border grid h-full w-full grid-cols-[1fr_2fr] flex-row gap-x-4 rounded-[5rem] bg-surface-container p-7;
+  @apply box-border grid max-h-full w-full grid-cols-[1fr_2fr] gap-x-4 rounded-[5rem] bg-surface-container p-7;
 }
 
 .Wrapper {

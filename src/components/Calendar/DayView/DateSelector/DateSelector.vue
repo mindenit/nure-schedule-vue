@@ -1,16 +1,18 @@
 <script lang="ts" setup>
+import { Button } from '@/components/ui/Button'
 import { dayjsClient } from '@/libs/dayjs'
 import { Icon } from '@iconify/vue'
-import { Dayjs } from 'dayjs'
+import type { Dayjs } from 'dayjs'
 import { toRefs } from 'vue'
-import { Button } from '@/components/ui/Button'
 
-const props = defineProps<{
+interface Props {
   currentDate: string
   selectedDate: Dayjs
-}>()
+}
 
-const { currentDate, selectedDate } = toRefs(props)
+const props = defineProps<Props>()
+
+const { selectedDate, currentDate } = toRefs(props)
 
 const emit = defineEmits<{
   selectDate: [date: Dayjs]
@@ -32,13 +34,13 @@ const selectNext = () => {
 }
 </script>
 <template>
-  <div class="flex items-center">
+  <nav class="flex flex-row items-center justify-center">
     <Button variant="text" appearance="icon" @click="selectPrevious">
       <Icon icon="ic:baseline-chevron-left" />
     </Button>
-    <Button variant="text" @click="selectCurrent">Сьогоді</Button>
+    <Button variant="text" @click="selectCurrent"> Сьогодні </Button>
     <Button variant="text" appearance="icon" @click="selectNext">
       <Icon icon="ic:baseline-chevron-right" />
     </Button>
-  </div>
+  </nav>
 </template>

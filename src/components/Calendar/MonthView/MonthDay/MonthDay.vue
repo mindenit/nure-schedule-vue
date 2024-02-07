@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { CalendarDay } from '@/core/types'
 import { getPairsCountPlural } from '@/core/utils'
-import dayjs from 'dayjs'
+import { dayjsClient } from '@/libs/dayjs'
 import type { ISchedule } from 'nurekit'
 import { RadioGroupItem, useForwardProps, type RadioGroupItemProps } from 'radix-vue'
 import { computed } from 'vue'
@@ -16,7 +16,7 @@ const props = defineProps<Props>()
 const forwarded = useForwardProps(props)
 
 const label = computed(() => {
-  return dayjs(props.day.date).format('D')
+  return dayjsClient(props.day.date).format('D')
 })
 
 const pairsCount = computed(() => {
@@ -28,6 +28,7 @@ const pairsCount = computed(() => {
     v-bind="forwarded"
     :class="[{ 'not-current': !day.isCurrentMonth }, 'Day']"
     :value="day.date"
+    as="li"
   >
     <span class="Indicator">
       {{ label }}
@@ -66,16 +67,16 @@ const pairsCount = computed(() => {
   }
 
   .Indicator {
-    @apply box-border flex items-center justify-center rounded-full font-montserrat text-base font-bold text-contrast;
+    @apply box-border flex size-7 items-center justify-center rounded-full font-montserrat text-base font-bold text-contrast;
   }
 
   .Pairs {
-    @apply box-border flex h-6 w-auto flex-row items-center justify-center rounded-full bg-error-text px-2 text-sm text-white;
+    @apply box-border flex h-6 w-auto flex-row items-center justify-center rounded-full bg-error-bg px-2 text-sm text-app-bg;
   }
 
   &[data-state='checked'] {
     .Indicator {
-      @apply size-7 bg-primary text-app-bg;
+      @apply bg-primary text-app-bg;
     }
   }
 

@@ -1,30 +1,30 @@
 <script lang="ts" setup>
-import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
-import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
-import { Title } from '@/components/ui/Title'
-import { toDayWithMonth } from '@/core/utils'
-import { Icon } from '@iconify/vue'
+import { DAY_WITH_MONTH_FORMAT } from '@/core/constants'
+import { dayjsClient } from '@/libs/dayjs'
 import type { ISchedule } from 'nurekit'
 import { computed } from 'vue'
+import { Title } from '@/components/ui/Title'
+import { Icon } from '@iconify/vue'
+import { DialogRoot, DialogContent, DialogTrigger, DialogHeader } from '@/components/ui/Dialog'
+import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
 
-const props = defineProps<{
-  activeDate: string
-  pairs: ISchedule[]
-}>()
+const props = defineProps<{ activeDate: string; pairs: ISchedule[] }>()
 
-const title = computed(() => toDayWithMonth(props.activeDate))
+const title = computed(() => {
+  return dayjsClient(props.activeDate).locale('uk').format(DAY_WITH_MONTH_FORMAT)
+})
 </script>
 <template>
-  <aside class="MonthAside">
+  <aside class="DayMain">
     <Title variant="large">{{ title }}</Title>
     <div v-if="!pairs.length" class="NoSubjectsFallback">
       <Icon icon="ic:baseline-emoji-emotions" class="size-24" />
-      <Title variant="big"> Сьогодні пар немає </Title>
+      <Title variant="big">Сьогодні пар немає</Title>
     </div>
     <div v-else class="SubjectsContainer">
       <DialogRoot v-for="pair in pairs" :key="pair.startTime">
         <DialogTrigger>
-          <SubjectCard :pair="pair" :is-full-width="true" />
+          <SubjectCard :pair="pair" />
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>Розклад</DialogHeader>
@@ -35,7 +35,7 @@ const title = computed(() => toDayWithMonth(props.activeDate))
   </aside>
 </template>
 <style lang="scss" scoped>
-.MonthAside {
+.DayMain {
   @apply box-border flex size-full flex-col gap-5 p-4;
 }
 
@@ -44,6 +44,6 @@ const title = computed(() => toDayWithMonth(props.activeDate))
 }
 
 .SubjectsContainer {
-  @apply flex w-full animate-fadeIn flex-col gap-4;
+  @apply flex w-full animate-fadeIn flex-row flex-wrap gap-4;
 }
 </style>

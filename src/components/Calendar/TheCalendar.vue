@@ -11,6 +11,7 @@ import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
 import CalendarLoader from './CalendarLoader.vue'
 import MonthView from './MonthView/MonthView.vue'
 import WeekView from './WeekView/WeekView.vue'
+import DayView from './DayView/DayView.vue'
 
 const view = ref<CalendarView>('month')
 
@@ -63,6 +64,13 @@ provide('calendar', {
       </TabsContent>
       <TabsContent value="week" as-child>
         <WeekView :days="weekDays" @select-date="(date) => selectDate(date)" />
+      </TabsContent>
+      <TabsContent value="day" as-child>
+        <DayView
+          :pairs="filtersStore.applyFilers(data)"
+          :month-days="monthDays"
+          @select-date="(date) => selectDate(date)"
+        />
       </TabsContent>
     </template>
   </TabsRoot>
