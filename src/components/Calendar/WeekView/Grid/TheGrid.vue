@@ -2,14 +2,16 @@
 import type { CalendarDay } from '@/core/types'
 import { WeekTimeline } from '../Timeline'
 import { WeekEventsColumn } from '../EventColumn'
+import type { ISchedule } from 'nurekit'
+import { getDayPairs } from '@/core/utils'
 
-defineProps<{ days: CalendarDay[] }>()
+defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
 </script>
 <template>
   <div class="WeekGrid">
     <WeekTimeline />
     <div class="WeekEventsColumns">
-      <WeekEventsColumn v-for="day in days" :key="day.date" />
+      <WeekEventsColumn v-for="day in days" :key="day.date" :pairs="getDayPairs(day.date, pairs)" />
     </div>
   </div>
 </template>

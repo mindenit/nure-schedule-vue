@@ -1,10 +1,20 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { Event } from '../Event'
+import type { ISchedule } from 'nurekit'
+
+const props = defineProps<{ pairs: ISchedule[] }>()
+
+const type = computed(() => (props.pairs.length > 1 ? 'compact' : 'default'))
+</script>
 <template>
-  <div class="ColumnItem"></div>
+  <div class="ColumnItem">
+    <Event v-for="pair in pairs" :key="pair.startTime" :pair="pair" :type="type" />
+  </div>
 </template>
 <style lang="scss" scoped>
 .ColumnItem {
-  @apply flex flex-col justify-start items-end w-full border-b border-outline p-2 gap-2 box-border;
+  @apply box-border flex w-full flex-col items-end justify-start gap-2 border-b border-outline p-2;
 
   &:nth-child(even) {
     @apply h-5;

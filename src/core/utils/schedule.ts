@@ -1,8 +1,9 @@
-import { nurekit } from '@/libs/nurekit'
-import type { ScheduleFnArgs, ScheduleQueryFn } from '../types/schedule'
-import type { ISchedule } from 'nurekit'
 import { dayjsClient } from '@/libs/dayjs'
+import { nurekit } from '@/libs/nurekit'
+import type { ISchedule } from 'nurekit'
+import { toTime } from '.'
 import { DATE_FORMAT } from '../constants'
+import type { ScheduleFnArgs, ScheduleQueryFn } from '../types/schedule'
 
 const getSchedule = async ({ type, ...rest }: ScheduleQueryFn) => {
   switch (type) {
@@ -47,4 +48,10 @@ const getDayPairs = (date: string, pairs: ISchedule[]) => {
   })
 }
 
-export { getSchedule, getDayPairs }
+const getPairsByTime = (time: string, pairs: ISchedule[]) => {
+  return pairs.filter((pair) => {
+    return toTime(pair.startTime) === time
+  })
+}
+
+export { getDayPairs, getPairsByTime, getSchedule }

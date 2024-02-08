@@ -63,7 +63,11 @@ provide('calendar', {
         />
       </TabsContent>
       <TabsContent value="week" as-child>
-        <WeekView :days="weekDays" @select-date="(date) => selectDate(date)" />
+        <WeekView
+          :days="weekDays"
+          :pairs="filtersStore.applyFilers(data)"
+          @select-date="(date) => selectDate(date)"
+        />
       </TabsContent>
       <TabsContent value="day" as-child>
         <DayView

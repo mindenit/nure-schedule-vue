@@ -2,7 +2,7 @@ const DATE_FORMAT = 'YYYY-MM-DD'
 const YEAR_FORMAT = 'YYYY'
 const MONTH_FORMAT = 'M'
 const DAY_WITH_MONTH_FORMAT = 'D MMMM'
-const TIME_FORMAT = 'HH:mm'
+const TIME_FORMAT = 'H:mm'
 const LONG_MONTH_FORMAT = 'MMMM'
 const LONG_DAY_FORMAT = 'dddd'
 

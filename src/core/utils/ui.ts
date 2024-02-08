@@ -1,5 +1,5 @@
-import { SUBJECT_COLORS } from '@/core/constants/'
-import type { SubjectShortType } from '@/core/types/ui'
+import { SUBJECT_COLORS } from '@/core/constants'
+import type { SubjectShortType } from '@/core/types'
 
 interface CardDetails {
   avatarColor: string
@@ -60,4 +60,21 @@ const getCardIcon = (type: SubjectShortType) => {
   }
 }
 
-export { getCardDetails, getCardIcon }
+const getPairColor = (type: SubjectShortType) => {
+  switch (type) {
+    case 'Екз':
+      return SUBJECT_COLORS.exam
+    case 'Зал':
+      return SUBJECT_COLORS.test
+    case 'Конс':
+      return SUBJECT_COLORS.consultation
+    case 'Лб':
+      return SUBJECT_COLORS.lab
+    case 'Лк':
+      return SUBJECT_COLORS.lecture
+    case 'Пз':
+      return SUBJECT_COLORS.practise
+  }
+}
+
+export { getCardDetails, getCardIcon, getPairColor }

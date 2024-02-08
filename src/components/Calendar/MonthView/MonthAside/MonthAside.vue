@@ -2,6 +2,7 @@
 import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
 import { Title } from '@/components/ui/Title'
+import { PE_AUDITORIUM } from '@/core/constants'
 import { toDayWithMonth } from '@/core/utils'
 import { Icon } from '@iconify/vue'
 import type { ISchedule } from 'nurekit'
@@ -22,15 +23,18 @@ const title = computed(() => toDayWithMonth(props.activeDate))
       <Title variant="big"> Сьогодні пар немає </Title>
     </div>
     <div v-else class="SubjectsContainer">
-      <DialogRoot v-for="pair in pairs" :key="pair.startTime">
-        <DialogTrigger>
-          <SubjectCard :pair="pair" :is-full-width="true" />
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>Розклад</DialogHeader>
-          <TextSubjectCard :pair="pair" />
-        </DialogContent>
-      </DialogRoot>
+      <template v-for="pair in pairs" :key="pair.startTime">
+        <DialogRoot v-if="pair.auditory !== PE_AUDITORIUM">
+          <DialogTrigger>
+            <SubjectCard :pair="pair" :is-full-width="true" />
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>Розклад</DialogHeader>
+            <TextSubjectCard :pair="pair" />
+          </DialogContent>
+        </DialogRoot>
+        <SubjectCard v-else :pair="pair" :is-full-width="true" />
+      </template>
     </div>
   </aside>
 </template>

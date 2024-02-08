@@ -7,6 +7,7 @@ import { Title } from '@/components/ui/Title'
 import { Icon } from '@iconify/vue'
 import { DialogRoot, DialogContent, DialogTrigger, DialogHeader } from '@/components/ui/Dialog'
 import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
+import { PE_AUDITORIUM } from '@/core/constants'
 
 const props = defineProps<{ activeDate: string; pairs: ISchedule[] }>()
 
@@ -22,15 +23,18 @@ const title = computed(() => {
       <Title variant="big">Сьогодні пар немає</Title>
     </div>
     <div v-else class="SubjectsContainer">
-      <DialogRoot v-for="pair in pairs" :key="pair.startTime">
-        <DialogTrigger>
-          <SubjectCard :pair="pair" />
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>Розклад</DialogHeader>
-          <TextSubjectCard :pair="pair" />
-        </DialogContent>
-      </DialogRoot>
+      <template v-for="pair in pairs" :key="pair.startTime">
+        <DialogRoot v-if="pair.auditory !== PE_AUDITORIUM">
+          <DialogTrigger>
+            <SubjectCard :pair="pair" />
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>Розклад</DialogHeader>
+            <TextSubjectCard :pair="pair" />
+          </DialogContent>
+        </DialogRoot>
+        <SubjectCard v-else :pair="pair" />
+      </template>
     </div>
   </aside>
 </template>

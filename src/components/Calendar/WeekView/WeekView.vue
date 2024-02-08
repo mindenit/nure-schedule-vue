@@ -6,8 +6,9 @@ import type { Dayjs } from 'dayjs'
 import { inject, ref, type Ref } from 'vue'
 import { WeekHeader } from './Header'
 import { WeekGrid } from './Grid'
+import type { ISchedule } from 'nurekit'
 
-defineProps<{ days: CalendarDay[] }>()
+defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
 
 defineEmits<{ selectDate: [date: Dayjs] }>()
 
@@ -26,7 +27,7 @@ const { selectedDate } = inject<{
       :selected-date="selectedDate"
       @select-date="(date) => $emit('selectDate', date)"
     />
-    <WeekGrid :days="days" />
+    <WeekGrid :days="days" :pairs="pairs" />
   </div>
 </template>
 <style lang="css" scoped>
