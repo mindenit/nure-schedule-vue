@@ -30,6 +30,6 @@ defineEmits<{
 </template>
 <style lang="scss" scoped>
 .InnerContainer {
-  @apply w-full flex flex-row flex-nowrap justify-between items-center gap-4;
+  @apply flex w-full flex-row flex-nowrap items-center justify-between gap-4;
 }
 </style>

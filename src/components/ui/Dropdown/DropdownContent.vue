@@ -14,14 +14,14 @@ const forwarded = useForwardPropsEmits(props, emits)
 </script>
 <template>
   <DropdownMenuPortal>
-    <DropdownMenuContent class="DropdownContent" v-bind="forwarded" :side-offset="4">
+    <DropdownMenuContent class="DropdownContent" v-bind="forwarded" align="start" :side-offset="4">
       <slot></slot>
     </DropdownMenuContent>
   </DropdownMenuPortal>
 </template>
 <style lang="scss">
 .DropdownContent {
-  @apply flex flex-col p-3 min-w-52 w-auto bg-surface shadow-lg shadow-black/40 rounded-xl box-border;
+  @apply flex flex-col p-2 min-w-52 w-auto bg-surface shadow-lg shadow-black/40 rounded-xl box-border;
 
   &[data-state='open'] {
     @apply animate-fadeIn;

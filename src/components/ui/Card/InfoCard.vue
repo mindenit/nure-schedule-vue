@@ -8,11 +8,15 @@ interface Props {
   isFullWidth?: boolean
 }
 
+defineEmits<{
+  click: []
+}>()
+
 defineProps<Props>()
 </script>
 
 <template>
-  <div class="CardContainer" :class="{ 'CardContainer-full': isFullWidth }">
+  <div class="CardContainer" :class="{ 'CardContainer-full': isFullWidth }" @click="$emit('click')">
     <div>
       <Title v-if="title" variant="big">{{ title }}</Title>
       <h5 class="Text" v-if="subtitle">
@@ -27,6 +31,6 @@ defineProps<Props>()
 
 <style lang="scss" scoped>
 .Text {
-  @apply text-muted font-montserrat text-lg leading-5 font-medium tracking-[0.016rem];
+  @apply font-montserrat text-lg font-medium leading-5 tracking-[0.016rem] text-muted;
 }
 </style>

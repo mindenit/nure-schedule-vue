@@ -1,16 +1,9 @@
-<script lang="ts" setup>
-import { useForwardProps } from 'radix-vue'
-import { RouterLink, type RouterLinkProps } from 'vue-router'
-
-const props = defineProps<RouterLinkProps>()
-
-const forwarded = useForwardProps(props)
-</script>
+<script lang="ts" setup></script>
 <template>
-  <RouterLink class="NavigationItem" v-bind="forwarded">
+  <button class="NavigationItem">
     <span class="Dot" aria-hidden></span>
     <slot></slot>
-  </RouterLink>
+  </button>
 </template>
 <style lang="scss" scoped>
 .NavigationItem {

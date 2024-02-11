@@ -1,40 +1,35 @@
 <script lang="ts" setup>
-import type { SubjectShortType } from '@/core/types'
 import { Title } from '@/components/ui/Title'
-
-interface IData {
-  id: string
-  name: string
-}
+import { toDay, toDayWithMonth, toTime } from '@/core/utils'
+import type { ISchedule } from 'nurekit'
+import { computed } from 'vue'
 
 interface Props {
-  weekday: string
-  date: string
-  startTime: string
-  subjectType: SubjectShortType
-  subjectName: string
-  auditory: string
-  teacher: string
-  groups: IData[]
+  pair: ISchedule
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const weekday = computed(() => toDay(props.pair.startTime))
+const date = computed(() => toDayWithMonth(props.pair.startTime))
+const startTime = computed(() => toTime(props.pair.startTime))
 </script>
 <template>
   <div class="TextCardContainer">
-    <Title variant="light">{{ weekday }} {{ date }} {{ startTime }}. {{ subjectType }}</Title>
-    <Title variant="big">{{ subjectName }}</Title>
-    <Title variant="medium">Авдиторія: {{ auditory }}</Title>
-    <Title variant="medium">Викладач: {{ teacher }}</Title>
-
-    <Title variant="medium">Група(-и):</Title>
-    <div class="flex gap-1">
-      <span v-for="group in groups ? groups : []" :key="group.id">{{ group.name }}</span>
+    <Title variant="light">{{ weekday }} {{ date }} {{ startTime }}. {{ pair.type }}</Title>
+    <Title variant="big">{{ pair.subject.title }}</Title>
+    <Title variant="medium">Авдиторія: {{ pair.auditory }}</Title>
+    <Title variant="medium">Викладач: {{ pair.teachers[0].fullName }}</Title>
+    <div class="flex flex-wrap gap-1">
+      <Title variant="medium">Група(-и):</Title>
+      <div class="flex gap-1">
+        <span v-for="group in pair.groups" :key="group.id">{{ group.name }}</span>
+      </div>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .TextCardContainer {
-  @apply flex flex-col items-start shrink-0 self-stretch w-full;
+  @apply flex w-full shrink-0 flex-col items-start gap-4 self-stretch;
 }
 </style>

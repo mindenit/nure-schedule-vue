@@ -1,16 +1,19 @@
 <script lang="ts" setup>
 import { Title } from '@/components/ui/Title'
+import { Icon } from '@iconify/vue'
 
 interface Props {
   letters: string
   color: string
+  asIcon?: boolean
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), { asIcon: false })
 </script>
 <template>
   <div class="AvatarContainer" :style="{ background: color }">
-    <Title class="text-center text-white" variant="medium">{{ letters }}</Title>
+    <Title v-if="!asIcon" class="text-center text-white" variant="medium">{{ letters }}</Title>
+    <Icon v-else :icon="letters" class="size-8 text-white" />
   </div>
 </template>
 <style lang="scss" scoped>

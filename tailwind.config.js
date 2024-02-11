@@ -62,8 +62,8 @@ export default {
       animation: {
         'loader-spin': 'loader-spin 1s infinite linear',
         'fade-out': 'fade-out',
-        fadeIn: 'fadeIn 300ms ease-out',
-        fadeOut: 'fadeOut 300ms ease-in'
+        fadeIn: 'fadeIn 200ms ease-out',
+        fadeOut: 'fadeOut 200ms ease-in'
       }
     }
   },
