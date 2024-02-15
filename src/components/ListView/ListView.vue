@@ -3,7 +3,6 @@ import { usePagination } from '@/core/composables'
 import type { ViewProps } from '@/core/types'
 import { Button } from '../ui/Button'
 import { ListItem, ListRoot } from '../ui/List'
-import { toRefs } from 'vue'
 
 defineEmits<{
   click: [item: T]

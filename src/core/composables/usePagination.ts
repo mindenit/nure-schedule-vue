@@ -1,5 +1,5 @@
-import { computed, ref, type Ref } from 'vue'
 import { ITEMS_PER_PAGE } from '@/core/constants'
+import { computed, ref } from 'vue'
 
 export function usePagination<T>(items: T[]) {
   const currentPage = ref(1)
@@ -11,10 +11,10 @@ export function usePagination<T>(items: T[]) {
     return startIndex.value + ITEMS_PER_PAGE
   })
   const displayedItems = computed(() => {
-    return items.value.slice(0, endIndex.value)
+    return items.slice(0, endIndex.value)
   })
 
-  const totalItems = items.value.length
+  const totalItems = items.length
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE)
   const showButton = computed(() => currentPage.value < totalPages)
 
