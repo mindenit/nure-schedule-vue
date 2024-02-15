@@ -5,7 +5,8 @@ import {
   DAY_WITH_MONTH_FORMAT,
   LONG_DAY_FORMAT,
   LONG_MONTH_FORMAT,
-  TIME_FORMAT
+  TIME_FORMAT,
+  USER_TIMEZONE
 } from '../constants'
 
 const getWeekday = (date: string) => {

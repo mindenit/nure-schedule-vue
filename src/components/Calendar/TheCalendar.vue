@@ -58,20 +58,20 @@ provide('calendar', {
       <TabsContent value="month" as-child>
         <MonthView
           :days="monthDays"
-          :pairs="filtersStore.applyFilers(data)"
+          :pairs="filtersStore.applyFilters(data)"
           @select-date="(date) => selectDate(date)"
         />
       </TabsContent>
       <TabsContent value="week" as-child>
         <WeekView
           :days="weekDays"
-          :pairs="filtersStore.applyFilers(data)"
+          :pairs="filtersStore.applyFilters(data)"
           @select-date="(date) => selectDate(date)"
         />
       </TabsContent>
       <TabsContent value="day" as-child>
         <DayView
-          :pairs="filtersStore.applyFilers(data)"
+          :pairs="filtersStore.applyFilters(data)"
           :month-days="monthDays"
           @select-date="(date) => selectDate(date)"
         />
