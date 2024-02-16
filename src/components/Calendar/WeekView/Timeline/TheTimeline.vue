@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import { TIMELINE } from '@/core/constants'
+import { getTimeline } from '@/core/utils'
+
+const timeline = getTimeline()
 </script>
 <template>
   <div class="WeekTimeline">
-    <p v-for="item in TIMELINE" :key="item" class="WeekTimelineItem">
+    <p v-for="item in timeline" :key="item" class="WeekTimelineItem">
       {{ item }}
     </p>
   </div>

@@ -1,5 +1,5 @@
-import { computed, ref } from 'vue'
 import { ITEMS_PER_PAGE } from '@/core/constants'
+import { computed, ref } from 'vue'
 
 export function usePagination<T>(items: T[]) {
   const currentPage = ref(1)

@@ -2,6 +2,7 @@ import type { IAuditorium, ISchedule, ITeacher } from 'nurekit'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { LessonsFilter, SubjectShortType } from '../types'
+import { flow } from '../utils'
 
 export const useFiltersStore = defineStore(
   'filters',
@@ -100,10 +101,7 @@ export const useFiltersStore = defineStore(
       })
     }
 
-    const applyFilers = (pairs: ISchedule[]) => {
-      // TODO: replace nesting with pipe
-      return applyTeachersFilter(applyLessonsFilter(applyAuditoriumsFilter(pairs)))
-    }
+    const applyFilters = flow(applyAuditoriumsFilter, applyLessonsFilter, applyTeachersFilter)
 
     return {
       teachersFilter,
@@ -115,7 +113,7 @@ export const useFiltersStore = defineStore(
       removeAuditoriumFilter,
       removeLessonFilter,
       removeTeacherFilter,
-      applyFilers
+      applyFilters
     }
   },
   {
