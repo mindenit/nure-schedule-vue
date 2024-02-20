@@ -21,7 +21,7 @@ button {
   }
 
   .CardContainer {
-    @apply flex flex-col items-start shrink-0 self-stretch border border-solid border-outline bg-surface rounded-xl p-4 cursor-pointer w-[350px] duration-200 max-sm:w-full;
+    @apply flex w-[350px] shrink-0 cursor-pointer flex-col items-start self-stretch rounded-xl border border-solid border-outline bg-surface p-4 duration-200 max-sm:w-full;
 
     &:focus,
     &:active {

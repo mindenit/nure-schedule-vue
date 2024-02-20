@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { DATE_FORMAT } from '@/core/constants'
 import type { CalendarDay } from '@/core/types'
 import { getDayPairs } from '@/core/utils'
@@ -28,9 +29,15 @@ const radioStateSingle = ref(today.value)
 defineProps<Props>()
 
 defineEmits<{ selectDate: [date: Dayjs] }>()
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const deviceClass = computed(() => {
+  return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
+})
 </script>
 <template>
-  <section class="DayView">
+  <section class="DayView" v-if="deviceClass === 'is-desktop'">
     <DayMain :active-date="radioStateSingle" :pairs="getDayPairs(radioStateSingle, pairs)" />
     <aside>
       <div class="DayAside">
@@ -45,10 +52,31 @@ defineEmits<{ selectDate: [date: Dayjs] }>()
       </div>
     </aside>
   </section>
+
+  <section class="DayView MobileDayView" v-else>
+    <aside class="AsideContainer">
+      <div class="DayAside">
+        <DateSelector
+          :current-date="today"
+          :selected-date="selectedDate"
+          @select-date="(day) => $emit('selectDate', day)"
+        />
+        <RadioGroupRoot class="MiniCalendar" v-model="radioStateSingle" as="ul">
+          <DateSelectorItem v-for="day in monthDays" :key="day.date" :day="day" />
+        </RadioGroupRoot>
+      </div>
+    </aside>
+    <DayMain :active-date="radioStateSingle" :pairs="getDayPairs(radioStateSingle, pairs)" />
+  </section>
 </template>
 <style lang="scss" scoped>
 .DayView {
   @apply box-border grid size-full grid-cols-[3fr_1fr] gap-x-4 rounded-[5rem] bg-surface-container p-7;
+  @apply max-sm:h-fit max-sm:grid-cols-1 max-sm:bg-transparent max-sm:p-0;
+}
+
+.MobileDayView {
+  @apply pb-[90px];
 }
 
 .DayAside {
@@ -56,6 +84,10 @@ defineEmits<{ selectDate: [date: Dayjs] }>()
 }
 
 .MiniCalendar {
-  @apply grid grid-cols-7 flex-row flex-wrap;
+  @apply grid h-fit grid-cols-7 flex-row flex-wrap;
+}
+
+.AsideContainer {
+  @apply h-fit;
 }
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Title } from '@/components/ui/Title'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { DATE_FORMAT } from '@/core/constants/calendar'
 import type { CalendarDay } from '@/core/types'
 import { getDayPairs } from '@/core/utils'
@@ -13,6 +14,8 @@ import { DateSelector } from './DateSelector'
 import { MonthAside } from './MonthAside'
 import { MonthDay } from './MonthDay'
 import { MonthHeaders } from './MonthHeaders'
+
+import { DialogTrigger, DialogRoot, DialogContent, DialogHeader } from '@/components/ui/Dialog'
 
 defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
 
@@ -31,9 +34,15 @@ const radioStateSingle = ref(today.value)
 const monthTitle = computed(() => {
   return `${toMonthName(selectedDate.value)} ${selectedDate.value.year()}`
 })
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const deviceClass = computed(() => {
+  return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
+})
 </script>
 <template>
-  <section class="MonthView">
+  <section class="MonthView" v-if="deviceClass === 'is-desktop'">
     <MonthAside :active-date="radioStateSingle" :pairs="getDayPairs(radioStateSingle, pairs)" />
     <div class="Wrapper">
       <div class="Header">
@@ -55,14 +64,48 @@ const monthTitle = computed(() => {
       </RadioGroupRoot>
     </div>
   </section>
+  <section class="MobileMothView" v-else>
+    <div class="Wrapper">
+      <div class="Header">
+        <Title variant="big">{{ monthTitle }}</Title>
+        <DateSelector
+          :current-date="today"
+          :selected-date="selectedDate"
+          @select-date="(date) => $emit('selectDate', date)"
+        />
+      </div>
+      <MonthHeaders />
+      <RadioGroupRoot v-model="radioStateSingle" :default-value="today" as="ul" class="MonthDays">
+        <DialogRoot>
+          <DialogTrigger>
+            <MonthDay
+              v-for="day in days"
+              :key="day.date"
+              :day="day"
+              :pairs="getDayPairs(day.date, pairs)"
+            />
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>Розклад</DialogHeader>
+            <div v-if="!pairs.length">FALLBACK</div>
+            <template v-else v-for="pair in pairs" :key="pair.startTime">
+              <SubjectCard :pair="pair" :is-full-width="true" />
+            </template>
+          </DialogContent>
+        </DialogRoot>
+      </RadioGroupRoot>
+    </div>
+  </section>
 </template>
 <style lang="scss" scoped>
 .MonthView {
-  @apply box-border grid max-h-full w-full grid-cols-[1fr_2fr] gap-x-4 rounded-[5rem] bg-surface-container p-7;
+  @apply box-border grid w-full grid-cols-[1fr_2fr] gap-x-4 rounded-[5rem] bg-surface-container p-7;
+  @apply max-sm:w-full max-sm:grid-cols-1 max-sm:rounded-[2rem] max-sm:p-2 max-sm:pb-[90px];
 }
 
 .Wrapper {
   @apply box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7;
+  @apply max-sm:rounded-[1rem] max-sm:p-2;
 }
 
 .Header {

@@ -23,20 +23,20 @@ const forwarded = useForwardPropsEmits(props, emits)
 </template>
 <style lang="scss" scoped>
 .DialogOverlay {
-  @apply fixed inset-0 bg-black/50 dark:bg-white/30 z-10;
+  @apply fixed inset-0 z-10 bg-black/50 dark:bg-white/30;
 }
 
 .DialogContent {
-  @apply flex flex-col justify-start items-start fixed bg-modal-bg overflow-y-scroll box-border gap-4 p-4 z-20;
+  @apply fixed z-20 box-border flex flex-col items-start justify-start gap-4 overflow-y-scroll bg-modal-bg p-4;
   -ms-overflow-style: none;
   scrollbar-width: none;
 
   @media (max-width: theme('screens.md')) {
-    @apply w-full h-[85dvh] bottom-0 rounded-t-3xl;
+    @apply bottom-0 w-full rounded-t-3xl;
   }
 
   @media not (max-width: theme('screens.md')) {
-    @apply w-[420px] min-h-40  max-h-[600px] rounded-3xl left-1/2 top-1/2;
+    @apply left-1/2 top-1/2  max-h-[600px] min-h-40 w-[420px] rounded-3xl;
     transform: translate(-50%, -50%);
   }
 

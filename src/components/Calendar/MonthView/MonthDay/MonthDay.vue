@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { CalendarDay } from '@/core/types'
 import { getPairsCountPlural } from '@/core/utils'
 import { dayjsClient } from '@/libs/dayjs'
@@ -19,8 +20,17 @@ const label = computed(() => {
   return dayjsClient(props.day.date).format('D')
 })
 
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const deviceClass = computed(() => {
+  return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
+})
+
 const pairsCount = computed(() => {
-  return getPairsCountPlural(props.pairs.length)
+  if (deviceClass.value === 'is-desktop') {
+    return getPairsCountPlural(props.pairs.length)
+  }
+  return props.pairs.length
 })
 </script>
 <template>

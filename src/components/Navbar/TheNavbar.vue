@@ -56,10 +56,14 @@ const { icon, toggle } = useTheme()
 </template>
 <style lang="scss" scoped>
 .Navbar {
-  @apply flex w-full h-20 px-5 lg:h-[84px] items-center bg-surface lg:px-10;
+  @apply flex w-full items-center bg-surface px-5 py-3 lg:px-10;
+
+  /* &:where(.is-mobile) {
+    @apply justify-start gap-2 bottom-0 absolute;
+  } */
 
   &:where(.is-mobile) {
-    @apply justify-start gap-2 bottom-0 absolute;
+    @apply fixed bottom-0 left-0 right-0 justify-between gap-2;
   }
 
   &:where(.is-desktop) {

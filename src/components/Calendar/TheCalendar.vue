@@ -82,5 +82,6 @@ provide('calendar', {
 <style lang="scss" scoped>
 .CalendarHeader {
   @apply box-border flex h-fit w-full flex-row items-center justify-between px-5;
+  @apply max-sm:flex-col max-sm:gap-2;
 }
 </style>
