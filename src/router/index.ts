@@ -21,14 +21,14 @@ const router = createRouter({
       name: 'filters',
       component: () => import('../views/FiltersView.vue')
     },
-    {
-      path: '/questions',
-      meta: {
-        title: 'Питання'
-      },
-      name: 'questions',
-      component: () => import('../views/AboutView.vue')
-    },
+    // {
+    //   path: '/questions',
+    //   meta: {
+    //     title: 'Питання'
+    //   },
+    //   name: 'questions',
+    //   component: () => import('../views/AboutView.vue')
+    // },
     {
       path: '/changes',
       meta: {
