@@ -37,3 +37,9 @@ button {
     @apply bg-error-text;
   }
 }
+
+@layer utilities {
+  .MobileButtonContainer {
+    @apply max-sm:fixed max-sm:bottom-24 max-sm:right-4 max-sm:z-[5];
+  }
+}

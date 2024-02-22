@@ -18,7 +18,7 @@ const fallback = computed(() => {
 </template>
 <style lang="scss" scoped>
 .WeekHeader {
-  @apply box-border flex w-full touch-none select-none items-center justify-center rounded-full p-2;
+  @apply box-border flex w-full touch-none select-none items-center justify-center rounded-full p-2 max-sm:w-24;
 
   &:where(.active) {
     @apply bg-primary text-app-bg;

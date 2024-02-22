@@ -64,7 +64,7 @@ const deviceClass = computed(() => {
       </RadioGroupRoot>
     </div>
   </section>
-  <section class="MobileMothView" v-else>
+  <section class="MobileMonthView" v-else>
     <div class="Wrapper">
       <div class="Header">
         <Title variant="big">{{ monthTitle }}</Title>
@@ -76,23 +76,12 @@ const deviceClass = computed(() => {
       </div>
       <MonthHeaders />
       <RadioGroupRoot v-model="radioStateSingle" :default-value="today" as="ul" class="MonthDays">
-        <DialogRoot>
-          <DialogTrigger>
-            <MonthDay
-              v-for="day in days"
-              :key="day.date"
-              :day="day"
-              :pairs="getDayPairs(day.date, pairs)"
-            />
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>Розклад</DialogHeader>
-            <div v-if="!pairs.length">FALLBACK</div>
-            <template v-else v-for="pair in pairs" :key="pair.startTime">
-              <SubjectCard :pair="pair" :is-full-width="true" />
-            </template>
-          </DialogContent>
-        </DialogRoot>
+        <MonthDay
+          v-for="day in days"
+          :key="day.date"
+          :day="day"
+          :pairs="getDayPairs(day.date, pairs)"
+        />
       </RadioGroupRoot>
     </div>
   </section>
@@ -100,12 +89,10 @@ const deviceClass = computed(() => {
 <style lang="scss" scoped>
 .MonthView {
   @apply box-border grid w-full grid-cols-[1fr_2fr] gap-x-4 rounded-[5rem] bg-surface-container p-7;
-  @apply max-sm:w-full max-sm:grid-cols-1 max-sm:rounded-[2rem] max-sm:p-2 max-sm:pb-[90px];
 }
 
 .Wrapper {
-  @apply box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7;
-  @apply max-sm:rounded-[1rem] max-sm:p-2;
+  @apply box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7 max-sm:h-full max-sm:rounded-[1rem] max-sm:p-2;
 }
 
 .Header {
@@ -114,5 +101,9 @@ const deviceClass = computed(() => {
 
 .MonthDays {
   @apply grid h-full w-full list-none grid-cols-7 flex-row flex-wrap;
+}
+
+.MobileMonthView {
+  @apply flex h-full pb-28;
 }
 </style>

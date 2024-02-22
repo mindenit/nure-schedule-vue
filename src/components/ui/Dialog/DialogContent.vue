@@ -32,7 +32,7 @@ const forwarded = useForwardPropsEmits(props, emits)
   scrollbar-width: none;
 
   @media (max-width: theme('screens.md')) {
-    @apply bottom-0 w-full rounded-t-3xl;
+    @apply bottom-0 max-h-[90dvh] w-full rounded-t-3xl;
   }
 
   @media not (max-width: theme('screens.md')) {

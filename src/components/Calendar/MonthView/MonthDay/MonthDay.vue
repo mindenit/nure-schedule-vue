@@ -6,11 +6,14 @@ import { dayjsClient } from '@/libs/dayjs'
 import type { ISchedule } from 'nurekit'
 import { RadioGroupItem, useForwardProps, type RadioGroupItemProps } from 'radix-vue'
 import { computed } from 'vue'
+import { MobileDayDialog } from '../MobileDayDialog'
 
 interface Props extends RadioGroupItemProps {
   day: CalendarDay
   pairs: ISchedule[]
 }
+
+const { isGreater } = useBreakpoints(breakpointsTailwind)
 
 const props = defineProps<Props>()
 
@@ -34,19 +37,33 @@ const pairsCount = computed(() => {
 })
 </script>
 <template>
-  <RadioGroupItem
-    v-bind="forwarded"
-    :class="[{ 'not-current': !day.isCurrentMonth }, 'Day']"
-    :value="day.date"
-    as="li"
-  >
-    <span class="Indicator">
-      {{ label }}
-    </span>
-    <span v-if="pairs.length" class="Pairs">
-      {{ pairsCount }}
-    </span>
-  </RadioGroupItem>
+  <template v-if="isGreater('sm')">
+    <RadioGroupItem
+      v-bind="forwarded"
+      :class="[{ 'not-current': !day.isCurrentMonth }, 'Day']"
+      :value="day.date"
+      as="li"
+    >
+      <span class="Indicator">
+        {{ label }}
+      </span>
+      <span v-if="pairs.length" class="Pairs">
+        {{ pairsCount }}
+      </span>
+    </RadioGroupItem>
+  </template>
+  <template v-else>
+    <MobileDayDialog :day="day" :pairs="pairs">
+      <li :class="[{ 'not-current': !day.isCurrentMonth, active: day.isToday }, 'Day']">
+        <span class="Indicator">
+          {{ label }}
+        </span>
+        <span v-if="pairs.length" class="Pairs">
+          {{ pairsCount }}
+        </span>
+      </li>
+    </MobileDayDialog>
+  </template>
 </template>
 <style lang="scss" scoped>
 .Day {
@@ -84,7 +101,8 @@ const pairsCount = computed(() => {
     @apply box-border flex h-6 w-auto flex-row items-center justify-center rounded-full bg-error-bg px-2 text-sm text-app-bg;
   }
 
-  &[data-state='checked'] {
+  &[data-state='checked'],
+  &:where(.active) {
     .Indicator {
       @apply bg-primary text-app-bg;
     }

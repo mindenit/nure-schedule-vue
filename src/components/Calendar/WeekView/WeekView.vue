@@ -32,7 +32,6 @@ const { selectedDate } = inject<{
 </template>
 <style lang="css" scoped>
 .WeekView {
-  @apply flex w-full flex-col items-center justify-between gap-y-2;
-  @apply max-sm:box-border max-sm:h-full max-sm:w-full max-sm:flex-nowrap max-sm:items-start max-sm:overflow-y-auto max-sm:overflow-x-scroll max-sm:pb-[120px];
+  @apply flex w-full flex-col items-center justify-between gap-y-2 max-sm:box-border max-sm:h-full max-sm:w-full max-sm:flex-nowrap max-sm:items-start max-sm:overflow-x-scroll max-sm:overflow-y-scroll max-sm:pb-[120px];
 }
 </style>

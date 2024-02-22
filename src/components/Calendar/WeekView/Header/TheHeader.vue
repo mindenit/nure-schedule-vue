@@ -43,11 +43,10 @@ const selectNext = () => {
 </template>
 <style lang="scss" scoped>
 .Wrapper {
-  /* TODO: Fix this styles */
-  @apply flex w-fit flex-row items-center justify-between gap-4 rounded-full bg-surface p-3;
+  @apply flex w-full flex-row items-center justify-between gap-4 rounded-full bg-surface p-3 max-sm:w-auto;
 }
 
 .HeadersContainer {
-  @apply flex h-fit w-fit flex-row gap-4;
+  @apply flex h-fit w-full flex-row gap-4 max-sm:gap-0;
 }
 </style>
