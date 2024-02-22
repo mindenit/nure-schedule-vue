@@ -26,13 +26,13 @@ const props = withDefaults(defineProps<Props>(), { variant: 'medium' })
   @apply Muted font-roboto text-xs font-light;
 }
 .MediumTitle {
-  @apply font-montserrat Muted text-sm leading-[18px] font-medium tracking-[0.009rem];
+  @apply Muted font-montserrat text-sm font-medium leading-[18px] tracking-[0.009rem];
 }
 .BigTitle {
-  @apply font-montserrat text-xl leading-6 tracking-wide font-bold Contrast;
+  @apply Contrast font-montserrat text-xl font-bold leading-6 tracking-wide max-sm:text-lg;
 }
 .LargeTitle {
-  @apply font-montserrat text-[32px] leading-10 font-extrabold Contrast mb-[10px];
+  @apply Contrast mb-[10px] font-montserrat text-[32px] font-extrabold leading-10;
 }
 .Muted {
   @apply text-muted;

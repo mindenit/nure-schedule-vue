@@ -9,9 +9,9 @@ import { ScheduleDialog } from '../ScheduleDialog'
 import { ScheduleDropdown } from '../ScheduleDropdown'
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
 import CalendarLoader from './CalendarLoader.vue'
+import DayView from './DayView/DayView.vue'
 import MonthView from './MonthView/MonthView.vue'
 import WeekView from './WeekView/WeekView.vue'
-import DayView from './DayView/DayView.vue'
 
 const view = ref<CalendarView>('month')
 
@@ -51,7 +51,9 @@ provide('calendar', {
           <TabsTrigger value="day">День</TabsTrigger>
         </TabsList>
       </div>
-      <ScheduleDialog />
+      <div class="MobileButtonContainer">
+        <ScheduleDialog />
+      </div>
     </header>
     <CalendarLoader v-if="isLoading" />
     <template v-if="data">
@@ -81,6 +83,6 @@ provide('calendar', {
 </template>
 <style lang="scss" scoped>
 .CalendarHeader {
-  @apply box-border flex h-fit w-full flex-row items-center justify-between px-5;
+  @apply box-border flex h-fit w-full flex-row items-center justify-between px-5 max-sm:flex-row max-sm:gap-2 max-sm:px-1;
 }
 </style>

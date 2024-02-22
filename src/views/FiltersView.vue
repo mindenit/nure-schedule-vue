@@ -52,7 +52,9 @@ const handleClick = (item: any, name: string) => {
           <Title variant="large">Фільтри</Title>
           <Title variant="medium">Оберіть елементи, які не треба показувати</Title>
         </div>
-        <FiltersDialog />
+        <div class="MobileButtonContainer">
+          <FiltersDialog />
+        </div>
       </header>
       <div class="PageBody">
         <template v-for="(filter, index) in filters" :key="index">

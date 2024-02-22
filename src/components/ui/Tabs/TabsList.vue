@@ -14,11 +14,11 @@ const forwarded = useForwardProps(props)
 </template>
 <style lang="scss">
 .TabsList {
-  @apply flex flex-row w-full;
+  @apply flex w-full flex-row;
 
   @media not (max-width: theme('screens.sm')) {
     .TabsTrigger {
-      @apply flex items-center justify-center w-full py-2 px-3 flex-1 whitespace-nowrap overflow-hidden text-ellipsis;
+      @apply flex w-full flex-1 items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-3 py-2;
       transition: flex 0.3s ease;
     }
   }
@@ -26,7 +26,7 @@ const forwarded = useForwardProps(props)
   @media (max-width: theme('screens.sm')) {
     &:where(.variant-compact) {
       .TabsTrigger {
-        @apply items-center justify-center size-12 px-2 text-[0px];
+        @apply size-12 items-center justify-center px-2 text-[0px];
       }
 
       .TabsTrigger::first-letter {
@@ -34,20 +34,20 @@ const forwarded = useForwardProps(props)
       }
 
       .TabsTrigger[data-state='active'] {
-        @apply flex justify-center items-center w-32 text-base;
+        @apply flex w-28 items-center justify-center text-base;
       }
     }
 
     &:where(.variant-default) {
       .TabsTrigger {
-        @apply flex items-center justify-center grow text-[10px] py-2;
+        @apply flex grow items-center justify-center py-2 text-[10px] max-sm:text-base;
       }
     }
   }
 
   @media (min-width: theme('screens.md')) {
     .TabsTrigger {
-      @apply flex items-center justify-center min-w-28 h-12 text-base;
+      @apply flex h-12 min-w-28 items-center justify-center text-base;
     }
   }
 }
