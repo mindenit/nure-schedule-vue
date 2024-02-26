@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosClient = axios.create({
-  baseURL: 'https://api.mindenit.tech/'
+  baseURL: 'https://api.mindenit.tech'
 })
 
 axiosClient.interceptors.response.use(
@@ -12,7 +12,7 @@ axiosClient.interceptors.response.use(
   function (error) {
     const res = error.response
     if (res.status == 401) {
-      window.location.href = '/signin'
+      window.location.href = '/login'
     }
     return Promise.reject(error)
   }

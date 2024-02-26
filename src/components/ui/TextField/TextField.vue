@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { IValidationError } from '@/core/types'
 import { useVModel } from '@vueuse/core'
 type TextFieldType = 'email' | 'text' | 'password' | 'search'
 
@@ -8,7 +7,7 @@ interface TextFieldProps {
   placeholder: string
   type: TextFieldType
   modelValue: string
-  error?: IValidationError | string | null
+  error?: string
 }
 const props = defineProps<TextFieldProps>()
 
@@ -18,7 +17,14 @@ const model = useVModel(props, 'modelValue', emit)
 
 <template>
   <div class="relative flex flex-col">
-    <input class="TextField" :type="type" :id="id" :placeholder="placeholder" v-model="model" />
+    <input
+      class="TextField"
+      v-bind="$attrs"
+      :type="type"
+      :id="id"
+      :placeholder="placeholder"
+      v-model="model"
+    />
     <label class="Placeholder" :id="id" :for="id">
       <div class="Text">
         {{ placeholder }}

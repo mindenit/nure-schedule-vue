@@ -3,6 +3,7 @@ import { usePagination } from '@/core/composables'
 import type { ViewProps } from '@/core/types'
 import { Button } from '../ui/Button'
 import { ListItem, ListRoot } from '../ui/List'
+import { toRefs } from 'vue'
 
 defineEmits<{
   click: [item: T]
@@ -14,7 +15,9 @@ interface Props extends Omit<ViewProps<T>, 'type'> {
 
 const props = defineProps<Props>()
 
-const { displayedItems, showButton, loadMore } = usePagination(props.data)
+const { data } = toRefs(props)
+
+const { displayedItems, showButton, loadMore } = usePagination(data)
 </script>
 <template>
   <template v-if="!data.length">

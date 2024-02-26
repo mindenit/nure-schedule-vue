@@ -1,51 +1,51 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axiosClient from '../services/axios.service'
 import type { IAuthTokens, TAuthInput } from '../types/auth'
 import type { IUser } from '../types/user'
-import { transformAuthError } from '../utils'
-import axiosClient from '../services/axios.service'
-import { useRouter } from 'vue-router'
 
 export const useAuthStore = defineStore(
   'auth',
   () => {
     const router = useRouter()
 
-    const authTokens = ref<IAuthTokens | null>(null)
+    const tokens = ref<IAuthTokens | null>(null)
     const isAuthorized = ref(false)
 
     const signup = async (data: TAuthInput) => {
       try {
+        console.log('started')
+
         await axiosClient.post<IUser>('/register', data)
 
-        isAuthorized.value = true
-
-        router.push({ path: 'home' })
+        router.push({ name: 'login' })
       } catch (error: any) {
-        error.value = transformAuthError(error.response.data)
+        console.log(error)
       }
     }
 
     const signin = async (data: TAuthInput) => {
       try {
         const response = await axiosClient.post<IAuthTokens>('/login', data)
-        const { refresh_token, access_token } = response.data
+        console.log(response)
+        const { refreshToken, accessToken } = response.data
 
-        authTokens.value = { access_token, refresh_token }
+        tokens.value = { refreshToken, accessToken }
         isAuthorized.value = true
 
-        router.push({ path: 'home' })
+        router.push('/')
       } catch (error: any) {
-        error.value = transformAuthError(error.response.data.message)
+        console.log(error)
       }
     }
 
     const signout = () => {
-      authTokens.value = null
+      tokens.value = null
       isAuthorized.value = false
     }
 
-    return { isAuthorized, signup, signin, signout }
+    return { isAuthorized, tokens, signup, signin, signout }
   },
   {
     persist: true
