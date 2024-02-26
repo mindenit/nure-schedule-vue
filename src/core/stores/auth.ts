@@ -15,8 +15,6 @@ export const useAuthStore = defineStore(
 
     const signup = async (data: TAuthInput) => {
       try {
-        console.log('started')
-
         await axiosClient.post<IUser>('/register', data)
 
         router.push({ name: 'login' })
@@ -34,7 +32,7 @@ export const useAuthStore = defineStore(
         tokens.value = { refreshToken, accessToken }
         isAuthorized.value = true
 
-        router.push('/')
+        router.push({ name: 'home' })
       } catch (error: any) {
         console.log(error)
       }

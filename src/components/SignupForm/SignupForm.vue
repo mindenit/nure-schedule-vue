@@ -1,45 +1,65 @@
 <script lang="ts" setup>
+import { Button } from '@/components/ui/Button'
+import { TextField } from '@/components/ui/TextField'
+import { Title } from '@/components/ui/Title'
+import { useAuthStore } from '@/core/stores/auth'
+import type { TAuthInput } from '@/core/types'
+import { authSchema } from '@/core/validations'
+import { useMutation } from '@tanstack/vue-query'
+import type { Output } from 'valibot'
+import { useForm } from 'vee-validate'
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
-import { TextField } from '@/components/ui/TextField'
-import { Button } from '@/components/ui/Button'
-import { Title } from '@/components/ui/Title'
+const authStore = useAuthStore()
 
-import { useSignupForm } from '@/core/composables'
-
-const {
-  emailValue,
-  passwordValue,
-  handleSubmit,
-  validationError,
-  isDisabled,
-  isPending,
-  formError
-} = useSignupForm()
-
-const emailError = computed(() => {
-  return !validationError ? validationError['email'] : ''
+const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
+  Output<typeof authSchema>
+>({
+  initialValues: {
+    email: '',
+    password: ''
+  }
 })
 
-const passwordError = computed(() => {
-  return !validationError ? validationError['password'] : ''
+const { mutateAsync, status, error, isError } = useMutation({
+  mutationKey: ['signup'],
+  async mutationFn(data: TAuthInput) {
+    await authStore.signup(data)
+  }
+})
+
+const [email] = defineField('email')
+
+const [password] = defineField('password')
+
+const submit = handleSubmit((values) => {
+  console.log(values)
+
+  mutateAsync(values)
 })
 
 const buttonText = computed(() => {
-  return isPending ? 'Реєстратиція...' : 'Зареєструватися'
+  return status.value === 'pending' ? 'Реєстратиція...' : 'Зареєструватися'
+})
+
+const isEmpty = computed(() => Object.values(values).some((value) => value.trim() === ''))
+
+const isDisabled = computed(() => {
+  return status.value === 'pending' || isEmpty.value || isSubmitting.value
 })
 </script>
 <template>
-  <form class="Form" @submit.prevent="handleSubmit">
+  <form class="Form" @submit="submit">
     <TextField
       id="email"
       type="email"
       name="email"
       inputmode="email"
       placeholder="Електронна пошта"
-      v-model="emailValue"
-      :error="emailError"
+      v-model="email"
+      :error="errors.email"
+      :disabled="isSubmitting"
       autofocus
     />
     <TextField
@@ -48,11 +68,12 @@ const buttonText = computed(() => {
       name="password"
       inputmode="password"
       placeholder="Пароль"
-      v-model="passwordValue"
-      :error="passwordError"
+      v-model="password"
+      :error="errors.password"
+      :disabled="isSubmitting"
     />
-    <p class="ErrorText" v-if="validationError !== null">{{ formError }}</p>
-    <Button type="submit" :disabled="isDisabled || isPending">
+    <p class="ErrorText" v-if="isError">{{ error?.message }}</p>
+    <Button type="submit" :disabled="isDisabled">
       {{ buttonText }}
     </Button>
     <div class="TextContainer">
