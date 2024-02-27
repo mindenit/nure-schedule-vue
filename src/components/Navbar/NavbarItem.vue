@@ -2,19 +2,23 @@
 import { RouterLink } from 'vue-router'
 import NavbarIcon from './NavbarIcon.vue'
 
-withDefaults(defineProps<{ name: string; icon: string; isActive?: boolean }>(), {
-  isActive: false
+withDefaults(defineProps<{ name: string; icon: string; asLink?: boolean }>(), {
+  asLink: true
 })
 </script>
 <template>
-  <RouterLink :to="{ name }" :class="[{ active: isActive }, 'NavbarItem']">
+  <RouterLink v-if="asLink" :to="{ name }" class="NavbarItem">
     <NavbarIcon :icon="icon" />
     <slot></slot>
   </RouterLink>
+  <button v-else class="NavbarItem">
+    <NavbarIcon :icon="icon" />
+    <slot></slot>
+  </button>
 </template>
 <style lang="scss" scoped>
 .NavbarItem {
-  @apply flex flex-col items-center justify-center w-full h-full lg:min-w-16 gap-2 text-sm font-medium no-underline leading-4 bg-transparent text-muted;
+  @apply flex h-full w-full flex-col items-center justify-center gap-2 bg-transparent text-sm font-medium leading-4 text-muted no-underline lg:min-w-16;
 
   &:hover,
   &:focus {
@@ -25,8 +29,8 @@ withDefaults(defineProps<{ name: string; icon: string; isActive?: boolean }>(), 
     }
   }
 
-  &:where(.active) {
-    @apply text-contrast font-semibold #{!important};
+  &:where(.router-link-active) {
+    @apply font-semibold text-contrast #{!important};
 
     .IconContainer {
       @apply bg-navbar-chip;

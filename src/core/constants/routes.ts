@@ -13,17 +13,12 @@ const ROUTES_META = [
     name: 'Фільтр',
     route: 'filters',
     icon: 'ic:outline-filter-alt'
-  },
+  }
   // {
   //   name: 'Питання',
   //   route: 'questions',
   //   icon: 'ic:outline-quiz'
   // },
-  {
-    name: 'Акаунт',
-    route: 'login',
-    icon: 'ic:baseline-account-circle'
-  }
 ]
 
 export { ROUTES_META }
