@@ -5,10 +5,13 @@ import { NavigationItem, NavigationRoot } from '../ui/Navigation'
 import { DialogClose } from '../ui/Dialog'
 import type { ViewProps } from '@/core/types'
 import { useSchedulesStore } from '@/core/stores'
+import { toRefs } from 'vue'
 
 const props = defineProps<ViewProps<T>>()
 
-const { displayedItems, showButton, loadMore } = usePagination(props.data)
+const { data } = toRefs(props)
+
+const { displayedItems, showButton, loadMore } = usePagination(data)
 const store = useSchedulesStore()
 </script>
 <template>

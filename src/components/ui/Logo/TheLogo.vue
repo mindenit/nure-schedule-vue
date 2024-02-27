@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import Logo from '@/assets/logo.svg'
+import { RouterLink } from 'vue-router'
 </script>
 <template>
   <div class="LogoContainer">
-    <Logo />
+    <RouterLink :to="{ name: 'home' }">
+      <Logo />
+    </RouterLink>
     <h2 class="LogoText">
       <slot></slot>
     </h2>
@@ -14,7 +17,7 @@ import Logo from '@/assets/logo.svg'
   @apply flex items-center gap-2;
 
   .LogoText {
-    @apply text-contrast font-montserrat text-3xl font-bold leading-normal;
+    @apply font-montserrat text-3xl font-bold leading-normal text-contrast;
   }
 }
 </style>

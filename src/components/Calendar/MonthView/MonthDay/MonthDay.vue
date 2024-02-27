@@ -67,7 +67,7 @@ const pairsCount = computed(() => {
 </template>
 <style lang="scss" scoped>
 .Day {
-  @apply box-border flex h-full min-h-20 w-full touch-none select-none flex-col items-start justify-between border-l border-t border-outline p-3 text-lg leading-3 tracking-tight;
+  @apply box-border flex h-full min-h-20 w-full cursor-pointer touch-none select-none flex-col items-start justify-between border-l border-t border-outline p-3 text-lg leading-3 tracking-tight;
 
   &:nth-child(1) {
     @apply rounded-tl-2xl;

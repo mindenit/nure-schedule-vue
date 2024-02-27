@@ -8,7 +8,8 @@ const router = createRouter({
     {
       path: '/',
       meta: {
-        title: 'Головна'
+        title: 'Головна',
+        showAuthrized: true
       },
       name: 'home',
       component: HomeView
@@ -16,7 +17,8 @@ const router = createRouter({
     {
       path: '/filters',
       meta: {
-        title: 'Фільтри'
+        title: 'Фільтри',
+        showAuthrized: true
       },
       name: 'filters',
       component: () => import('../views/FiltersView.vue')
@@ -32,7 +34,8 @@ const router = createRouter({
     {
       path: '/changes',
       meta: {
-        title: 'Зміни'
+        title: 'Зміни',
+        showAuthrized: true
       },
       name: 'changes',
       component: () => import('../views/AboutView.vue')
