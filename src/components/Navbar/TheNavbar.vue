@@ -1,28 +1,33 @@
 <script lang="ts" setup>
-import { breakpointsTailwind, useBreakpoints, useTitle } from '@vueuse/core'
-import { computed } from 'vue'
-import { Logo } from '../ui/Logo'
-import { useRoute } from 'vue-router'
-import NavbarItem from './NavbarItem.vue'
-import { Button } from '../ui/Button'
-import { Icon } from '@iconify/vue'
 import { useTheme } from '@/core/composables'
 import { ROUTES_META } from '@/core/constants/routes'
+import { useAuthStore } from '@/core/stores/auth'
+import { Icon } from '@iconify/vue'
+import { breakpointsTailwind, useBreakpoints, useTitle } from '@vueuse/core'
+import { toRefs } from 'vue'
+import { RouterLink } from 'vue-router'
+import { Button } from '../ui/Button'
+import { Logo } from '../ui/Logo'
+import NavbarItem from './NavbarItem.vue'
+import { DialogRoot, DialogTrigger, DialogContent, DialogHeader } from '../ui/Dialog'
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
-
-const deviceClass = computed(() => {
-  return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
-})
-
 const title = useTitle()
 
-const route = useRoute()
-
 const { icon, toggle } = useTheme()
+const authStore = useAuthStore()
+const { isAuthorized } = toRefs(authStore)
 </script>
 <template>
-  <header :class="`Navbar ${deviceClass}`">
+  <header
+    :class="[
+      {
+        'is-desktop': breakpoints.isGreaterOrEqual('md'),
+        'is-mobile': !breakpoints.isGreaterOrEqual('md')
+      },
+      'Navbar'
+    ]"
+  >
     <template v-if="breakpoints.isGreaterOrEqual('md')">
       <Logo>{{ title }}</Logo>
       <div class="flex flex-row items-center gap-6">
@@ -30,15 +35,23 @@ const { icon, toggle } = useTheme()
           v-for="(elem, index) in ROUTES_META"
           :key="index"
           :name="elem.route"
-          :is-active="elem.route === route.name?.toString()"
           :icon="elem.icon"
         >
           {{ elem.name }}
         </NavbarItem>
-
         <Button variant="text" appearance="icon">
           <Icon :icon="icon" @click="toggle()" />
         </Button>
+        <Button v-if="isAuthorized" variant="filled" @click="authStore.signout()">
+          <Icon icon="ic:baseline-logout" />
+          Вийти
+        </Button>
+        <RouterLink v-else :to="{ name: 'login' }">
+          <Button variant="filled">
+            <Icon icon="ic:baseline-log-in" />
+            Увійти
+          </Button>
+        </RouterLink>
       </div>
     </template>
     <template v-if="breakpoints.isSmaller('md')">
@@ -46,11 +59,27 @@ const { icon, toggle } = useTheme()
         v-for="(elem, index) in ROUTES_META"
         :key="index"
         :name="elem.route"
-        :is-active="elem.route === route.name?.toString()"
         :icon="elem.icon"
       >
         {{ elem.name }}
       </NavbarItem>
+      <DialogRoot v-if="isAuthorized">
+        <DialogTrigger>
+          <NavbarItem name="login" icon="ic:baseline-account-circle" :as-link="false">
+            Акаунт
+          </NavbarItem>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>Акаунт</DialogHeader>
+          <div class="flex size-full flex-col items-center justify-center">
+            <Button v-if="isAuthorized" variant="filled" @click="authStore.signout()">
+              <Icon icon="ic:baseline-logout" />
+              Вийти
+            </Button>
+          </div>
+        </DialogContent>
+      </DialogRoot>
+      <NavbarItem v-else name="login" icon="ic:baseline-account-circle"> Акаунт </NavbarItem>
     </template>
   </header>
 </template>
