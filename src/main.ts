@@ -1,26 +1,19 @@
 import './assets/main.scss'
 
 import { createPinia } from 'pinia'
-import { createApp, markRaw } from 'vue'
+import { createApp } from 'vue'
 
-import { VueQueryPlugin, type VueQueryPluginOptions } from '@tanstack/vue-query'
 import { persistQueryClient } from '@tanstack/query-persist-client-core'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
+import { VueQueryPlugin, type VueQueryPluginOptions } from '@tanstack/vue-query'
+import { createHead } from '@unhead/vue'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 
 const app = createApp(App)
 const pinia = createPinia()
-
-pinia.use(({ store }) => {
-  store.router = markRaw(router)
-})
-
-pinia.use(piniaPluginPersistedstate)
-
-app.use(pinia)
-app.use(router)
+const head = createHead()
 
 const vueQueryOptions: VueQueryPluginOptions = {
   queryClientConfig: {
@@ -33,11 +26,18 @@ const vueQueryOptions: VueQueryPluginOptions = {
   },
   clientPersister: (queryClient) => {
     return persistQueryClient({
+      // @ts-ignore
       queryClient,
       persister: createSyncStoragePersister({ storage: localStorage })
     })
   }
 }
 
+pinia.use(piniaPluginPersistedstate)
+
+app.use(pinia)
+app.use(router)
 app.use(VueQueryPlugin, vueQueryOptions)
+app.use(head)
+
 app.mount('#app')

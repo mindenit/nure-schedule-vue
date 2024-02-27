@@ -3,16 +3,17 @@ import { useTheme } from '@/core/composables'
 import { ROUTES_META } from '@/core/constants/routes'
 import { useAuthStore } from '@/core/stores/auth'
 import { Icon } from '@iconify/vue'
-import { breakpointsTailwind, useBreakpoints, useTitle } from '@vueuse/core'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { toRefs } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Button } from '../ui/Button'
+import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
 import { Logo } from '../ui/Logo'
 import NavbarItem from './NavbarItem.vue'
-import { DialogRoot, DialogTrigger, DialogContent, DialogHeader } from '../ui/Dialog'
+
+defineProps<{ title: string }>()
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
-const title = useTitle()
 
 const { icon, toggle } = useTheme()
 const authStore = useAuthStore()

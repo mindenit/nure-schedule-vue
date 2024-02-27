@@ -2,9 +2,17 @@
 import { FiltersDialog } from '@/components/FiltersDialog'
 import { InfoCard } from '@/components/ui/Card'
 import { Title } from '@/components/ui/Title'
+import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
 import { useFiltersStore } from '@/core/stores'
 import { MainLayout } from '@/layouts/MainLayout'
+import { useHead } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
+
+useHead({
+  title: 'Фільтри',
+  titleTemplate: TITLE_TEMPLATE,
+  templateParams: TITLE_TEMPLATE_PARAMS
+})
 
 const filtersStore = useFiltersStore()
 
@@ -45,11 +53,11 @@ const handleClick = (item: any, name: string) => {
 }
 </script>
 <template>
-  <MainLayout>
+  <MainLayout title="Фільтри">
     <section class="FiltersPage">
       <header class="PageHeader">
         <div class="flex flex-col">
-          <Title variant="large">Фільтри</Title>
+          <Title variant="large" class="md:hidden">Фільтри</Title>
           <Title variant="medium">Оберіть елементи, які не треба показувати</Title>
         </div>
         <div class="MobileButtonContainer">

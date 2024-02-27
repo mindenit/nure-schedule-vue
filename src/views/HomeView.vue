@@ -6,14 +6,22 @@ import { Icon } from '@iconify/vue'
 import { Title } from '@/components/ui/Title'
 import { ScheduleDialog } from '@/components/ScheduleDialog'
 import { toRefs } from 'vue'
+import { useHead } from '@unhead/vue'
+import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
 
 const schedulesStore = useSchedulesStore()
 
 const { activeSchedule } = toRefs(schedulesStore)
+
+useHead({
+  title: 'Головна',
+  titleTemplate: TITLE_TEMPLATE,
+  templateParams: TITLE_TEMPLATE_PARAMS
+})
 </script>
 
 <template>
-  <MainLayout>
+  <MainLayout title="Розклад">
     <section class="HomeView">
       <div v-if="!activeSchedule" class="NoScheduleFallback">
         <Icon icon="ic:baseline-sentiment-slightly-dissatisfied" class="size-24" />

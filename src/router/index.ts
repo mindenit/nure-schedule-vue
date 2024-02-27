@@ -8,7 +8,6 @@ const router = createRouter({
     {
       path: '/',
       meta: {
-        title: 'Головна',
         showAuthrized: true
       },
       name: 'home',
@@ -17,7 +16,6 @@ const router = createRouter({
     {
       path: '/filters',
       meta: {
-        title: 'Фільтри',
         showAuthrized: true
       },
       name: 'filters',
@@ -34,16 +32,14 @@ const router = createRouter({
     {
       path: '/changes',
       meta: {
-        title: 'Зміни',
         showAuthrized: true
       },
       name: 'changes',
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/InDevelopmentView.vue')
     },
     {
       path: '/login',
       meta: {
-        title: 'Вхід',
         showAuthrized: false
       },
       name: 'login',
@@ -52,11 +48,18 @@ const router = createRouter({
     {
       path: '/signup',
       meta: {
-        title: 'Реєстрація',
         showAuthrized: false
       },
       name: 'signup',
       component: () => import('../views/SignupView.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      meta: {
+        showAuthrized: true
+      },
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue')
     }
   ]
 })
@@ -67,9 +70,6 @@ router.beforeEach((to) => {
   if (!to.meta.showAuthrized && auth.isAuthorized) {
     return { name: 'home' }
   }
-
-  // @ts-ignore
-  document.title = to.meta?.title ?? 'Default Title'
 })
 
 export default router
