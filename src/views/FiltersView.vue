@@ -103,7 +103,7 @@ const handleClick = (item: any, name: string) => {
 }
 
 .PageBody {
-  @apply flex h-fit w-full flex-col items-start justify-start gap-4;
+  @apply mb-28 flex h-fit w-full flex-col items-start justify-start gap-4;
 }
 
 .ContentWrapper {
