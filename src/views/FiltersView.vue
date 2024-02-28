@@ -5,13 +5,24 @@ import { Title } from '@/components/ui/Title'
 import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
 import { useFiltersStore } from '@/core/stores'
 import { MainLayout } from '@/layouts/MainLayout'
-import { useHead } from '@unhead/vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
 
+const title = 'Фільтри'
+const description =
+  'Оберіть які елементи розкладу ви хочете бачити, видаляючи непотрібні аудиторії, викладачів, або типи занятть.'
+
 useHead({
-  title: 'Фільтри',
+  title: title,
   titleTemplate: TITLE_TEMPLATE,
   templateParams: TITLE_TEMPLATE_PARAMS
+})
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description
 })
 
 const filtersStore = useFiltersStore()

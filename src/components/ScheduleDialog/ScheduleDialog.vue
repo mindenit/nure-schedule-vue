@@ -41,7 +41,7 @@ const selectedTab = ref('groups')
           </p>
           <NavigationView
             v-else-if="query.data"
-            :data="search(query.data, searchValue, DIALOG_TABS[index].select)"
+            :data="search(/* @ts-ignore */ query.data, searchValue, DIALOG_TABS[index].select)"
             :select="DIALOG_TABS[index].select"
             :type="DIALOG_TABS[index].value"
           />

@@ -17,6 +17,7 @@ export function flow<T>(...fns: PipeArrFn<T>[]): PipeArrFn<T>
 export function flow<T>(...fns: PipeFn<T>[]) {
   return (value: T) => {
     // TODO: resolve type issue
+    // @ts-ignore
     return pipe(value, ...fns)
   }
 }
