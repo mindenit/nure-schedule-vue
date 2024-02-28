@@ -6,14 +6,33 @@ import { Icon } from '@iconify/vue'
 import { Title } from '@/components/ui/Title'
 import { ScheduleDialog } from '@/components/ScheduleDialog'
 import { toRefs } from 'vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
 
 const schedulesStore = useSchedulesStore()
 
 const { activeSchedule } = toRefs(schedulesStore)
+
+const title = 'Головна'
+const description =
+  'Переглядайте розклад у максимально зручній формі, користуючись одним із трьох режимів показу. А також додавайте розклад інших груп та викладачів у свій список розкладів.'
+
+useHead({
+  title: title,
+  titleTemplate: TITLE_TEMPLATE,
+  templateParams: TITLE_TEMPLATE_PARAMS
+})
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description
+})
 </script>
 
 <template>
-  <MainLayout>
+  <MainLayout title="Розклад">
     <section class="HomeView">
       <div v-if="!activeSchedule" class="NoScheduleFallback">
         <Icon icon="ic:baseline-sentiment-slightly-dissatisfied" class="size-24" />

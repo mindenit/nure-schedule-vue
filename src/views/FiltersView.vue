@@ -2,9 +2,28 @@
 import { FiltersDialog } from '@/components/FiltersDialog'
 import { InfoCard } from '@/components/ui/Card'
 import { Title } from '@/components/ui/Title'
+import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
 import { useFiltersStore } from '@/core/stores'
 import { MainLayout } from '@/layouts/MainLayout'
+import { useHead, useSeoMeta } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
+
+const title = 'Фільтри'
+const description =
+  'Оберіть які елементи розкладу ви хочете бачити, видаляючи непотрібні аудиторії, викладачів, або типи занятть.'
+
+useHead({
+  title: title,
+  titleTemplate: TITLE_TEMPLATE,
+  templateParams: TITLE_TEMPLATE_PARAMS
+})
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description
+})
 
 const filtersStore = useFiltersStore()
 
@@ -45,11 +64,11 @@ const handleClick = (item: any, name: string) => {
 }
 </script>
 <template>
-  <MainLayout>
+  <MainLayout title="Фільтри">
     <section class="FiltersPage">
       <header class="PageHeader">
         <div class="flex flex-col">
-          <Title variant="large">Фільтри</Title>
+          <Title variant="large" class="md:hidden">Фільтри</Title>
           <Title variant="medium">Оберіть елементи, які не треба показувати</Title>
         </div>
         <div class="MobileButtonContainer">

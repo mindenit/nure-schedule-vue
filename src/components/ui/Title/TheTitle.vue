@@ -1,24 +1,29 @@
 <script lang="ts" setup>
+// TODO: Rewrite component
+
 interface Props {
-  variant?: 'light' | 'medium' | 'big' | 'large'
+  variant?: 'light' | 'medium' | 'big' | 'large' | 'xl'
 }
 
-const props = withDefaults(defineProps<Props>(), { variant: 'medium' })
+withDefaults(defineProps<Props>(), { variant: 'medium' })
 </script>
 
 <template>
-  <h5 class="LightTitle" v-if="props.variant === 'light'">
+  <h5 class="LightTitle" v-if="variant === 'light'">
     <slot></slot>
   </h5>
-  <h4 class="MediumTitle" v-if="props.variant === 'medium'">
+  <h4 :class="['MediumTitle', $attrs['class']]" v-if="variant === 'medium'">
     <slot></slot>
   </h4>
-  <h3 class="BigTitle" v-if="props.variant === 'big'">
+  <h3 :class="['BigTitle', $attrs['class']]" v-if="variant === 'big'">
     <slot></slot>
   </h3>
-  <h2 class="LargeTitle" v-if="props.variant === 'large'">
+  <h2 :class="['LargeTitle', $attrs['class']]" v-if="variant === 'large'">
     <slot></slot>
   </h2>
+  <h1 :class="['ExtraLargeTitle', $attrs['class']]" v-if="variant === 'xl'">
+    <slot></slot>
+  </h1>
 </template>
 
 <style lang="css" scoped>
@@ -33,6 +38,10 @@ const props = withDefaults(defineProps<Props>(), { variant: 'medium' })
 }
 .LargeTitle {
   @apply Contrast mb-[10px] font-montserrat text-[32px] font-extrabold leading-10;
+}
+
+.ExtraLargeTitle {
+  @apply Contrast mb-[10px] font-montserrat text-5xl font-extrabold leading-10;
 }
 .Muted {
   @apply text-muted;
