@@ -41,7 +41,10 @@ const getItemIcon = (type: ScheduleType) => {
       </span>
     </DropdownTrigger>
     <DropdownContent>
-      <DropdownRadioGroup :model-value="store.activeSchedule?.name">
+      <DropdownRadioGroup
+        :model-value="store.activeSchedule?.name"
+        class="flex w-full flex-col gap-1"
+      >
         <DropdownRadioItem
           v-for="(schedule, index) in recentSchedules"
           :key="index"
