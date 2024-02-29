@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
 import { Button } from '@/components/ui/Button'
 import { TextField } from '@/components/ui/TextField'
 import { Title } from '@/components/ui/Title'
+import { useTheme } from '@/core/composables'
 import { useAuthStore } from '@/core/stores/auth'
 import type { TAuthInput } from '@/core/types'
 import { authSchema } from '@/core/validations'
@@ -11,9 +10,13 @@ import { useMutation } from '@tanstack/vue-query'
 import { toTypedSchema } from '@vee-validate/valibot'
 import { type Output } from 'valibot'
 import { useForm } from 'vee-validate'
+import { computed } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
+import { IS_PRODUCTION } from '@/core/constants'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const { isDark } = useTheme()
 
 const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
   Output<typeof authSchema>
@@ -77,6 +80,12 @@ const isDisabled = computed(() => {
       :error="errors.password"
       :disabled="isSubmitting"
     />
+    <div
+      v-if="IS_PRODUCTION"
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAAAS7MPqHI2QUmMK_"
+      :data-theme="isDark ? 'dark' : 'light'"
+    ></div>
     <p class="ErrorText" v-if="isError">{{ error?.response.data.title }}</p>
     <Button type="submit" :disabled="isDisabled">
       {{ buttonText }}

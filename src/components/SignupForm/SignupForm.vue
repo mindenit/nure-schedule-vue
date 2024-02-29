@@ -12,10 +12,12 @@ import { computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { PasswordChecker } from '../PasswordChecker'
 import { toTypedSchema } from '@vee-validate/valibot'
-import { usePasswordCheckers } from '@/core/composables'
+import { usePasswordCheckers, useTheme } from '@/core/composables'
+import { IS_PRODUCTION } from '@/core/constants'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const { isDark } = useTheme()
 
 const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
   Output<typeof authSchema>
@@ -84,6 +86,12 @@ const isDisabled = computed(() => {
       :disabled="isSubmitting"
     />
     <PasswordChecker :password="password" />
+    <div
+      v-if="IS_PRODUCTION"
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAAAS7MPqHI2QUmMK_"
+      :data-theme="isDark ? 'dark' : 'light'"
+    ></div>
     <p class="ErrorText" v-if="isError">{{ error?.response.data.title }}</p>
     <Button type="submit" :disabled="isDisabled">
       {{ buttonText }}

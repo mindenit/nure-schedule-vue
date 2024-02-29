@@ -10,7 +10,8 @@ const description = 'Увійдіть в акаунт щоби синхроні�
 useHead({
   title,
   titleTemplate: TITLE_TEMPLATE,
-  templateParams: TITLE_TEMPLATE_PARAMS
+  templateParams: TITLE_TEMPLATE_PARAMS,
+  script: [{ key: '1', src: 'https://challenges.cloudflare.com/turnstile/v0/api.js' }]
 })
 
 useSeoMeta({
