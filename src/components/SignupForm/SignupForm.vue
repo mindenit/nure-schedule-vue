@@ -9,8 +9,12 @@ import { useMutation } from '@tanstack/vue-query'
 import type { Output } from 'valibot'
 import { useForm } from 'vee-validate'
 import { computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+import { PasswordChecker } from '../PasswordChecker'
+import { toTypedSchema } from '@vee-validate/valibot'
+import { usePasswordCheckers } from '@/core/composables'
 
+const router = useRouter()
 const authStore = useAuthStore()
 
 const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
@@ -19,13 +23,18 @@ const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
   initialValues: {
     email: '',
     password: ''
-  }
+  },
+  // @ts-ignore
+  validationSchema: toTypedSchema(authSchema)
 })
 
 const { mutateAsync, status, error, isError } = useMutation({
   mutationKey: ['signup'],
   async mutationFn(data: TAuthInput) {
     await authStore.signup(data)
+  },
+  onSuccess() {
+    router.push({ name: 'login' })
   }
 })
 
@@ -33,10 +42,10 @@ const [email] = defineField('email')
 
 const [password] = defineField('password')
 
-const submit = handleSubmit((values) => {
-  console.log(values)
+const submit = handleSubmit((data, ctx) => {
+  ctx.evt?.preventDefault()
 
-  mutateAsync(values)
+  mutateAsync(data)
 })
 
 const buttonText = computed(() => {
@@ -45,8 +54,10 @@ const buttonText = computed(() => {
 
 const isEmpty = computed(() => Object.values(values).some((value) => value.trim() === ''))
 
+const { isValid } = usePasswordCheckers(password)
+
 const isDisabled = computed(() => {
-  return status.value === 'pending' || isEmpty.value || isSubmitting.value
+  return status.value === 'pending' || isEmpty.value || isSubmitting.value || !isValid.value
 })
 </script>
 <template>
@@ -72,7 +83,8 @@ const isDisabled = computed(() => {
       :error="errors.password"
       :disabled="isSubmitting"
     />
-    <p class="ErrorText" v-if="isError">{{ error?.message }}</p>
+    <PasswordChecker :password="password" />
+    <p class="ErrorText" v-if="isError">{{ error?.response.data.title }}</p>
     <Button type="submit" :disabled="isDisabled">
       {{ buttonText }}
     </Button>

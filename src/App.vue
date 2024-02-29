@@ -5,7 +5,6 @@ import { useTheme } from '@/core/composables'
 
 const theme = useTheme()
 </script>
-
 <template>
   <RouterView />
 </template>

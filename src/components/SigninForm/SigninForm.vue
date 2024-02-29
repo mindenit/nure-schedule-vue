@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { RouterLink } from 'vue-router'
-
+import { RouterLink, useRouter } from 'vue-router'
 import { Button } from '@/components/ui/Button'
 import { TextField } from '@/components/ui/TextField'
 import { Title } from '@/components/ui/Title'
@@ -13,9 +12,10 @@ import { toTypedSchema } from '@vee-validate/valibot'
 import { type Output } from 'valibot'
 import { useForm } from 'vee-validate'
 
+const router = useRouter()
 const authStore = useAuthStore()
 
-const { defineField, errors, values, handleSubmit, isSubmitting } = useForm<
+const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
   Output<typeof authSchema>
 >({
   initialValues: {
@@ -26,15 +26,23 @@ const { defineField, errors, values, handleSubmit, isSubmitting } = useForm<
   validationSchema: toTypedSchema(authSchema)
 })
 
-const [email] = defineField('email')
-const [password] = defineField('password')
-
 const { mutateAsync, status, error, isError } = useMutation({
-  mutationKey: ['signup'],
-  mutationFn: async (data: TAuthInput) => await authStore.signin(data)
+  mutationKey: ['signin'],
+  async mutationFn(data: TAuthInput) {
+    await authStore.signin(data)
+  },
+  onSuccess() {
+    router.push({ name: 'home' })
+  }
 })
 
-const submit = handleSubmit(async (values) => await mutateAsync(values))
+const [email] = defineField('email')
+
+const [password] = defineField('password')
+
+const submit = handleSubmit((data) => {
+  mutateAsync(data)
+})
 
 const buttonText = computed(() => {
   return status.value === 'pending' ? 'Вхід...' : 'Увійти'
@@ -69,7 +77,7 @@ const isDisabled = computed(() => {
       :error="errors.password"
       :disabled="isSubmitting"
     />
-    <p class="ErrorText" v-if="isError">{{ error?.message }}</p>
+    <p class="ErrorText" v-if="isError">{{ error?.response.data.title }}</p>
     <Button type="submit" :disabled="isDisabled">
       {{ buttonText }}
     </Button>

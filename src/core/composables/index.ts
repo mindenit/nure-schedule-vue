@@ -1,4 +1,5 @@
 export * from './useCalendar'
 export * from './useDataQueries'
 export * from './usePagination'
+export * from './usePasswordCheckers'
 export * from './useTheme'

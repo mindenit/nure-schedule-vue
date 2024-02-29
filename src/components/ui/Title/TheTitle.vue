@@ -9,7 +9,7 @@ withDefaults(defineProps<Props>(), { variant: 'medium' })
 </script>
 
 <template>
-  <h5 class="LightTitle" v-if="variant === 'light'">
+  <h5 :class="['LightTitle', $attrs['class']]" v-if="variant === 'light'">
     <slot></slot>
   </h5>
   <h4 :class="['MediumTitle', $attrs['class']]" v-if="variant === 'medium'">

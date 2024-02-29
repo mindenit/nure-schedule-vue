@@ -64,12 +64,12 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to) => {
-  const auth = useAuthStore()
+// router.beforeEach((to) => {
+//   const auth = useAuthStore()
 
-  if (!to.meta.showAuthrized && auth.isAuthorized) {
-    return { name: 'home' }
-  }
-})
+//   if (!to.meta.showAuthrized && auth.isAuthorized) {
+//     return { name: 'home' }
+//   }
+// })
 
 export default router
