@@ -1,15 +1,17 @@
 <script lang="ts" setup>
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { Title } from '@/components/ui/Title'
 import { DATE_FORMAT } from '@/core/constants'
 import type { CalendarDay } from '@/core/types'
-import { getDayPairs } from '@/core/utils'
+import { getDayPairs, toMonthName } from '@/core/utils'
 import { dayjsClient } from '@/libs/dayjs'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { Dayjs } from 'dayjs'
 import type { ISchedule } from 'nurekit'
 import { RadioGroupRoot } from 'radix-vue'
 import { computed, inject, ref, type ComputedRef, type Ref } from 'vue'
-import { DateSelectorItem, DateSelector } from './DateSelector'
+import { DateSelector, DateSelectorItem } from './DateSelector'
 import { DayMain } from './DayMain'
+import { capitalize } from '@/core/utils'
 
 interface Props {
   monthDays: CalendarDay[]
@@ -35,17 +37,24 @@ const breakpoints = useBreakpoints(breakpointsTailwind)
 const deviceClass = computed(() => {
   return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
 })
+
+const monthTitle = computed(() => {
+  return `${toMonthName(selectedDate.value)} ${selectedDate.value.year()}`
+})
 </script>
 <template>
   <section class="DayView" v-if="deviceClass === 'is-desktop'">
     <DayMain :active-date="radioStateSingle" :pairs="getDayPairs(radioStateSingle, pairs)" />
     <aside>
       <div class="DayAside">
-        <DateSelector
-          :current-date="today"
-          :selected-date="selectedDate"
-          @select-date="(day) => $emit('selectDate', day)"
-        />
+        <div class="flex flex-row items-center justify-between">
+          <Title variant="medium">{{ monthTitle }}</Title>
+          <DateSelector
+            :current-date="today"
+            :selected-date="selectedDate"
+            @select-date="(day) => $emit('selectDate', day)"
+          />
+        </div>
         <RadioGroupRoot class="MiniCalendar" v-model="radioStateSingle" as="ul">
           <DateSelectorItem v-for="day in monthDays" :key="day.date" :day="day" />
         </RadioGroupRoot>
@@ -56,11 +65,10 @@ const deviceClass = computed(() => {
   <section class="DayView MobileDayView" v-else>
     <aside class="AsideContainer">
       <div class="DayAside">
-        <DateSelector
-          :current-date="today"
-          :selected-date="selectedDate"
-          @select-date="(day) => $emit('selectDate', day)"
-        />
+        <div class="flex flex-row items-center justify-between">
+          <Title variant="medium">{{ monthTitle }}</Title>
+          <DateSelector :current-date="today" :selected-date="selectedDate" />
+        </div>
         <RadioGroupRoot class="MiniCalendar" v-model="radioStateSingle" as="ul">
           <DateSelectorItem v-for="day in monthDays" :key="day.date" :day="day" />
         </RadioGroupRoot>

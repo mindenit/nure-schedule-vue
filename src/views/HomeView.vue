@@ -36,7 +36,7 @@ useSeoMeta({
     <section class="HomeView">
       <div v-if="!activeSchedule" class="NoScheduleFallback">
         <Icon icon="ic:baseline-sentiment-slightly-dissatisfied" class="size-24" />
-        <Title variant="large">У вас поки немає розкладів</Title>
+        <Title variant="large" class="max-sm:text-center">У вас поки немає розкладів</Title>
         <ScheduleDialog />
       </div>
       <Calendar v-else />
