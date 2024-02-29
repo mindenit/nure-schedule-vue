@@ -21,7 +21,11 @@ const type = computed(() => (props.pairs.length > 1 ? 'compact' : 'default'))
   }
 
   &:nth-child(odd) {
-    @apply h-32;
+    @apply h-32 overflow-hidden overflow-y-scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &:last-child {
