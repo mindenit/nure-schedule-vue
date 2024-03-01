@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { Calendar } from '@/components/Calendar'
+import { ScheduleDialog } from '@/components/ScheduleDialog'
+import { Title } from '@/components/ui/Title'
+import { TITLE_TEMPLATE } from '@/core/constants'
 import { useSchedulesStore } from '@/core/stores'
 import { MainLayout } from '@/layouts/MainLayout'
 import { Icon } from '@iconify/vue'
-import { Title } from '@/components/ui/Title'
-import { ScheduleDialog } from '@/components/ScheduleDialog'
-import { toRefs } from 'vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
-import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
+import { toRefs } from 'vue'
 
 const schedulesStore = useSchedulesStore()
 
@@ -19,8 +19,7 @@ const description =
 
 useHead({
   title: title,
-  titleTemplate: TITLE_TEMPLATE,
-  templateParams: TITLE_TEMPLATE_PARAMS
+  titleTemplate: TITLE_TEMPLATE
 })
 
 useSeoMeta({

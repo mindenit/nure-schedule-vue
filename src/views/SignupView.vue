@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { AuthLayout } from '@/layouts/AuthLayout'
 import { SignupForm } from '@/components/SignupForm'
+import { TITLE_TEMPLATE } from '@/core/constants'
+import { AuthLayout } from '@/layouts/AuthLayout'
 import { useHead, useSeoMeta } from '@unhead/vue'
-import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
 
 const title = 'Реєстрація'
 const description = 'Створіть акаунт щоби синхронізувати між пристроями обрані вами розклади.'
@@ -10,8 +10,7 @@ const description = 'Створіть акаунт щоби синхронізу
 useHead({
   title,
   titleTemplate: TITLE_TEMPLATE,
-  templateParams: TITLE_TEMPLATE_PARAMS,
-  script: [{ key: '1', src: 'https://challenges.cloudflare.com/turnstile/v0/api.js' }]
+  script: [{ key: '2', src: 'https://challenges.cloudflare.com/turnstile/v0/api.js' }]
 })
 
 useSeoMeta({

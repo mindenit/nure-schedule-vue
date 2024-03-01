@@ -60,16 +60,24 @@ const router = createRouter({
       },
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue')
+    },
+    {
+      path: '/authors',
+      meta: {
+        showAuthrized: true
+      },
+      name: 'authors',
+      component: () => import('../views/AuthorsView.vue')
     }
   ]
 })
 
-// router.beforeEach((to) => {
-//   const auth = useAuthStore()
+router.beforeEach((to) => {
+  const auth = useAuthStore()
 
-//   if (!to.meta.showAuthrized && auth.isAuthorized) {
-//     return { name: 'home' }
-//   }
-// })
+  if (!to.meta.showAuthrized && auth.isAuthorized) {
+    return { name: 'home' }
+  }
+})
 
 export default router

@@ -13,6 +13,11 @@ const ROUTES_META = [
     name: 'Фільтр',
     route: 'filters',
     icon: 'ic:outline-filter-alt'
+  },
+  {
+    name: 'Автори',
+    route: 'authors',
+    icon: 'ic:baseline-groups'
   }
   // {
   //   name: 'Питання',

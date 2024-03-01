@@ -1,4 +1,4 @@
-const TITLE_TEMPLATE = '%s %separator Nure Schedule'
+const TITLE_TEMPLATE = '%s | Nure Schedule'
 
 const TITLE_TEMPLATE_PARAMS = {
   separator: '|'

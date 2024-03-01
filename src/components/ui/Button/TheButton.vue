@@ -7,24 +7,24 @@ interface ButtonProps {
 withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'default' })
 </script>
 <template>
-  <button :class="`Button variant-${variant} appearance-${appearance}`">
+  <button :class="[`Button`, `variant-${variant}`, `appearance-${appearance}`, $attrs['class']]">
     <slot></slot>
   </button>
 </template>
 <style lang="scss" scoped>
 .Button {
-  @apply inline-flex flex-row items-center justify-center text-center shrink-0 font-roboto text-sm leading-5 tracking-tight rounded-full;
+  @apply inline-flex shrink-0 flex-row items-center justify-center rounded-full text-center font-roboto text-sm leading-5 tracking-tight;
 
   &:where(.appearance-default) {
     @apply gap-2 px-6 py-2;
   }
 
   &:where(.appearance-icon) {
-    @apply p-2 size-10;
+    @apply size-10 p-2;
   }
 
   &:where(.variant-filled) {
-    @apply text-primary-foreground bg-primary;
+    @apply bg-primary text-primary-foreground;
 
     &:active,
     &:focus {
@@ -36,7 +36,7 @@ withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'defau
   }
 
   &:where(.variant-outlined) {
-    @apply text-primary bg-transparent border border-outline;
+    @apply border border-outline bg-transparent text-primary;
 
     &:hover,
     &:focus {
@@ -53,7 +53,7 @@ withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'defau
   }
 
   &:where(.variant-text) {
-    @apply text-primary bg-transparent;
+    @apply bg-transparent text-primary;
 
     &:hover,
     &:focus,

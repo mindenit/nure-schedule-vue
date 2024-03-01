@@ -2,7 +2,7 @@
 import { FiltersDialog } from '@/components/FiltersDialog'
 import { InfoCard } from '@/components/ui/Card'
 import { Title } from '@/components/ui/Title'
-import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
+import { TITLE_TEMPLATE } from '@/core/constants'
 import { useFiltersStore } from '@/core/stores'
 import { MainLayout } from '@/layouts/MainLayout'
 import { useHead, useSeoMeta } from '@unhead/vue'
@@ -14,8 +14,7 @@ const description =
 
 useHead({
   title: title,
-  titleTemplate: TITLE_TEMPLATE,
-  templateParams: TITLE_TEMPLATE_PARAMS
+  titleTemplate: TITLE_TEMPLATE
 })
 
 useSeoMeta({

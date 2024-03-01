@@ -1,14 +1,13 @@
 <script lang="ts" setup>
 import { Button } from '@/components/ui/Button'
 import { Title } from '@/components/ui/Title'
-import { TITLE_TEMPLATE, TITLE_TEMPLATE_PARAMS } from '@/core/constants'
+import { TITLE_TEMPLATE } from '@/core/constants'
 import { Icon } from '@iconify/vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
   title: '404',
-  titleTemplate: TITLE_TEMPLATE,
-  templateParams: TITLE_TEMPLATE_PARAMS
+  titleTemplate: TITLE_TEMPLATE
 })
 </script>
 <template>
