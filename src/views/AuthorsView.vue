@@ -94,7 +94,7 @@ const donations = [
 </template>
 <style lang="scss" scoped>
 .Wrapper {
-  @apply mx-auto box-border flex w-full max-w-[750px] flex-col gap-5 p-4;
+  @apply mx-auto box-border flex w-full max-w-[750px] flex-col gap-5 p-4 max-sm:last:pb-24;
 }
 
 .AuthorCard {
