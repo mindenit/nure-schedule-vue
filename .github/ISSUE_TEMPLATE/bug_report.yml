@@ -11,7 +11,7 @@ body:
     id: priority
     attributes:
       label: Priority
-      description: [Reference - Google Issue tracker priority levels](https://developers.google.com/issue-tracker/concepts/issues#priority)
+      description: How to choose priority you can find out [here](https://developers.google.com/issue-tracker/concepts/issues#priority)
       multiple: false
       options:
         - P0
