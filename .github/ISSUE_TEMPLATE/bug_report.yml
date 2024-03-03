@@ -1,0 +1,66 @@
+name: Bug Report
+description: File a bug report
+title: "(bug): "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority ([Reference](https://developers.google.com/issue-tracker/concepts/issues#priority))
+      multiple: false
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
+  - type: textarea
+    id: describe-a-bug
+    attributes:
+      label: Describe a bug
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: textarea
+    id: to-reproduce
+    attributes:
+      label: To reproduce
+      value: "Do something"
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of our software are you running?
+      options:
+        - 1.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: device
+    attributes:
+      label: Device
+      value: ""
+    validations:
+      required: true
