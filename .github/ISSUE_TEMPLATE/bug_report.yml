@@ -10,7 +10,8 @@ body:
   - type: dropdown
     id: priority
     attributes:
-      label: Priority ([Reference](https://developers.google.com/issue-tracker/concepts/issues#priority))
+      label: Priority
+      description: [Reference - Google Issue tracker priority levels](https://developers.google.com/issue-tracker/concepts/issues#priority)
       multiple: false
       options:
         - P0
