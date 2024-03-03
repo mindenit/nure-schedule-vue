@@ -36,6 +36,7 @@ body:
     id: expected-behavior
     attributes:
       label: Expected behavior
+      value: "It's expected..."
     validations:
       required: true
   - type: dropdown
@@ -61,6 +62,6 @@ body:
     id: device
     attributes:
       label: Device
-      value: ""
+      value: "- Device: [e.g. IPhone 15] \n - OS: [e.g. iOS 17] \n - Resolution: [e.g. 4.75, 5.5] \n - Version OS [e.g. 22]"
     validations:
       required: true
