@@ -14,7 +14,7 @@ const forwarded = useForwardProps(props)
 </template>
 <style lang="scss">
 .TabsList {
-  @apply flex w-full flex-row;
+  @apply flex flex-row max-sm:w-full;
 
   @media not (max-width: theme('screens.sm')) {
     .TabsTrigger {
