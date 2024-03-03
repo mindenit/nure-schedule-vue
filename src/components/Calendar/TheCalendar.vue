@@ -44,13 +44,11 @@ provide('calendar', {
       <div>
         <ScheduleDropdown />
       </div>
-      <div>
-        <TabsList variant="compact">
-          <TabsTrigger value="month">Місяць</TabsTrigger>
-          <TabsTrigger value="week">Тиждень</TabsTrigger>
-          <TabsTrigger value="day">День</TabsTrigger>
-        </TabsList>
-      </div>
+      <TabsList variant="compact">
+        <TabsTrigger value="month">Місяць</TabsTrigger>
+        <TabsTrigger value="week">Тиждень</TabsTrigger>
+        <TabsTrigger value="day">День</TabsTrigger>
+      </TabsList>
       <div class="MobileButtonContainer">
         <ScheduleDialog />
       </div>
@@ -83,6 +81,6 @@ provide('calendar', {
 </template>
 <style lang="scss" scoped>
 .CalendarHeader {
-  @apply box-border flex h-fit w-full flex-row items-center justify-between px-5 max-sm:flex-row max-sm:gap-2 max-sm:px-1;
+  @apply box-border flex h-fit w-full flex-row items-center justify-between px-5 max-sm:flex-row max-sm:gap-2 max-sm:px-0;
 }
 </style>

@@ -94,7 +94,7 @@ const handleClick = (item: any, name: string) => {
 </template>
 <style lang="scss" scoped>
 .FiltersPage {
-  @apply mx-auto my-0 box-border flex h-fit w-full flex-col items-start justify-start gap-4 px-16 py-6;
+  @apply mx-auto my-0 box-border flex h-fit w-full flex-col items-start justify-start gap-4 px-16 py-6 max-sm:px-4;
 }
 
 .PageHeader {

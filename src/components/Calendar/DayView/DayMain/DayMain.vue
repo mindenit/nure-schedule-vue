@@ -41,6 +41,7 @@ const title = computed(() => {
 <style lang="scss" scoped>
 .DayMain {
   @apply box-border flex size-full flex-col gap-5 p-4;
+  @apply max-sm:p-0;
 }
 
 .NoSubjectsFallback {

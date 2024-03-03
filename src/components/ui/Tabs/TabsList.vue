@@ -18,7 +18,8 @@ const forwarded = useForwardProps(props)
 
   @media not (max-width: theme('screens.sm')) {
     .TabsTrigger {
-      @apply flex w-full flex-1 items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-3 py-2;
+      /* px-3 py-2 */
+      @apply flex w-full flex-[1] items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap;
       transition: flex 0.3s ease;
     }
   }
@@ -26,7 +27,8 @@ const forwarded = useForwardProps(props)
   @media (max-width: theme('screens.sm')) {
     &:where(.variant-compact) {
       .TabsTrigger {
-        @apply size-12 items-center justify-center px-2 text-[0px];
+        /* size-12 */
+        @apply items-center justify-center px-3 py-2 text-[0px];
       }
 
       .TabsTrigger::first-letter {
@@ -34,7 +36,7 @@ const forwarded = useForwardProps(props)
       }
 
       .TabsTrigger[data-state='active'] {
-        @apply flex w-28 items-center justify-center text-base;
+        @apply flex w-fit flex-[2] items-center justify-center text-base;
       }
     }
 
