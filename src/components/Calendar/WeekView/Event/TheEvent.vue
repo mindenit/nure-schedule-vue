@@ -37,7 +37,7 @@ const pairColor = getPairColor(props.pair.type as SubjectShortType)
 </template>
 <style lang="scss" scoped>
 .Event {
-  @apply box-border flex size-full cursor-pointer flex-col items-start justify-start rounded-lg;
+  @apply box-border flex size-full cursor-pointer flex-col items-start justify-start rounded-lg transition-all;
 
   &:where(.type-default) {
     @apply p-2;

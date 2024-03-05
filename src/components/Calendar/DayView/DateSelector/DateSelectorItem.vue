@@ -21,7 +21,11 @@ const label = computed(() => {
 </template>
 <style lang="scss" scoped>
 .DateSelectorItem {
-  @apply flex size-8 touch-none select-none items-center justify-center;
+  @apply flex size-8 touch-none select-none items-center justify-center rounded-full transition-all;
+
+  &:hover {
+    @apply bg-surface-container;
+  }
 
   &:where(.not-current) {
     @apply text-calendar;

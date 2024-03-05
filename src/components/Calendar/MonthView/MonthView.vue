@@ -92,7 +92,7 @@ const deviceClass = computed(() => {
 }
 
 .Wrapper {
-  @apply box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7 max-sm:h-full max-sm:rounded-[1rem] max-sm:p-0;
+  @apply box-border flex flex-col gap-3 rounded-[3rem] bg-app-bg p-7 max-sm:h-[65svh] max-sm:rounded-[1rem] max-sm:p-0;
 }
 
 .Header {
@@ -104,6 +104,7 @@ const deviceClass = computed(() => {
 }
 
 .MobileMonthView {
-  @apply flex h-full pb-28;
+  /* pb-28 */
+  @apply flex h-full;
 }
 </style>

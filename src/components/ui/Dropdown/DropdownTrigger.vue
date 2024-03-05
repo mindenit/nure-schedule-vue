@@ -15,7 +15,7 @@ const forwarded = useForwardProps(props)
 </template>
 <style lang="scss" scoped>
 .DropdownTrigger {
-  @apply box-border flex h-12 w-full min-w-36 items-center justify-between rounded-md px-2 font-montserrat text-base font-bold text-muted max-sm:text-sm;
+  @apply box-border flex h-12 w-full min-w-36 items-center justify-between rounded-md px-2 font-montserrat text-base font-bold text-muted transition-all max-sm:text-sm;
 
   &:hover,
   &:focus,
