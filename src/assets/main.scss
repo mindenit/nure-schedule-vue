@@ -14,6 +14,10 @@ button {
   @apply h-dvh;
 }
 
+svg {
+  @apply select-none;
+}
+
 @layer components {
   .Container {
     width: min(100% - 30px, 1300px);
@@ -24,7 +28,8 @@ button {
     @apply flex w-[350px] shrink-0 cursor-pointer flex-col items-start self-stretch rounded-xl border border-solid border-outline bg-surface p-4 duration-200 max-sm:w-full;
 
     &:focus,
-    &:active {
+    &:active,
+    &:hover {
       @apply bg-active-card;
     }
 
@@ -41,5 +46,13 @@ button {
 @layer utilities {
   .MobileButtonContainer {
     @apply max-sm:fixed max-sm:bottom-24 max-sm:right-4 max-sm:z-[5];
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

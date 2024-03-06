@@ -18,7 +18,7 @@ const forwarded = useForwardPropsEmits(props, emits)
 </template>
 <style lang="scss" scoped>
 .DropdownRadioItem {
-  @apply flex flex-row items-center justify-between w-full h-12 font-roboto text-sm leading-6 not-italic text-contrast tracking-tight px-3 rounded-lg box-border;
+  @apply box-border flex h-12 w-full flex-row items-center justify-between rounded-lg px-3 font-roboto text-sm not-italic leading-6 tracking-tight text-contrast transition-all;
 
   &:hover,
   &:focus,

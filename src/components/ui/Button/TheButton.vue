@@ -13,7 +13,7 @@ withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'defau
 </template>
 <style lang="scss" scoped>
 .Button {
-  @apply inline-flex shrink-0 flex-row items-center justify-center rounded-full text-center font-roboto text-sm leading-5 tracking-tight;
+  @apply inline-flex shrink-0 flex-row items-center justify-center rounded-full text-center font-roboto text-sm leading-5 tracking-tight transition-all;
 
   &:where(.appearance-default) {
     @apply gap-2 px-6 py-2;

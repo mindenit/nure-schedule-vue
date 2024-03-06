@@ -3,22 +3,33 @@ import { useDataQueries } from '@/core/composables'
 import { DIALOG_TABS } from '@/core/constants'
 import { search } from '@/core/utils/search'
 import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { NavigationView } from '../NavigationView'
 import { Button } from '../ui/Button'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
 import { SearchField } from '../ui/SearchField'
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
 
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+
 const result = useDataQueries()
 const searchValue = ref('')
 const selectedTab = ref('groups')
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const deviceClass = computed(() => {
+  return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
+})
 </script>
 <template>
   <DialogRoot>
     <DialogTrigger>
-      <Button>
+      <Button v-if="deviceClass === 'is-desktop'">
         Додати розклад
+        <Icon icon="ic:add" />
+      </Button>
+      <Button v-else appearance="icon">
         <Icon icon="ic:add" />
       </Button>
     </DialogTrigger>

@@ -14,7 +14,7 @@ const forwarded = useForwardProps(props)
 </template>
 <style lang="scss" scoped>
 .TabsTrigger {
-  @apply cursor-pointer gap-2 border border-outline bg-app-bg font-roboto font-normal text-contrast;
+  @apply cursor-pointer gap-2 border border-outline bg-app-bg font-roboto font-normal text-contrast transition-all duration-[247ms];
 
   svg {
     @apply hidden overflow-hidden;

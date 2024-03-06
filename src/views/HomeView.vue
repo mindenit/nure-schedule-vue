@@ -74,7 +74,7 @@ const { isLoading } = useQuery({
 </script>
 
 <template>
-  <MainLayout title="Розклад">
+  <MainLayout title="Розклад" :hideScrollbar="true" class="no-scrollbar overflow-y-scroll">
     <section class="HomeView">
       <Loader v-if="isLoading && authStore.isAuthorized" />
       <div v-else-if="!activeSchedule" class="NoScheduleFallback">
