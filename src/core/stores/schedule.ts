@@ -62,18 +62,16 @@ export const useSchedulesStore = defineStore(
     })
 
     const addSchedule = async (schedule: RecentSchedule) => {
-      if (!authStore.isAuthorized) {
-        addScheduleLocally(schedule)
-      } else {
-        await addScheduleToAccount(schedule)
+      console.log(recentSchedules.value.some((s) => s.id === schedule.id))
+
+      if (!recentSchedules.value.some((s) => s.id === schedule.id)) {
+        authStore.isAuthorized ? await addScheduleToAccount(schedule) : addScheduleLocally(schedule)
       }
     }
 
     const addScheduleLocally = (schedule: RecentSchedule) => {
-      if (!recentSchedules.value.some((s) => s.id === schedule.id)) {
-        recentSchedules.value.unshift(schedule)
-        activeSchedule.value = { ...schedule }
-      }
+      recentSchedules.value.unshift(schedule)
+      activeSchedule.value = { ...schedule }
     }
 
     const removeSchedule = async (schedule: RecentSchedule) => {
