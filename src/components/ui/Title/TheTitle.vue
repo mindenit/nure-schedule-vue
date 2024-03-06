@@ -31,7 +31,7 @@ withDefaults(defineProps<Props>(), { variant: 'medium' })
   @apply Muted select-none font-roboto text-xs font-light;
 }
 .MediumTitle {
-  @apply Muted select-none font-montserrat text-sm font-medium leading-[18px] tracking-[0.009rem];
+  @apply Muted select-none text-wrap font-montserrat text-sm font-medium leading-[18px] tracking-[0.009rem];
 }
 .BigTitle {
   @apply Contrast select-none font-montserrat text-xl font-bold leading-6 tracking-wide max-sm:text-lg;
