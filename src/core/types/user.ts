@@ -1,8 +1,8 @@
-import type { IAuthTokens } from './auth'
+import type { RecentSchedule } from '.'
 
-export interface IUser extends IAuthTokens {
+export interface IUser {
   id: number
   createdAt: Date
   updatedAt: Date
-  email: string
+  schedules: RecentSchedule
 }
