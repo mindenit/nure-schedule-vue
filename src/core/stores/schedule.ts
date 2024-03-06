@@ -1,10 +1,9 @@
+import { nurekit } from '@/libs/nurekit'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axiosClient from '../services/axios.service'
 import type { RecentSchedule } from '../types/schedule'
 import { useAuthStore } from './auth'
-import { scheduleTypeAdapter } from '../utils'
 
 export const useSchedulesStore = defineStore(
   'recent_schedules',
@@ -16,18 +15,10 @@ export const useSchedulesStore = defineStore(
 
     const { mutateAsync: addScheduleToAccount } = useMutation({
       mutationKey: ['add-schedule'],
-      async mutationFn({ id, name, type }: RecentSchedule) {
-        console.log('started')
-
-        await axiosClient.post(
-          '/user/add',
-          { id, name, type: scheduleTypeAdapter(type) },
-          {
-            headers: {
-              Authorization: `Bearer ${authStore.tokens?.accessToken}`
-            }
-          }
-        )
+      async mutationFn(data: RecentSchedule) {
+        await nurekit.users.addSchedule(data, {
+          accessToken: authStore.tokens?.accessToken as string
+        })
       },
       onSuccess(_, variables) {
         console.log('success')
@@ -44,12 +35,9 @@ export const useSchedulesStore = defineStore(
 
     const { mutateAsync: removeScheduleFromAccount } = useMutation({
       mutationKey: ['remove-schedule'],
-      async mutationFn({ id, name, type }: RecentSchedule) {
-        await axiosClient.delete('/user/remove', {
-          headers: {
-            Authorization: `Bearer ${authStore.tokens?.accessToken}`
-          },
-          data: { id, name, type: scheduleTypeAdapter(type) }
+      async mutationFn(data: RecentSchedule) {
+        await nurekit.users.removeSchedule(data, {
+          accessToken: authStore.tokens?.accessToken as string
         })
       },
       onSuccess(data, variables) {

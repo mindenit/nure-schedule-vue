@@ -14,6 +14,7 @@ import { PasswordChecker } from '../PasswordChecker'
 import { toTypedSchema } from '@vee-validate/valibot'
 import { usePasswordCheckers, useTheme } from '@/core/composables'
 import { IS_PRODUCTION } from '@/core/constants'
+import { transformAuthError } from '@/core/utils'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -33,7 +34,11 @@ const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
 const { mutateAsync, status, error, isError } = useMutation({
   mutationKey: ['signup'],
   async mutationFn(data: TAuthInput) {
-    await authStore.signup(data)
+    try {
+      await authStore.signup(data)
+    } catch (error) {
+      throw new Error(error)
+    }
   },
   onSuccess() {
     router.push({ name: 'login' })
@@ -61,6 +66,8 @@ const { isValid } = usePasswordCheckers(password)
 const isDisabled = computed(() => {
   return status.value === 'pending' || isEmpty.value || isSubmitting.value || !isValid.value
 })
+
+const transformedError = computed(() => transformAuthError(error.value?.message))
 </script>
 <template>
   <form class="Form" @submit="submit">
@@ -92,7 +99,7 @@ const isDisabled = computed(() => {
       data-sitekey="0x4AAAAAAAS7MPqHI2QUmMK_"
       :data-theme="isDark ? 'dark' : 'light'"
     ></div>
-    <p class="ErrorText" v-if="isError">{{ error?.response.data.title }}</p>
+    <p class="ErrorText" v-if="isError">{{ transformedError }}</p>
     <Button type="submit" :disabled="isDisabled">
       {{ buttonText }}
     </Button>

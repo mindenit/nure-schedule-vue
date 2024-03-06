@@ -1,25 +1,24 @@
+import { nurekit } from '@/libs/nurekit'
+import type { IAuthData, ITokens } from 'nurekit'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axiosClient from '../services/axios.service'
-import type { IAuthTokens, TAuthInput } from '../types/auth'
-import type { IUser } from '../types/user'
 import { useSchedulesStore } from './schedule'
 
 export const useAuthStore = defineStore(
   'auth',
   () => {
-    const tokens = ref<IAuthTokens | null>(null)
+    const tokens = ref<ITokens | null>(null)
     const scheduleStore = useSchedulesStore()
     const isAuthorized = ref(false)
 
-    const signup = async (data: TAuthInput) => {
-      await axiosClient.post<IUser>('/register', data)
+    const signup = async (data: IAuthData) => {
+      await nurekit.auth.signup(data)
     }
 
-    const signin = async (data: TAuthInput) => {
-      const response = await axiosClient.post<IAuthTokens>('/login', data)
+    const signin = async (data: IAuthData) => {
+      const response = await nurekit.auth.login(data)
 
-      const { accessToken, refreshToken } = response.data
+      const { accessToken, refreshToken } = response
 
       isAuthorized.value = true
 

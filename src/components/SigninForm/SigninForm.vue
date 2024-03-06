@@ -33,10 +33,17 @@ const { defineField, errors, handleSubmit, isSubmitting, values } = useForm<
 const { mutateAsync, status, error, isError } = useMutation({
   mutationKey: ['signin'],
   async mutationFn(data: TAuthInput) {
-    await authStore.signin(data)
+    try {
+      await authStore.signin(data)
+    } catch (error) {
+      throw new Error(error)
+    }
   },
   onSuccess() {
     router.push({ name: 'home' })
+  },
+  onError(error, variables, context) {
+    console.log(error)
   }
 })
 
@@ -59,7 +66,7 @@ const isDisabled = computed(() => {
 })
 
 const transformedError = computed(() => {
-  return transformAuthError(error.value?.response.data.title)
+  return transformAuthError(error?.value?.message)
 })
 </script>
 <template>

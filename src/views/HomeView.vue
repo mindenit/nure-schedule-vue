@@ -4,11 +4,10 @@ import { ScheduleDialog } from '@/components/ScheduleDialog'
 import { Loader } from '@/components/ui/Loader'
 import { Title } from '@/components/ui/Title'
 import { TITLE_TEMPLATE } from '@/core/constants'
-import axiosClient from '@/core/services/axios.service'
 import { useSchedulesStore } from '@/core/stores'
 import { useAuthStore } from '@/core/stores/auth'
-import { scheduleTypeAdapter } from '@/core/utils'
 import { MainLayout } from '@/layouts/MainLayout'
+import { nurekit } from '@/libs/nurekit'
 import { Icon } from '@iconify/vue'
 import { useQuery } from '@tanstack/vue-query'
 import { useHead, useSeoMeta } from '@unhead/vue'
@@ -35,28 +34,15 @@ useSeoMeta({
   ogDescription: description
 })
 
-const { isLoading } = useQuery({
+const { data, isLoading } = useQuery({
   queryKey: ['user', authStore.tokens?.accessToken],
   async queryFn() {
-    // TODO: Re-write to something more reliable and move to the nurekit library
-
     try {
-      const response = await axiosClient.get('/user', {
-        headers: {
-          Authorization: `Bearer ${authStore.tokens?.accessToken}`
-        }
+      const user = await nurekit.users.info({
+        accessToken: authStore.tokens?.accessToken as string
       })
 
-      const parsedSchedules = Array.isArray(response.data.Schedules)
-        ? // @ts-ignore
-          response.data.Schedules.map((item) => JSON.parse(item))
-        : JSON.parse(`${response.data.Schedules}`)
-
-      const schedules = Array.isArray(parsedSchedules) ? parsedSchedules : [parsedSchedules]
-
-      schedulesStore.recentSchedules = schedules.map((item) => {
-        return { ...item, type: scheduleTypeAdapter(item.type, 'api') }
-      })
+      schedulesStore.recentSchedules = user.schedules
 
       if (!schedulesStore.activeSchedule?.name) {
         const activeSchedule = schedulesStore.recentSchedules[0]
@@ -64,7 +50,7 @@ const { isLoading } = useQuery({
         schedulesStore.activeSchedule = activeSchedule
       }
 
-      return response.data
+      return user
     } catch (e) {
       console.log(e)
     }
