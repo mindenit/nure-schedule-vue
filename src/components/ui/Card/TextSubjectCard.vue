@@ -25,9 +25,7 @@ const groups = computed(() => stringifyGroups(props.pair.groups))
     <Title variant="medium" v-if="pair.teachers.length">Викладач(-і): {{ teachers }}</Title>
     <div class="flex flex-wrap gap-1">
       <Title variant="medium">Група(-и):</Title>
-      <div class="flex gap-1">
-        <p>{{ groups }}</p>
-      </div>
+      <p class="select-none">{{ groups }}</p>
     </div>
   </div>
 </template>
