@@ -1,13 +1,12 @@
 <script lang="ts" setup>
+import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
+import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
+import { Title } from '@/components/ui/Title'
 import { DAY_WITH_MONTH_FORMAT } from '@/core/constants'
 import { dayjsClient } from '@/libs/dayjs'
+import { Icon } from '@iconify/vue'
 import type { ISchedule } from 'nurekit'
 import { computed } from 'vue'
-import { Title } from '@/components/ui/Title'
-import { Icon } from '@iconify/vue'
-import { DialogRoot, DialogContent, DialogTrigger, DialogHeader } from '@/components/ui/Dialog'
-import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
-import { PE_AUDITORIUM } from '@/core/constants'
 
 const props = defineProps<{ activeDate: string; pairs: ISchedule[] }>()
 
@@ -24,7 +23,7 @@ const title = computed(() => {
     </div>
     <div v-else class="SubjectsContainer">
       <template v-for="pair in pairs" :key="pair.startTime">
-        <DialogRoot v-if="pair.auditory !== PE_AUDITORIUM">
+        <DialogRoot>
           <DialogTrigger>
             <SubjectCard :pair="pair" />
           </DialogTrigger>
@@ -33,7 +32,6 @@ const title = computed(() => {
             <TextSubjectCard :pair="pair" />
           </DialogContent>
         </DialogRoot>
-        <SubjectCard v-else :pair="pair" />
       </template>
     </div>
   </aside>

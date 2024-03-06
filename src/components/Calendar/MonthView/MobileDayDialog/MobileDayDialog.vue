@@ -42,7 +42,7 @@ const title = computed(() => toDayWithMonth(props.day.date))
                 <SubjectCard :pair="pair" />
               </DialogTrigger>
               <DialogContent>
-                <DialogHeader>{{ pair.subject.title }}</DialogHeader>
+                <DialogHeader>Розклад</DialogHeader>
                 <TextSubjectCard :pair="pair" />
               </DialogContent>
             </DialogRoot>

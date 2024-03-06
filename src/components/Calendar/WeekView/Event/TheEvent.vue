@@ -5,7 +5,6 @@ import type { EventType, SubjectShortType } from '@/core/types'
 import { computed } from 'vue'
 import { getPairColor, toTime } from '@/core/utils'
 import { TextSubjectCard } from '@/components/ui/Card'
-import { PE_AUDITORIUM } from '@/core/constants'
 
 const props = defineProps<{ pair: ISchedule; type: EventType }>()
 
@@ -16,7 +15,7 @@ const pairTime = computed(() => {
 const pairColor = getPairColor(props.pair.type as SubjectShortType)
 </script>
 <template>
-  <DialogRoot v-if="pair.auditory !== PE_AUDITORIUM">
+  <DialogRoot>
     <DialogTrigger>
       <div :class="`Event type-${type}`" :style="{ backgroundColor: pairColor }">
         <p class="EventText">{{ pair.subject.brief }}</p>
@@ -29,11 +28,6 @@ const pairColor = getPairColor(props.pair.type as SubjectShortType)
       <TextSubjectCard :pair="pair" />
     </DialogContent>
   </DialogRoot>
-  <div v-else :class="`Event type-${type}`" :style="{ backgroundColor: pairColor }">
-    <p class="EventText">{{ pair.subject.brief }}</p>
-    <p class="EventText">{{ pair.type }}</p>
-    <p v-if="type === 'default'" class="EventText">{{ pairTime }}</p>
-  </div>
 </template>
 <style lang="scss" scoped>
 .Event {
