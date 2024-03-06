@@ -5,6 +5,7 @@ type ScheduleType = 'teachers' | 'groups' | 'auditoriums'
 interface RecentSchedule {
   type: ScheduleType
   name: string
+  id: number
 }
 
 interface ScheduleQueryArgs {

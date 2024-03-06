@@ -7,10 +7,6 @@ export const usePasswordCheckers = (value: MaybeRef<string>) => {
     return password.value.length >= 6
   })
 
-  const latinChecker = computed(() => {
-    return /[A-Za-z]/.test(password.value)
-  })
-
   const digitChecker = computed(() => {
     return /(.*\d.*)/.test(password.value)
   })
@@ -23,28 +19,20 @@ export const usePasswordCheckers = (value: MaybeRef<string>) => {
     return /(.*[A-Z].*)/.test(password.value)
   })
 
-  const whitespacesChecker = computed(() => {
-    return /^[^ ]+$/.test(password.value)
-  })
-
   const isValid = computed(() => {
     return (
       lengthChecker.value &&
-      latinChecker.value &&
       digitChecker.value &&
       specialSymbolChecker.value &&
-      upperCaseChecker.value &&
-      whitespacesChecker.value
+      upperCaseChecker.value
     )
   })
 
   return {
     lengthChecker,
-    latinChecker,
     digitChecker,
     specialSymbolChecker,
     upperCaseChecker,
-    whitespacesChecker,
     isValid
   }
 }

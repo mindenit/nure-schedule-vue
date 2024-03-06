@@ -24,7 +24,7 @@ const store = useSchedulesStore()
     <NavigationRoot>
       <DialogClose v-for="(item, index) in displayedItems" :key="index">
         <NavigationItem
-          @click="() => store.addSchedule({ type, name: item[select] })"
+          @click="() => store.addSchedule({ type, name: item[select], id: item.id })"
           class="animate-fadeIn"
         >
           {{ item[select] }}

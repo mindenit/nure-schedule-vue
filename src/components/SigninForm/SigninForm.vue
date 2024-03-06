@@ -13,6 +13,7 @@ import { useForm } from 'vee-validate'
 import { computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { IS_PRODUCTION } from '@/core/constants'
+import { transformAuthError } from '@/core/utils'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -56,6 +57,10 @@ const isEmpty = computed(() => Object.values(values).some((value) => value.trim(
 const isDisabled = computed(() => {
   return status.value === 'pending' || isEmpty.value || isSubmitting.value
 })
+
+const transformedError = computed(() => {
+  return transformAuthError(error.value?.response.data.title)
+})
 </script>
 <template>
   <form class="Form" @submit="submit">
@@ -86,7 +91,7 @@ const isDisabled = computed(() => {
       data-sitekey="0x4AAAAAAAS7MPqHI2QUmMK_"
       :data-theme="isDark ? 'dark' : 'light'"
     ></div>
-    <p class="ErrorText" v-if="isError">{{ error?.response.data.title }}</p>
+    <p class="ErrorText" v-if="isError">{{ transformedError }}</p>
     <Button type="submit" :disabled="isDisabled">
       {{ buttonText }}
     </Button>
