@@ -7,7 +7,7 @@ import { Icon } from '@iconify/vue'
 import { Title } from '@/components/ui/Title'
 import { computed } from 'vue'
 import { toDayWithMonth } from '@/core/utils'
-import { DialogContent, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
+import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
 import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
 
 const props = defineProps<{ day: CalendarDay; pairs: ISchedule[] }>()
@@ -42,6 +42,7 @@ const title = computed(() => toDayWithMonth(props.day.date))
                 <SubjectCard :pair="pair" />
               </DialogTrigger>
               <DialogContent>
+                <DialogHeader>{{ pair.subject.title }}</DialogHeader>
                 <TextSubjectCard :pair="pair" />
               </DialogContent>
             </DialogRoot>

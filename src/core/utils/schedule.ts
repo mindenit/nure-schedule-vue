@@ -55,20 +55,12 @@ const getPairsByTime = (time: string, pairs: ISchedule[]) => {
 }
 
 const stringifyGroups = (groups: IGroup[]) => {
-  return groups.length > 1
-    ? groups
-        .map((group) => group.name)
-        .join(', ')
-        .slice(0, -2)
-    : groups[0].name
+  return groups.length > 1 ? groups.map((group) => group.name).join(', ') : groups[0].name
 }
 
 const stringifyTeachers = (teachers: ITeacher[]) => {
   return teachers.length > 1
-    ? teachers
-        .map((teacher) => teacher.fullName)
-        .join(', ')
-        .slice(0, -2)
+    ? teachers.map((teacher) => teacher.fullName).join(', ')
     : teachers[0].fullName
 }
 
