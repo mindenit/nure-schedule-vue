@@ -43,4 +43,12 @@ button {
   .MobileButtonContainer {
     @apply max-sm:fixed max-sm:bottom-24 max-sm:right-4 max-sm:z-[5];
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

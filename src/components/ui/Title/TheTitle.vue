@@ -28,20 +28,20 @@ withDefaults(defineProps<Props>(), { variant: 'medium' })
 
 <style lang="css" scoped>
 .LightTitle {
-  @apply Muted touch-none select-none font-roboto text-xs font-light;
+  @apply Muted select-none font-roboto text-xs font-light;
 }
 .MediumTitle {
-  @apply Muted touch-none select-none font-montserrat text-sm font-medium leading-[18px] tracking-[0.009rem];
+  @apply Muted select-none font-montserrat text-sm font-medium leading-[18px] tracking-[0.009rem];
 }
 .BigTitle {
-  @apply Contrast touch-none select-none font-montserrat text-xl font-bold leading-6 tracking-wide max-sm:text-lg;
+  @apply Contrast select-none font-montserrat text-xl font-bold leading-6 tracking-wide max-sm:text-lg;
 }
 .LargeTitle {
-  @apply Contrast mb-[10px] touch-none select-none font-montserrat text-[32px] font-extrabold leading-10;
+  @apply Contrast mb-[10px] select-none font-montserrat text-[32px] font-extrabold leading-10;
 }
 
 .ExtraLargeTitle {
-  @apply Contrast mb-[10px] touch-none select-none font-montserrat text-5xl font-extrabold leading-10;
+  @apply Contrast mb-[10px] select-none font-montserrat text-5xl font-extrabold leading-10;
 }
 .Muted {
   @apply text-muted;

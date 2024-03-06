@@ -11,14 +11,14 @@ defineProps<{ icon: string; count?: number }>()
 </template>
 <style lang="scss" scoped>
 .IconContainer {
-  @apply flex items-center justify-center w-full h-8 rounded-2xl tracking-tighter;
+  @apply flex h-8 w-full items-center justify-center rounded-2xl tracking-tighter transition-all duration-[247ms];
 
   svg {
-    @apply w-6 h-6;
+    @apply h-6 w-6;
   }
 
   .IconBadge {
-    @apply flex absolute items-center justify-center min-w-4 text-xs text-error-text bg-error-bg rounded-lg mb-2 ml-4 px-2;
+    @apply absolute mb-2 ml-4 flex min-w-4 items-center justify-center rounded-lg bg-error-bg px-2 text-xs text-error-text;
   }
 }
 </style>

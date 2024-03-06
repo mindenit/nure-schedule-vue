@@ -18,7 +18,7 @@ withDefaults(defineProps<{ name: string; icon: string; asLink?: boolean }>(), {
 </template>
 <style lang="scss" scoped>
 .NavbarItem {
-  @apply flex h-full w-full flex-col items-center justify-center gap-2 bg-transparent text-sm font-medium leading-4 text-muted no-underline lg:min-w-16;
+  @apply flex h-full w-full flex-col items-center justify-center gap-2 bg-transparent text-sm font-medium leading-4 text-muted no-underline transition-all duration-[247ms] lg:min-w-16;
 
   &:hover,
   &:focus {

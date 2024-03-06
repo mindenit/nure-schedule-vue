@@ -31,7 +31,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <MainLayout title="Розклад">
+  <MainLayout title="Розклад" :hideScrollbar="true" class="no-scrollbar overflow-y-scroll">
     <section class="HomeView">
       <div v-if="!activeSchedule" class="NoScheduleFallback">
         <Icon icon="ic:baseline-sentiment-slightly-dissatisfied" class="size-24" />

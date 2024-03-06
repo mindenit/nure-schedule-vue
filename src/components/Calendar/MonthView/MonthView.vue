@@ -104,7 +104,6 @@ const deviceClass = computed(() => {
 }
 
 .MobileMonthView {
-  /* pb-28 */
-  @apply flex h-full;
+  @apply flex h-full pb-[200px];
 }
 </style>

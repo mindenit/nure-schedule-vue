@@ -2,7 +2,7 @@
 import { useDataQueries } from '@/core/composables'
 import { search } from '@/core/utils'
 import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { ListView } from '../ListView'
 import { Button } from '../ui/Button'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
@@ -12,6 +12,8 @@ import { LESSONS_TYPE } from '@/core/constants'
 import { useFiltersStore } from '@/core/stores'
 import { storeToRefs } from 'pinia'
 
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+
 const result = useDataQueries()
 const searchValue = ref('')
 const selectedTab = ref('teachers')
@@ -19,12 +21,21 @@ const selectedTab = ref('teachers')
 const filtersStore = useFiltersStore()
 
 const { lessonsFilter, auditoriumsFilter, teachersFilter } = storeToRefs(filtersStore)
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const deviceClass = computed(() => {
+  return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
+})
 </script>
 <template>
   <DialogRoot>
     <DialogTrigger>
-      <Button>
+      <Button v-if="deviceClass === 'is-desktop'">
         Додати фільтр
+        <Icon icon="ic:add" />
+      </Button>
+      <Button v-else appearance="icon">
         <Icon icon="ic:add" />
       </Button>
     </DialogTrigger>

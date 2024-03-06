@@ -29,7 +29,7 @@ const deviceClass = computed(() => {
         Додати розклад
         <Icon icon="ic:add" />
       </Button>
-      <Button v-else>
+      <Button v-else appearance="icon">
         <Icon icon="ic:add" />
       </Button>
     </DialogTrigger>
