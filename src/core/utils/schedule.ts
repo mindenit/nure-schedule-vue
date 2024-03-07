@@ -1,9 +1,9 @@
 import { dayjsClient } from '@/libs/dayjs'
 import { nurekit } from '@/libs/nurekit'
 import type { IGroup, ISchedule, ITeacher } from 'nurekit'
-import { toTime } from './dayjs'
 import { DATE_FORMAT } from '../constants'
-import type { ScheduleFnArgs, ScheduleQueryFn, ScheduleType } from '../types/schedule'
+import type { ScheduleFnArgs, ScheduleQueryFn } from '../types/schedule'
+import { toTime } from './dayjs'
 
 const getSchedule = async ({ type, ...rest }: ScheduleQueryFn) => {
   switch (type) {
@@ -62,33 +62,4 @@ const stringifyTeachers = (teachers: ITeacher[]) => {
   return teachers.map((teacher) => teacher.fullName).join(', ')
 }
 
-const scheduleTypeAdapter = (type: any, provider: 'api' | 'app' = 'app') => {
-  if (provider === 'api') {
-    switch (type) {
-      case 'auditory':
-        return 'auditoriums'
-      case 'group':
-        return 'groups'
-      case 'teacher':
-        return 'teachers'
-    }
-  } else if (provider === 'app') {
-    switch (type) {
-      case 'auditoriums':
-        return 'auditory'
-      case 'groups':
-        return 'group'
-      case 'teachers':
-        return 'teacher'
-    }
-  }
-}
-
-export {
-  getDayPairs,
-  getPairsByTime,
-  getSchedule,
-  stringifyGroups,
-  stringifyTeachers,
-  scheduleTypeAdapter
-}
+export { getDayPairs, getPairsByTime, getSchedule, stringifyGroups, stringifyTeachers }
