@@ -15,11 +15,9 @@ import { MonthAside } from './MonthAside'
 import { MonthDay } from './MonthDay'
 import { MonthHeaders } from './MonthHeaders'
 
-import { DialogTrigger, DialogRoot, DialogContent, DialogHeader } from '@/components/ui/Dialog'
-
 defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
 
-defineEmits<{ selectDate: [date: Dayjs] }>()
+const emits = defineEmits<{ selectDate: [date: Dayjs] }>()
 
 const { today, selectedDate } = inject<{
   today: ComputedRef<string>
@@ -40,6 +38,12 @@ const breakpoints = useBreakpoints(breakpointsTailwind)
 const deviceClass = computed(() => {
   return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
 })
+
+const handleDateChange = (date: Dayjs) => {
+  radioStateSingle.value = date.format(DATE_FORMAT)
+
+  emits('selectDate', date)
+}
 </script>
 <template>
   <section class="MonthView" v-if="deviceClass === 'is-desktop'">
@@ -50,7 +54,7 @@ const deviceClass = computed(() => {
         <DateSelector
           :current-date="today"
           :selected-date="selectedDate"
-          @select-date="(date) => $emit('selectDate', date)"
+          @select-date="(date) => handleDateChange(date)"
         />
       </div>
       <MonthHeaders />

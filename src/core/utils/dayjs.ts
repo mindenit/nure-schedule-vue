@@ -1,13 +1,12 @@
-import { capitalize } from './string'
 import { dayjsClient } from '@/libs/dayjs'
 import type { Dayjs } from 'dayjs'
 import {
   DAY_WITH_MONTH_FORMAT,
   LONG_DAY_FORMAT,
   LONG_MONTH_FORMAT,
-  TIME_FORMAT,
-  USER_TIMEZONE
+  TIME_FORMAT
 } from '../constants'
+import { capitalize } from './string'
 
 const getWeekday = (date: string) => {
   return dayjsClient(date).weekday()
@@ -62,8 +61,8 @@ export {
   getNextMonth,
   getPreviousMonth,
   getWeekday,
+  toDay,
   toDayWithMonth,
   toMonthName,
-  toTime,
-  toDay
+  toTime
 }

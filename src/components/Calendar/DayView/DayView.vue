@@ -11,7 +11,6 @@ import { RadioGroupRoot } from 'radix-vue'
 import { computed, inject, ref, type ComputedRef, type Ref } from 'vue'
 import { DateSelector, DateSelectorItem } from './DateSelector'
 import { DayMain } from './DayMain'
-import { capitalize } from '@/core/utils'
 
 interface Props {
   monthDays: CalendarDay[]
@@ -30,7 +29,7 @@ const radioStateSingle = ref(today.value)
 
 defineProps<Props>()
 
-defineEmits<{ selectDate: [date: Dayjs] }>()
+const emits = defineEmits<{ selectDate: [date: Dayjs] }>()
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -41,6 +40,12 @@ const deviceClass = computed(() => {
 const monthTitle = computed(() => {
   return `${toMonthName(selectedDate.value)} ${selectedDate.value.year()}`
 })
+
+const handleDateChange = (date: Dayjs) => {
+  radioStateSingle.value = date.format(DATE_FORMAT)
+
+  emits('selectDate', date)
+}
 </script>
 <template>
   <section class="DayView" v-if="deviceClass === 'is-desktop'">
@@ -52,7 +57,7 @@ const monthTitle = computed(() => {
           <DateSelector
             :current-date="today"
             :selected-date="selectedDate"
-            @select-date="(day) => $emit('selectDate', day)"
+            @select-date="(day) => handleDateChange(day)"
           />
         </div>
         <RadioGroupRoot class="MiniCalendar" v-model="radioStateSingle" as="ul">
