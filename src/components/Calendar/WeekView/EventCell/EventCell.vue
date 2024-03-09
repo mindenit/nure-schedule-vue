@@ -15,6 +15,7 @@ const type = computed(() => (props.pairs.length > 1 ? 'compact' : 'default'))
 <style lang="scss" scoped>
 .ColumnItem {
   @apply box-border flex w-full flex-col items-end justify-start gap-2 border-b border-outline p-2;
+  scrollbar-width: none;
 
   &:nth-child(even) {
     @apply h-5;
