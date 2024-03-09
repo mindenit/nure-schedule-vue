@@ -59,6 +59,18 @@ console.log(checkers.lengthChecker.value)
       <li
         :class="[
           {
+            'success line-through': checkers.lowerCaseChecker.value,
+            wrong: !checkers.lowerCaseChecker.value
+          },
+          'Checker'
+        ]"
+      >
+        <Icon :icon="getIcon(checkers.lowerCaseChecker)" />
+        Принаймні одну малу літеру
+      </li>
+      <li
+        :class="[
+          {
             'success line-through': checkers.specialSymbolChecker.value,
             wrong: !checkers.specialSymbolChecker.value
           },

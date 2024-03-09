@@ -19,12 +19,17 @@ export const usePasswordCheckers = (value: MaybeRef<string>) => {
     return /(.*[A-Z].*)/.test(password.value)
   })
 
+  const lowerCaseChecker = computed(() => {
+    return /(.*[a-z].*)/.test(password.value)
+  })
+
   const isValid = computed(() => {
     return (
       lengthChecker.value &&
       digitChecker.value &&
       specialSymbolChecker.value &&
-      upperCaseChecker.value
+      upperCaseChecker.value &&
+      lowerCaseChecker.value
     )
   })
 
@@ -33,6 +38,7 @@ export const usePasswordCheckers = (value: MaybeRef<string>) => {
     digitChecker,
     specialSymbolChecker,
     upperCaseChecker,
+    lowerCaseChecker,
     isValid
   }
 }
