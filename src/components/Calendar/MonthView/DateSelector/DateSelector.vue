@@ -36,7 +36,7 @@ const selectNext = () => {
     <Button variant="text" appearance="icon" @click="selectPrevious">
       <Icon icon="ic:baseline-chevron-left" />
     </Button>
-    <Button variant="text" @click="selectCurrent">Сьогоді</Button>
+    <Button variant="text" @click="selectCurrent">Сьогодні</Button>
     <Button variant="text" appearance="icon" @click="selectNext">
       <Icon icon="ic:baseline-chevron-right" />
     </Button>
