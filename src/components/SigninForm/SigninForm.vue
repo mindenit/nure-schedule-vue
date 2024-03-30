@@ -36,6 +36,7 @@ const { mutateAsync, status, error, isError } = useMutation({
     try {
       await authStore.signin(data)
     } catch (error) {
+      // @ts-ignore
       throw new Error(error)
     }
   },
@@ -66,6 +67,7 @@ const isDisabled = computed(() => {
 })
 
 const transformedError = computed(() => {
+  // @ts-ignore
   return transformAuthError(error?.value?.message)
 })
 </script>
