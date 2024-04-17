@@ -1,35 +1,21 @@
 <script lang="ts" setup>
 import { Title } from '@/components/ui/Title'
+import { useCalendar } from '@/core/composables'
 import { DATE_FORMAT } from '@/core/constants'
-import type { CalendarDay } from '@/core/types'
 import { getDayPairs, toMonthName } from '@/core/utils'
-import { dayjsClient } from '@/libs/dayjs'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { Dayjs } from 'dayjs'
 import type { ISchedule } from 'nurekit'
 import { RadioGroupRoot } from 'radix-vue'
-import { computed, inject, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, ref } from 'vue'
 import { DateSelector, DateSelectorItem } from './DateSelector'
 import { DayMain } from './DayMain'
 
-interface Props {
-  monthDays: CalendarDay[]
-  pairs: ISchedule[]
-}
+defineProps<{ pairs: ISchedule[] }>()
 
-const { today, selectedDate } = inject<{
-  today: ComputedRef<string>
-  selectedDate: Ref<Dayjs>
-}>('calendar', {
-  today: computed(() => dayjsClient().format(DATE_FORMAT)),
-  selectedDate: ref(dayjsClient())
-})
+const { selectedDate, today, monthDays: days, selectDate } = useCalendar()
 
 const radioStateSingle = ref(today.value)
-
-defineProps<Props>()
-
-const emits = defineEmits<{ selectDate: [date: Dayjs] }>()
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -44,7 +30,7 @@ const monthTitle = computed(() => {
 const handleDateChange = (date: Dayjs) => {
   radioStateSingle.value = date.format(DATE_FORMAT)
 
-  emits('selectDate', date)
+  selectDate(date)
 }
 </script>
 <template>
@@ -54,14 +40,10 @@ const handleDateChange = (date: Dayjs) => {
       <div class="DayAside">
         <div class="flex flex-row items-center justify-between">
           <Title variant="medium">{{ monthTitle }}</Title>
-          <DateSelector
-            :current-date="today"
-            :selected-date="selectedDate"
-            @select-date="(day) => handleDateChange(day)"
-          />
+          <DateSelector @select-date="(day) => handleDateChange(day)" />
         </div>
         <RadioGroupRoot class="MiniCalendar" v-model="radioStateSingle" as="ul">
-          <DateSelectorItem v-for="day in monthDays" :key="day.date" :day="day" />
+          <DateSelectorItem v-for="day in days" :key="day.date" :day="day" />
         </RadioGroupRoot>
       </div>
     </aside>
@@ -75,7 +57,7 @@ const handleDateChange = (date: Dayjs) => {
           <DateSelector :current-date="today" :selected-date="selectedDate" />
         </div>
         <RadioGroupRoot class="MiniCalendar" v-model="radioStateSingle" as="ul">
-          <DateSelectorItem v-for="day in monthDays" :key="day.date" :day="day" />
+          <DateSelectorItem v-for="day in days" :key="day.date" :day="day" />
         </RadioGroupRoot>
       </div>
     </aside>
@@ -84,8 +66,7 @@ const handleDateChange = (date: Dayjs) => {
 </template>
 <style lang="scss" scoped>
 .DayView {
-  @apply box-border grid size-full grid-cols-[3fr_1fr] gap-x-4 rounded-[5rem] bg-surface-container p-7;
-  @apply max-sm:h-fit max-sm:grid-cols-1 max-sm:bg-transparent max-sm:p-0;
+  @apply box-border grid size-full grid-cols-[3fr_1fr] gap-x-4 rounded-[5rem] bg-surface-container p-7 max-sm:h-fit max-sm:grid-cols-1 max-sm:bg-transparent max-sm:p-0;
 }
 
 .MobileDayView {

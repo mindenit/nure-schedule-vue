@@ -27,5 +27,9 @@ export const useWeek = ({ selectedDate, today }: Args) => {
     })
   })
 
-  return { days }
+  const nextWeek = computed(() => dayjsClient(selectedDate.value).add(1, 'week'))
+
+  const previousWeek = computed(() => dayjsClient(selectedDate.value).subtract(1, 'week'))
+
+  return { days, nextWeek, previousWeek }
 }

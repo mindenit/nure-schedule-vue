@@ -6,9 +6,7 @@ import { computed } from 'vue'
 
 const props = defineProps<{ day: CalendarDay }>()
 
-const label = computed(() => {
-  return dayjsClient(props.day.date).format('D')
-})
+const label = computed(() => dayjsClient(props.day.date).format('D'))
 </script>
 <template>
   <RadioGroupItem

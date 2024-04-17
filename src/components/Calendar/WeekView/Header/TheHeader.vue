@@ -1,42 +1,25 @@
 <script lang="ts" setup>
-import type { CalendarDay } from '@/core/types/calendar'
-import HeaderItem from './HeaderItem.vue'
 import { Button } from '@/components/ui/Button'
+import { useCalendar } from '@/core/composables'
 import { Icon } from '@iconify/vue'
 import type { Dayjs } from 'dayjs'
-import { toRefs } from 'vue'
-import { dayjsClient } from '@/libs/dayjs'
+import HeaderItem from './HeaderItem.vue'
 
-const props = defineProps<{
-  days: CalendarDay[]
-  selectedDate: Dayjs
-}>()
+const { weekDays: days, selectDate, nextWeek, previousWeek } = useCalendar()
 
-const { selectedDate, days } = toRefs(props)
-
-const emit = defineEmits<{
+defineEmits<{
   selectDate: [date: Dayjs]
 }>()
-
-const selectPrevious = () => {
-  const previous = dayjsClient(selectedDate.value).subtract(1, 'week')
-  emit('selectDate', previous)
-}
-
-const selectNext = () => {
-  const next = dayjsClient(selectedDate.value).add(1, 'week')
-  emit('selectDate', next)
-}
 </script>
 <template>
   <header class="Wrapper">
-    <Button variant="text" appearance="icon" @click="selectPrevious">
+    <Button variant="text" appearance="icon" @click="selectDate(previousWeek)">
       <Icon icon="ic:baseline-chevron-left" />
     </Button>
     <div class="HeadersContainer">
       <HeaderItem v-for="day in days" :key="day.date" :day="day" />
     </div>
-    <Button variant="text" appearance="icon" @click="selectNext">
+    <Button variant="text" appearance="icon" @click="selectDate(nextWeek)">
       <Icon icon="ic:baseline-chevron-right" />
     </Button>
   </header>
