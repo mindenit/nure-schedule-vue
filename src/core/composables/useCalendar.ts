@@ -4,15 +4,23 @@ import type { Dayjs } from 'dayjs'
 import { computed, ref } from 'vue'
 import { useMonth } from './useMonth'
 import { useWeek } from './useWeek'
+import { createSharedComposable } from '@vueuse/core'
 
-export const useCalendar = () => {
+export const useCalendar = createSharedComposable(() => {
   const selectedDate = ref<Dayjs>(dayjsClient())
   const today = computed(() => {
     return dayjsClient().format(DATE_FORMAT)
   })
 
-  const { days: monthDays, firstDay, lastDay } = useMonth({ today, selectedDate })
-  const { days: weekDays } = useWeek({ today, selectedDate })
+  const {
+    days: monthDays,
+    firstDay,
+    lastDay,
+    currentMonth,
+    nextMonth,
+    previousMonth
+  } = useMonth({ today, selectedDate })
+  const { days: weekDays, nextWeek, previousWeek } = useWeek({ today, selectedDate })
 
   const selectDate = (date: Dayjs) => {
     selectedDate.value = date
@@ -25,6 +33,11 @@ export const useCalendar = () => {
     weekDays,
     selectDate,
     firstDay,
-    lastDay
+    lastDay,
+    currentMonth,
+    nextMonth,
+    previousMonth,
+    nextWeek,
+    previousWeek
   }
-}
+})

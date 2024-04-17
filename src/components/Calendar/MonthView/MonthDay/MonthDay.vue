@@ -13,9 +13,9 @@ interface Props extends RadioGroupItemProps {
   pairs: ISchedule[]
 }
 
-const { isGreater } = useBreakpoints(breakpointsTailwind)
-
 const props = defineProps<Props>()
+
+const { isGreater } = useBreakpoints(breakpointsTailwind)
 
 const forwarded = useForwardProps(props)
 

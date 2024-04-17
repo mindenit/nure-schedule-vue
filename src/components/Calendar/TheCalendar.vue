@@ -15,7 +15,7 @@ import WeekView from './WeekView/WeekView.vue'
 
 const view = ref<CalendarView>('month')
 
-const { today, selectedDate, monthDays, weekDays, selectDate, firstDay, lastDay } = useCalendar()
+const { today, selectedDate, monthDays, selectDate, firstDay, lastDay } = useCalendar()
 
 const recentSchedules = useSchedulesStore()
 const filtersStore = useFiltersStore()
@@ -63,11 +63,7 @@ provide('calendar', {
         />
       </TabsContent>
       <TabsContent value="week" as-child>
-        <WeekView
-          :days="weekDays"
-          :pairs="filtersStore.applyFilters(data)"
-          @select-date="(date) => selectDate(date)"
-        />
+        <WeekView :pairs="filtersStore.applyFilters(data)" />
       </TabsContent>
       <TabsContent value="day" as-child>
         <DayView

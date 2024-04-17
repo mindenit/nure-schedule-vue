@@ -1,9 +1,9 @@
-import { dayjsClient } from '@/libs/dayjs'
-import { computed, type ComputedRef, type Ref } from 'vue'
 import { DATE_FORMAT, MONTH_FORMAT, YEAR_FORMAT } from '@/core/constants'
 import type { CalendarDay } from '@/core/types'
-import { getNextMonth, getPreviousMonth, getWeekday } from '@/core/utils'
+import { getPreviousMonth, getNextMonth, getWeekday } from '@/core/utils'
+import { dayjsClient } from '@/libs/dayjs'
 import type { Dayjs } from 'dayjs'
+import { computed, type ComputedRef, type Ref } from 'vue'
 
 interface Args {
   selectedDate: Ref<Dayjs>
@@ -96,9 +96,18 @@ export const useMonth = ({ selectedDate, today }: Args) => {
     return days.value[days.value.length - 1].date
   })
 
+  const nextMonth = computed(() => dayjsClient(selectedDate.value).add(1, 'month'))
+
+  const previousMonth = computed(() => dayjsClient(selectedDate.value).subtract(1, 'month'))
+
+  const currentMonth = computed(() => dayjsClient(today.value))
+
   return {
     days,
     firstDay,
-    lastDay
+    lastDay,
+    nextMonth,
+    previousMonth,
+    currentMonth
   }
 }

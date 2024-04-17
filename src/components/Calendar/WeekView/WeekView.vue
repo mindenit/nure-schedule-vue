@@ -1,32 +1,22 @@
 <script lang="ts" setup>
-import { DATE_FORMAT } from '@/core/constants'
-import type { CalendarDay } from '@/core/types'
-import { dayjsClient } from '@/libs/dayjs'
-import type { Dayjs } from 'dayjs'
-import { inject, ref, type Ref } from 'vue'
-import { WeekHeader } from './Header'
-import { WeekGrid } from './Grid'
+import { Title } from '@/components/ui/Title'
+import { useCalendar } from '@/core/composables'
+import { Icon } from '@iconify/vue'
 import type { ISchedule } from 'nurekit'
+import { WeekGrid } from './Grid'
+import { WeekHeader } from './Header'
 
-defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
+defineProps<{ pairs: ISchedule[] }>()
 
-defineEmits<{ selectDate: [date: Dayjs] }>()
-
-const { selectedDate } = inject<{
-  today: string
-  selectedDate: Ref<Dayjs>
-}>('calendar', {
-  today: dayjsClient().format(DATE_FORMAT),
-  selectedDate: ref(dayjsClient())
-})
+const { weekDays: days } = useCalendar()
 </script>
 <template>
-  <div class="WeekView">
-    <WeekHeader
-      :days="days"
-      :selected-date="selectedDate"
-      @select-date="(date) => $emit('selectDate', date)"
-    />
+  <div class="flex size-full flex-col items-center justify-center gap-6" v-if="!pairs.length">
+    <Icon icon="ic:baseline-emoji-emotions" class="size-32 text-muted" />
+    <Title variant="large" class="text-center">На цьому тижні пар немає</Title>
+  </div>
+  <div v-else class="WeekView">
+    <WeekHeader />
     <WeekGrid :days="days" :pairs="pairs" />
   </div>
 </template>

@@ -1,31 +1,22 @@
 <script lang="ts" setup>
 import { Title } from '@/components/ui/Title'
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { useCalendar } from '@/core/composables'
 import { DATE_FORMAT } from '@/core/constants/calendar'
-import type { CalendarDay } from '@/core/types'
 import { getDayPairs } from '@/core/utils'
 import { toMonthName } from '@/core/utils/dayjs'
-import { dayjsClient } from '@/libs/dayjs'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { Dayjs } from 'dayjs'
 import type { ISchedule } from 'nurekit'
 import { RadioGroupRoot } from 'radix-vue'
-import { computed, inject, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, ref } from 'vue'
 import { DateSelector } from './DateSelector'
 import { MonthAside } from './MonthAside'
 import { MonthDay } from './MonthDay'
 import { MonthHeaders } from './MonthHeaders'
 
-defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
+defineProps<{ pairs: ISchedule[] }>()
 
-const emits = defineEmits<{ selectDate: [date: Dayjs] }>()
-
-const { today, selectedDate } = inject<{
-  today: ComputedRef<string>
-  selectedDate: Ref<Dayjs>
-}>('calendar', {
-  today: computed(() => dayjsClient().format(DATE_FORMAT)),
-  selectedDate: ref(dayjsClient())
-})
+const { selectedDate, monthDays: days, today, selectDate } = useCalendar()
 
 const radioStateSingle = ref(today.value)
 
@@ -42,7 +33,7 @@ const deviceClass = computed(() => {
 const handleDateChange = (date: Dayjs) => {
   radioStateSingle.value = date.format(DATE_FORMAT)
 
-  emits('selectDate', date)
+  selectDate(date)
 }
 </script>
 <template>
@@ -51,11 +42,7 @@ const handleDateChange = (date: Dayjs) => {
     <div class="Wrapper">
       <div class="Header">
         <Title variant="big">{{ monthTitle }}</Title>
-        <DateSelector
-          :current-date="today"
-          :selected-date="selectedDate"
-          @select-date="(date) => handleDateChange(date)"
-        />
+        <DateSelector @select-date="handleDateChange" />
       </div>
       <MonthHeaders />
       <RadioGroupRoot v-model="radioStateSingle" :default-value="today" as="ul" class="MonthDays">
@@ -75,7 +62,7 @@ const handleDateChange = (date: Dayjs) => {
         <DateSelector
           :current-date="today"
           :selected-date="selectedDate"
-          @select-date="(date) => $emit('selectDate', date)"
+          @select-date="selectDate"
         />
       </div>
       <MonthHeaders />
