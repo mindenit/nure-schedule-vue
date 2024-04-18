@@ -40,7 +40,7 @@ const pairsCount = computed(() => {
   <template v-if="isGreater('sm')">
     <RadioGroupItem
       v-bind="forwarded"
-      :class="[{ 'not-current': !day.isCurrentMonth }, 'Day']"
+      :class="[{ 'not-current': !day.isCurrentMonth, today: day.isToday }, 'Day']"
       :value="day.date"
       as="li"
     >
@@ -120,6 +120,10 @@ const pairsCount = computed(() => {
   &:focus,
   &:active {
     @apply bg-surface-container;
+  }
+
+  &[data-state='unchecked']:where(.today) .Indicator {
+    @apply bg-navbar-chip;
   }
 }
 </style>
