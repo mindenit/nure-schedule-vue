@@ -8,14 +8,14 @@ import { provide, ref, toRefs } from 'vue'
 import { ScheduleDialog } from '../ScheduleDialog'
 import { ScheduleDropdown } from '../ScheduleDropdown'
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
-import CalendarLoader from './CalendarLoader.vue'
 import DayView from './DayView/DayView.vue'
 import MonthView from './MonthView/MonthView.vue'
 import WeekView from './WeekView/WeekView.vue'
+import { Loader } from '../ui/Loader'
 
 const view = ref<CalendarView>('month')
 
-const { today, selectedDate, monthDays, selectDate, firstDay, lastDay } = useCalendar()
+const { monthDays, selectDate, firstDay, lastDay } = useCalendar()
 
 const recentSchedules = useSchedulesStore()
 const filtersStore = useFiltersStore()
@@ -31,11 +31,6 @@ const { data, isLoading } = useQuery({
       endTime: lastDay.value
     })
   }
-})
-
-provide('calendar', {
-  today,
-  selectedDate
 })
 </script>
 <template>
@@ -53,24 +48,16 @@ provide('calendar', {
         <ScheduleDialog />
       </div>
     </header>
-    <CalendarLoader v-if="isLoading" />
+    <Loader v-show="isLoading" />
     <template v-if="data">
       <TabsContent value="month" as-child>
-        <MonthView
-          :days="monthDays"
-          :pairs="filtersStore.applyFilters(data)"
-          @select-date="(date) => selectDate(date)"
-        />
+        <MonthView :pairs="filtersStore.applyFilters(data)" />
       </TabsContent>
       <TabsContent value="week" as-child>
         <WeekView :pairs="filtersStore.applyFilters(data)" />
       </TabsContent>
       <TabsContent value="day" as-child>
-        <DayView
-          :pairs="filtersStore.applyFilters(data)"
-          :month-days="monthDays"
-          @select-date="(date) => selectDate(date)"
-        />
+        <DayView :pairs="filtersStore.applyFilters(data)" />
       </TabsContent>
     </template>
   </TabsRoot>

@@ -1,8 +1,5 @@
 # Nure Schedule
 
-> [!WARNING]
-> The project is work in progress still. We build it in public
-
 ## Setup
 
 ```sh

@@ -2,14 +2,9 @@
 import { Button } from '@/components/ui/Button'
 import { useCalendar } from '@/core/composables'
 import { Icon } from '@iconify/vue'
-import type { Dayjs } from 'dayjs'
 import HeaderItem from './HeaderItem.vue'
 
 const { weekDays: days, selectDate, nextWeek, previousWeek } = useCalendar()
-
-defineEmits<{
-  selectDate: [date: Dayjs]
-}>()
 </script>
 <template>
   <header class="Wrapper">
