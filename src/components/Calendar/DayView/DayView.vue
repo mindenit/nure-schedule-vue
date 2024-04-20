@@ -1,21 +1,25 @@
 <script lang="ts" setup>
+import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
+import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
 import { Title } from '@/components/ui/Title'
 import { useCalendar } from '@/core/composables'
 import { DATE_FORMAT } from '@/core/constants'
-import { getDayPairs, toMonthName } from '@/core/utils'
+import { getDayPairs, horizontalScrollTo, toMonthName } from '@/core/utils'
+import { dayjsClient } from '@/libs/dayjs'
+import { Icon } from '@iconify/vue'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { Dayjs } from 'dayjs'
 import type { ISchedule } from 'nurekit'
-import { RadioGroupRoot } from 'radix-vue'
-import { computed, ref } from 'vue'
+import { RadioGroupItem, RadioGroupRoot } from 'radix-vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { DateSelector, DateSelectorItem } from './DateSelector'
 import { DayMain } from './DayMain'
 
 defineProps<{ pairs: ISchedule[] }>()
 
-const { selectedDate, today, monthDays: days, selectDate } = useCalendar()
+const { selectedDate, monthDays: days, selectDate } = useCalendar()
 
-const radioStateSingle = ref(today.value)
+const radioStateSingle = ref(selectedDate.value.format(DATE_FORMAT))
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -28,10 +32,20 @@ const monthTitle = computed(() => {
 })
 
 const handleDateChange = (date: Dayjs) => {
+  const formattedDate = date.format(DATE_FORMAT)
+
   radioStateSingle.value = date.format(DATE_FORMAT)
 
   selectDate(date)
+
+  nextTick(() => {
+    horizontalScrollTo(formattedDate, { behavior: 'instant' })
+  })
 }
+
+onMounted(() => {
+  horizontalScrollTo(radioStateSingle.value, { behavior: 'instant' })
+})
 </script>
 <template>
   <section class="DayView" v-if="deviceClass === 'is-desktop'">
@@ -48,20 +62,49 @@ const handleDateChange = (date: Dayjs) => {
       </div>
     </aside>
   </section>
-
-  <section class="DayView MobileDayView" v-else>
-    <aside class="AsideContainer">
-      <div class="DayAside">
-        <div class="flex flex-row items-center justify-between">
-          <Title variant="medium">{{ monthTitle }}</Title>
-          <DateSelector :current-date="today" :selected-date="selectedDate" />
-        </div>
-        <RadioGroupRoot class="MiniCalendar" v-model="radioStateSingle" as="ul">
-          <DateSelectorItem v-for="day in days" :key="day.date" :day="day" />
-        </RadioGroupRoot>
-      </div>
-    </aside>
-    <DayMain :active-date="radioStateSingle" :pairs="getDayPairs(radioStateSingle, pairs)" />
+  <section class="flex w-full flex-col gap-4" v-else>
+    <div class="flex flex-row items-center justify-between">
+      <Title variant="medium">{{ monthTitle }}</Title>
+      <DateSelector @select-date="handleDateChange" />
+    </div>
+    <RadioGroupRoot
+      v-model="radioStateSingle"
+      as="ul"
+      class="no-scrollbar flex h-10 w-auto flex-row gap-4 overflow-x-scroll"
+      @update:model-value="horizontalScrollTo"
+    >
+      <RadioGroupItem
+        :id="day.date"
+        v-for="day in days"
+        :key="day.date"
+        as="li"
+        class="flex h-10 min-w-10 select-none items-center justify-center rounded-full data-[state=checked]:bg-primary data-[state=checked]:text-app-bg"
+        :value="day.date"
+      >
+        {{ dayjsClient(day.date).format('DD') }}
+      </RadioGroupItem>
+    </RadioGroupRoot>
+    <div
+      v-if="!getDayPairs(radioStateSingle, pairs).length"
+      class="mt-4 box-border flex flex-col items-center justify-center"
+    >
+      <Icon icon="ic:baseline-emoji-emotions" class="size-24" />
+      <Title variant="big">У цей день пар не має</Title>
+    </div>
+    <div v-else class="box-border flex w-full flex-col gap-4 pb-24">
+      <DialogRoot
+        v-for="(pair, index) in getDayPairs(radioStateSingle, pairs)"
+        :key="`${pair.startTime}-${pair.numberPair}-${index}`"
+      >
+        <DialogTrigger>
+          <SubjectCard :pair="pair" />
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>Розклад</DialogHeader>
+          <TextSubjectCard :pair="pair" />
+        </DialogContent>
+      </DialogRoot>
+    </div>
   </section>
 </template>
 <style lang="scss" scoped>

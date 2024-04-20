@@ -43,15 +43,35 @@ const getAuditoriumSchedule = async ({ name, startTime, endTime }: ScheduleFnArg
 }
 
 const getDayPairs = (date: string, pairs: ISchedule[]) => {
-  return pairs.filter((pair) => {
+  const cache = new Map<string, ISchedule[]>()
+
+  if (cache.has(date)) {
+    return cache.get(date) as ISchedule[]
+  }
+
+  const filtered = pairs.filter((pair) => {
     return dayjsClient.unix(pair.startTime).format(DATE_FORMAT) === date
   })
+
+  cache.set(date, filtered)
+
+  return filtered
 }
 
 const getPairsByTime = (time: string, pairs: ISchedule[]) => {
-  return pairs.filter((pair) => {
+  const cache = new Map<string, ISchedule[]>()
+
+  if (cache.has(time)) {
+    return cache.get(time) as ISchedule[]
+  }
+
+  const filtered = pairs.filter((pair) => {
     return toTime(pair.startTime) === time
   })
+
+  cache.set(time, filtered)
+
+  return filtered
 }
 
 const stringifyGroups = (groups: IGroup[]) => {
