@@ -36,7 +36,7 @@ const forwarded = useForwardProps(props)
       }
 
       .TabsTrigger[data-state='active'] {
-        @apply flex w-fit flex-[2] items-center justify-center text-base;
+        @apply flex max-w-32 flex-[2] items-center justify-center text-base;
       }
     }
 

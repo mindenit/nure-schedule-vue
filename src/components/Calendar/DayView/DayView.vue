@@ -43,6 +43,14 @@ const handleDateChange = (date: Dayjs) => {
   })
 }
 
+const handleActiveDayChange = (value: string) => {
+  const date = dayjsClient(value)
+
+  selectDate(date)
+
+  horizontalScrollTo(value)
+}
+
 onMounted(() => {
   horizontalScrollTo(radioStateSingle.value, { behavior: 'instant' })
 })
@@ -71,7 +79,7 @@ onMounted(() => {
       v-model="radioStateSingle"
       as="ul"
       class="no-scrollbar flex h-10 w-auto flex-row gap-4 overflow-x-scroll"
-      @update:model-value="horizontalScrollTo"
+      @update:model-value="handleActiveDayChange"
     >
       <RadioGroupItem
         :id="day.date"
