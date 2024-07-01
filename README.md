@@ -30,9 +30,6 @@ pnpm build
 pnpm lint
 ```
 
----
-Also we have a [docker](https://github.com/mindenit/nure-schedule-vue/pkgs/container/nure-schedule-vue) image.
----
 
 ## Contributing
 
