@@ -36,7 +36,7 @@ withDefaults(defineProps<ButtonProps>(), { variant: 'filled', appearance: 'defau
   }
 
   &:where(.variant-outlined) {
-    @apply border border-outline bg-transparent text-primary;
+    @apply border border-outline bg-app-bg text-primary;
 
     &:hover,
     &:focus {

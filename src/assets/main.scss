@@ -45,7 +45,7 @@ svg {
 
 @layer utilities {
   .MobileButtonContainer {
-    @apply max-sm:fixed max-sm:bottom-24 max-sm:right-4 max-sm:z-[5];
+    @apply inline-flex gap-3 max-sm:fixed max-sm:bottom-24 max-sm:right-4 max-sm:z-[5];
   }
 
   .no-scrollbar::-webkit-scrollbar {

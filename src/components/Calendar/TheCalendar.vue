@@ -1,21 +1,22 @@
 <script lang="ts" setup>
-import { useCalendar } from '@/core/composables'
+import { useCalendar, useDownload } from '@/core/composables'
 import { useFiltersStore, useSchedulesStore } from '@/core/stores'
 import type { CalendarView, ScheduleType } from '@/core/types'
-import { getSchedule } from '@/core/utils'
+import { getSchedule, toICS } from '@/core/utils'
 import { useQuery } from '@tanstack/vue-query'
-import { provide, ref, toRefs } from 'vue'
+import { ref, toRefs } from 'vue'
+import { ExportScheduleDialog } from '../ExportScheduleDialog'
 import { ScheduleDialog } from '../ScheduleDialog'
 import { ScheduleDropdown } from '../ScheduleDropdown'
+import { Loader } from '../ui/Loader'
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
 import DayView from './DayView/DayView.vue'
 import MonthView from './MonthView/MonthView.vue'
 import WeekView from './WeekView/WeekView.vue'
-import { Loader } from '../ui/Loader'
 
 const view = ref<CalendarView>('month')
 
-const { monthDays, selectDate, firstDay, lastDay } = useCalendar()
+const { firstDay, lastDay } = useCalendar()
 
 const recentSchedules = useSchedulesStore()
 const filtersStore = useFiltersStore()
@@ -32,6 +33,8 @@ const { data, isLoading } = useQuery({
     })
   }
 })
+
+const { downloadFile } = useDownload(toICS)
 </script>
 <template>
   <TabsRoot v-model="view" as-child>
@@ -45,6 +48,7 @@ const { data, isLoading } = useQuery({
         <TabsTrigger value="day">День</TabsTrigger>
       </TabsList>
       <div class="MobileButtonContainer">
+        <ExportScheduleDialog v-if="activeSchedule" @export="downloadFile(activeSchedule)" />
         <ScheduleDialog />
       </div>
     </header>

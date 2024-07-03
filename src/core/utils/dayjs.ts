@@ -56,6 +56,10 @@ const toDay = (date: string | number) => {
   return capitalize(dayjsClient.unix(date).locale('uk').format(LONG_DAY_FORMAT))
 }
 
+const toICVFormat = (timestamp: number) => {
+  return dayjsClient.unix(timestamp).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+}
+
 export {
   getFirstDayOfMonth,
   getNextMonth,
@@ -64,5 +68,6 @@ export {
   toDay,
   toDayWithMonth,
   toMonthName,
-  toTime
+  toTime,
+  toICVFormat
 }
