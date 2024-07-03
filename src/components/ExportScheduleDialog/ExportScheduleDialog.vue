@@ -11,7 +11,7 @@ defineEmits<{
   <DialogRoot>
     <DialogTrigger>
       <Button variant="outlined" appearance="icon">
-        <Icon icon="ic:baseline-file-download" />
+        <Icon icon="ic:round-save" />
       </Button>
     </DialogTrigger>
     <DialogContent>
