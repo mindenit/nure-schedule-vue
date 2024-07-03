@@ -1,7 +1,7 @@
 {
   "name": "nure-schedule",
   "description": "Schedule app for NURE university",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "module",
   "author": "Mindenit team",
   "homepage": "https://github.com/mindenit/nure-schedule-vue",
