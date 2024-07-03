@@ -2,6 +2,9 @@
 import { Icon } from '@iconify/vue'
 import { Button } from '../ui/Button'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+
+const { isGreater } = useBreakpoints(breakpointsTailwind)
 
 defineEmits<{
   export: []
@@ -10,7 +13,11 @@ defineEmits<{
 <template>
   <DialogRoot>
     <DialogTrigger>
-      <Button variant="outlined" appearance="icon">
+      <Button v-if="isGreater('sm')" variant="outlined">
+        Експортувати
+        <Icon icon="ic:round-save" />
+      </Button>
+      <Button v-else variant="outlined" appearance="icon">
         <Icon icon="ic:round-save" />
       </Button>
     </DialogTrigger>
