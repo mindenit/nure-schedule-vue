@@ -1,13 +1,10 @@
 <script lang="ts" setup>
 import { useTheme } from '@/core/composables'
 import { ROUTES_META } from '@/core/constants/routes'
-import { useAuthStore } from '@/core/stores/auth'
 import { Icon } from '@iconify/vue'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { toRefs } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Button } from '../ui/Button'
-import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
 import { Logo } from '../ui/Logo'
 import NavbarItem from './NavbarItem.vue'
 
@@ -16,8 +13,6 @@ defineProps<{ title: string }>()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const { icon, toggle } = useTheme()
-const authStore = useAuthStore()
-const { isAuthorized } = toRefs(authStore)
 </script>
 <template>
   <header
@@ -45,7 +40,7 @@ const { isAuthorized } = toRefs(authStore)
         <Button variant="text" appearance="icon">
           <Icon :icon="icon" @click="toggle()" />
         </Button>
-        <Button v-if="isAuthorized" variant="filled" @click="authStore.signout()">
+        <!-- <Button v-if="isAuthorized" variant="filled" @click="authStore.signout()">
           <Icon icon="ic:baseline-logout" />
           Вийти
         </Button>
@@ -54,7 +49,7 @@ const { isAuthorized } = toRefs(authStore)
             <Icon icon="ic:baseline-log-in" />
             Увійти
           </Button>
-        </RouterLink>
+        </RouterLink> -->
       </div>
     </template>
     <template v-if="breakpoints.isSmaller('md')">
@@ -66,7 +61,7 @@ const { isAuthorized } = toRefs(authStore)
       >
         {{ elem.name }}
       </NavbarItem>
-      <DialogRoot v-if="isAuthorized">
+      <!-- <DialogRoot v-if="isAuthorized">
         <DialogTrigger>
           <NavbarItem name="login" icon="ic:baseline-account-circle" :as-link="false">
             Акаунт
@@ -82,7 +77,7 @@ const { isAuthorized } = toRefs(authStore)
           </div>
         </DialogContent>
       </DialogRoot>
-      <NavbarItem v-else name="login" icon="ic:baseline-account-circle"> Акаунт </NavbarItem>
+      <NavbarItem v-else name="login" icon="ic:baseline-account-circle"> Акаунт </NavbarItem> -->
     </template>
   </header>
 </template>

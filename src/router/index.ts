@@ -1,6 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import { useAuthStore } from '@/core/stores/auth'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,22 +36,22 @@ const router = createRouter({
       name: 'changes',
       component: () => import('../views/InDevelopmentView.vue')
     },
-    {
-      path: '/login',
-      meta: {
-        showAuthrized: false
-      },
-      name: 'login',
-      component: () => import('../views/LoginView.vue')
-    },
-    {
-      path: '/signup',
-      meta: {
-        showAuthrized: false
-      },
-      name: 'signup',
-      component: () => import('../views/SignupView.vue')
-    },
+    // {
+    //   path: '/login',
+    //   meta: {
+    //     showAuthrized: false
+    //   },
+    //   name: 'login',
+    //   component: () => import('../views/LoginView.vue')
+    // },
+    // {
+    //   path: '/signup',
+    //   meta: {
+    //     showAuthrized: false
+    //   },
+    //   name: 'signup',
+    //   component: () => import('../views/SignupView.vue')
+    // },
     {
       path: '/:pathMatch(.*)*',
       meta: {
@@ -72,12 +71,12 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to) => {
-  const auth = useAuthStore()
+// router.beforeEach((to) => {
+//   const auth = useAuthStore()
 
-  if (!to.meta.showAuthrized && auth.isAuthorized) {
-    return { name: 'home' }
-  }
-})
+//   if (!to.meta.showAuthrized && auth.isAuthorized) {
+//     return { name: 'home' }
+//   }
+// })
 
 export default router

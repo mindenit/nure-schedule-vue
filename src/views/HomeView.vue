@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import { Calendar } from '@/components/Calendar'
 import { ScheduleDialog } from '@/components/ScheduleDialog'
-import { Loader } from '@/components/ui/Loader'
 import { Title } from '@/components/ui/Title'
 import { TITLE_TEMPLATE } from '@/core/constants'
 import { useSchedulesStore } from '@/core/stores'
-import { useAuthStore } from '@/core/stores/auth'
 import { MainLayout } from '@/layouts/MainLayout'
-import { nurekit } from '@/libs/nurekit'
 import { Icon } from '@iconify/vue'
-import { useQuery } from '@tanstack/vue-query'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { toRefs } from 'vue'
 
 const schedulesStore = useSchedulesStore()
-const authStore = useAuthStore()
 
 const { activeSchedule } = toRefs(schedulesStore)
 
@@ -34,36 +29,35 @@ useSeoMeta({
   ogDescription: description
 })
 
-const { data, isLoading } = useQuery({
-  queryKey: ['user', authStore.tokens?.accessToken],
-  async queryFn() {
-    try {
-      const user = await nurekit.users.info({
-        accessToken: authStore.tokens?.accessToken as string
-      })
+// const { data, isLoading } = useQuery({
+//   queryKey: ['user', authStore.tokens?.accessToken],
+//   async queryFn() {
+//     try {
+//       const user = await nurekit.users.info({
+//         accessToken: authStore.tokens?.accessToken as string
+//       })
 
-      schedulesStore.recentSchedules = user.schedules
+//       schedulesStore.recentSchedules = user.schedules
 
-      if (!schedulesStore.activeSchedule?.name) {
-        const activeSchedule = schedulesStore.recentSchedules[0]
+//       if (!schedulesStore.activeSchedule?.name) {
+//         const activeSchedule = schedulesStore.recentSchedules[0]
 
-        schedulesStore.activeSchedule = activeSchedule
-      }
+//         schedulesStore.activeSchedule = activeSchedule
+//       }
 
-      return user
-    } catch (e) {
-      console.log(e)
-    }
-  },
-  enabled: authStore.isAuthorized
-})
+//       return user
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   },
+//   enabled: authStore.isAuthorized
+// })
 </script>
 
 <template>
   <MainLayout title="Розклад" :hideScrollbar="true" class="no-scrollbar overflow-y-scroll">
     <section class="HomeView">
-      <Loader v-if="isLoading && authStore.isAuthorized" />
-      <div v-else-if="!activeSchedule" class="NoScheduleFallback">
+      <div v-if="!activeSchedule" class="NoScheduleFallback">
         <Icon icon="ic:baseline-sentiment-slightly-dissatisfied" class="size-24" />
         <Title variant="large" class="max-sm:text-center">У вас поки немає розкладів</Title>
         <ScheduleDialog />
