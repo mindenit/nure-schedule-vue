@@ -1,59 +1,16 @@
-import { nurekit } from '@/libs/nurekit'
-import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { RecentSchedule } from '../types/schedule'
-import { useAuthStore } from './auth'
 
 export const useSchedulesStore = defineStore(
   'recent_schedules',
   () => {
-    const authStore = useAuthStore()
     const activeSchedule = ref<RecentSchedule | null>()
     const recentSchedules = ref<RecentSchedule[]>([])
-    const queryClient = useQueryClient()
-
-    const { mutateAsync: addScheduleToAccount } = useMutation({
-      mutationKey: ['add-schedule'],
-      async mutationFn(data: RecentSchedule) {
-        await nurekit.users.addSchedule(data, {
-          accessToken: authStore.tokens?.accessToken as string
-        })
-      },
-      onSuccess(_, variables) {
-        console.log('success')
-        addScheduleLocally(variables)
-        queryClient.refetchQueries({
-          queryKey: ['user', authStore.tokens?.accessToken],
-          type: 'all'
-        })
-      },
-      onError(error) {
-        console.log(error)
-      }
-    })
-
-    const { mutateAsync: removeScheduleFromAccount } = useMutation({
-      mutationKey: ['remove-schedule'],
-      async mutationFn(data: RecentSchedule) {
-        await nurekit.users.removeSchedule(data, {
-          accessToken: authStore.tokens?.accessToken as string
-        })
-      },
-      onSuccess(data, variables) {
-        removeScheduleLocally(variables),
-          queryClient.refetchQueries({
-            queryKey: ['user', authStore.tokens?.accessToken],
-            type: 'all'
-          })
-      }
-    })
 
     const addSchedule = async (schedule: RecentSchedule) => {
-      console.log(recentSchedules.value.some((s) => s.id === schedule.id))
-
       if (!recentSchedules.value.some((s) => s.id === schedule.id)) {
-        authStore.isAuthorized ? await addScheduleToAccount(schedule) : addScheduleLocally(schedule)
+        addScheduleLocally(schedule)
       }
     }
 
@@ -63,11 +20,7 @@ export const useSchedulesStore = defineStore(
     }
 
     const removeSchedule = async (schedule: RecentSchedule) => {
-      if (!authStore.isAuthorized) {
-        removeScheduleLocally(schedule)
-      } else {
-        await removeScheduleFromAccount(schedule)
-      }
+      removeScheduleLocally(schedule)
     }
 
     const removeScheduleLocally = ({ id }: RecentSchedule) => {

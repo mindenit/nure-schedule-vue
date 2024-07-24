@@ -29,8 +29,8 @@ importers:
         specifier: ^1.11.10
         version: 1.11.10
       nurekit:
-        specifier: ^0.5.0
-        version: 0.5.1
+        specifier: ^0.5.2
+        version: 0.5.2
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.3.3)(vue@3.4.25(typescript@5.3.3))
@@ -3291,10 +3291,10 @@ packages:
         integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==
       }
 
-  nurekit@0.5.1:
+  nurekit@0.5.2:
     resolution:
       {
-        integrity: sha512-dScpqC5G5vEY7lm5+5vIGxQZtknLt0+HWicJljkxC+8hkk8T7kfV1ugWQpPo7cb9bFEpKgfyui0gWS1eJwW/kg==
+        integrity: sha512-5yVjdMo/6QYmKk2phcYyeeGeWqRjMY5QovjFrEHZpEmpF3E3f+dx9bvysbAvV3aOux6Qq3YJTOX8/sOAW8IbPw==
       }
     engines: { node: '>= 18.x.x' }
 
@@ -6473,7 +6473,7 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  nurekit@0.5.1:
+  nurekit@0.5.2:
     dependencies:
       axios: 1.7.2
     transitivePeerDependencies:
