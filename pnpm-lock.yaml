@@ -29,8 +29,8 @@ importers:
         specifier: ^1.11.10
         version: 1.11.10
       nurekit:
-        specifier: ^0.4.5
-        version: 0.4.5
+        specifier: ^0.5.0
+        version: 0.5.1
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.3.3)(vue@3.4.25(typescript@5.3.3))
@@ -1633,10 +1633,10 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
 
-  axios@1.6.5:
+  axios@1.7.2:
     resolution:
       {
-        integrity: sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==
+        integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==
       }
 
   balanced-match@1.0.2:
@@ -2360,10 +2360,10 @@ packages:
         integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==
       }
 
-  follow-redirects@1.15.4:
+  follow-redirects@1.15.6:
     resolution:
       {
-        integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==
+        integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
       }
     engines: { node: '>=4.0' }
     peerDependencies:
@@ -3291,11 +3291,12 @@ packages:
         integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==
       }
 
-  nurekit@0.4.5:
+  nurekit@0.5.1:
     resolution:
       {
-        integrity: sha512-cxJVZFYm5FA8eceEaYtYrNyeMgqMdGOh49MzIXii4vCvUtzF//X09/p1ybL00AzBeQC1jfyOcP4sQI1S0y1Aww==
+        integrity: sha512-dScpqC5G5vEY7lm5+5vIGxQZtknLt0+HWicJljkxC+8hkk8T7kfV1ugWQpPo7cb9bFEpKgfyui0gWS1eJwW/kg==
       }
+    engines: { node: '>= 18.x.x' }
 
   object-assign@4.1.1:
     resolution:
@@ -5538,9 +5539,9 @@ snapshots:
       postcss: 8.4.33
       postcss-value-parser: 4.2.0
 
-  axios@1.6.5:
+  axios@1.7.2:
     dependencies:
-      follow-redirects: 1.15.4
+      follow-redirects: 1.15.6
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -6018,7 +6019,7 @@ snapshots:
 
   flatted@3.2.9: {}
 
-  follow-redirects@1.15.4: {}
+  follow-redirects@1.15.6: {}
 
   foreground-child@3.1.1:
     dependencies:
@@ -6472,9 +6473,9 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  nurekit@0.4.5:
+  nurekit@0.5.1:
     dependencies:
-      axios: 1.6.5
+      axios: 1.7.2
     transitivePeerDependencies:
       - debug
 

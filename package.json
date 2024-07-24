@@ -1,7 +1,7 @@
 {
   "name": "nure-schedule",
   "description": "Schedule app for NURE university",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "author": "Mindenit team",
   "homepage": "https://github.com/mindenit/nure-schedule-vue",
@@ -46,7 +46,7 @@
     "@vee-validate/valibot": "^4.12.5",
     "@vueuse/core": "^10.9.0",
     "dayjs": "^1.11.10",
-    "nurekit": "^0.4.5",
+    "nurekit": "^0.5.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "radix-vue": "^1.4.9",
