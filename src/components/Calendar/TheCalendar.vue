@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useCalendar, useDownload } from '@/core/composables'
+import { useCalendar, useDownload, useGlobalError } from '@/core/composables'
 import { useFiltersStore, useSchedulesStore } from '@/core/stores'
 import type { CalendarView, ScheduleType } from '@/core/types'
 import { getSchedule, toICS } from '@/core/utils'
 import { useQuery } from '@tanstack/vue-query'
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, watchEffect } from 'vue'
 import { ExportScheduleDialog } from '../ExportScheduleDialog'
 import { ScheduleDialog } from '../ScheduleDialog'
 import { ScheduleDropdown } from '../ScheduleDropdown'
@@ -17,12 +17,13 @@ import WeekView from './WeekView/WeekView.vue'
 const view = ref<CalendarView>('month')
 
 const { firstDay, lastDay } = useCalendar()
+const { isGlobalError } = useGlobalError()
 
 const recentSchedules = useSchedulesStore()
 const filtersStore = useFiltersStore()
 const { activeSchedule } = toRefs(recentSchedules)
 
-const { data, isLoading } = useQuery({
+const { data, isLoading, isError } = useQuery({
   queryKey: [activeSchedule, firstDay, lastDay],
   queryFn: async () => {
     return getSchedule({
@@ -31,6 +32,12 @@ const { data, isLoading } = useQuery({
       startTime: firstDay.value,
       endTime: lastDay.value
     })
+  }
+})
+
+watchEffect(() => {
+  if (isError) {
+    isGlobalError.value = true
   }
 })
 
