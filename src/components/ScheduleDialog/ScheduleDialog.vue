@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useDataQueries } from '@/core/composables'
+import { useDataQueries, useGlobalError } from '@/core/composables'
 import { DIALOG_TABS } from '@/core/constants'
 import { search } from '@/core/utils/search'
 import { Icon } from '@iconify/vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { NavigationView } from '../NavigationView'
 import { Button } from '../ui/Button'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
@@ -12,6 +12,7 @@ import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
 
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
+const { isGlobalError } = useGlobalError()
 const result = useDataQueries()
 const searchValue = ref('')
 const selectedTab = ref('groups')
@@ -20,6 +21,12 @@ const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const deviceClass = computed(() => {
   return breakpoints.isGreaterOrEqual('md') ? 'is-desktop' : 'is-mobile'
+})
+
+watchEffect(() => {
+  if (result.value.some((query) => query.isError)) {
+    isGlobalError.value = true
+  }
 })
 </script>
 <template>
