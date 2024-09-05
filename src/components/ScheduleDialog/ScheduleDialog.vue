@@ -24,8 +24,12 @@ const deviceClass = computed(() => {
 })
 
 watchEffect(() => {
+  console.log(result.value.map((q) => q.isError))
+
   if (result.value.some((query) => query.isError)) {
     isGlobalError.value = true
+  } else {
+    isGlobalError.value = false
   }
 })
 </script>

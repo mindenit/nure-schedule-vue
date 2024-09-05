@@ -38,6 +38,8 @@ const { data, isLoading, isError } = useQuery({
 watchEffect(() => {
   if (isError) {
     isGlobalError.value = true
+  } else {
+    isGlobalError.value = false
   }
 })
 
