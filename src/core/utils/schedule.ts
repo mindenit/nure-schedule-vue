@@ -94,6 +94,7 @@ const toICS = (schedule: ISchedule[]): Blob => {
     const title = `${pair.numberPair}: (${pair.type}) ${pair.subject.title}`
     const teachersString = stringifyTeachers(pair.teachers)
     const description = `Викладач(і): ${teachersString.length === 0 ? 'Немає' : teachersString}`
+    const category = `${pair.type}`
 
     ics += 'BEGIN:VEVENT\n'
     ics += `SUMMARY:${title}\n`
@@ -101,6 +102,7 @@ const toICS = (schedule: ISchedule[]): Blob => {
     ics += `DTEND:${toICVFormat(pair.endTime)}\n`
     ics += `LOCATION:${pair.auditory}\n`
     ics += `DESCRIPTION:${description}\n`
+    ics += `CATEGORIES:${category}\n`
     ics += 'END:VEVENT\n'
   }
 
