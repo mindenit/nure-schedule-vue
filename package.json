@@ -46,7 +46,7 @@
     "@vee-validate/valibot": "^4.12.5",
     "@vueuse/core": "^10.9.0",
     "dayjs": "^1.11.10",
-    "nurekit": "^0.5.2",
+    "nurekit": "^0.5.3",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "radix-vue": "^1.4.9",
