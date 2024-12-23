@@ -1,10 +1,10 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
+import UnheadVite from '@unhead/addons/vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vite'
 import svgLoader from 'vite-svg-loader'
-import UnheadVite from '@unhead/addons/vite'
 
 export default defineConfig({
   plugins: [vue(), vueJsx(), svgLoader(), UnheadVite()],

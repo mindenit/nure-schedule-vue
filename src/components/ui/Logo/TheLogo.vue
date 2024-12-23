@@ -14,7 +14,7 @@ import { RouterLink } from 'vue-router'
 </template>
 <style lang="scss" scoped>
 .LogoContainer {
-  @apply flex items-center gap-2;
+  @apply flex items-center;
 
   .LogoText {
     @apply font-montserrat text-3xl font-bold leading-normal text-contrast;
