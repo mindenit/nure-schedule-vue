@@ -25,9 +25,9 @@ const { icon, toggle } = useTheme()
     ]"
   >
     <template v-if="breakpoints.isGreaterOrEqual('md')">
-      <RouterLink :to="{ name: 'home' }"
-        ><Logo>{{ title }}</Logo></RouterLink
-      >
+      <RouterLink :to="{ name: 'home' }">
+        <Logo>{{ title }}</Logo>
+      </RouterLink>
       <div class="flex flex-row items-center gap-6">
         <NavbarItem
           v-for="(elem, index) in ROUTES_META"

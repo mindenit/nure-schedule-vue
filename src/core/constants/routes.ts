@@ -4,11 +4,11 @@ const ROUTES_META = [
     route: 'home',
     icon: 'ic:outline-date-range'
   },
-  {
-    name: 'Зміни',
-    route: 'changes',
-    icon: 'ic:outline-sticky-note-2'
-  },
+  // {
+  //   name: 'Зміни',
+  //   route: 'changes',
+  //   icon: 'ic:outline-sticky-note-2'
+  // },
   {
     name: 'Фільтр',
     route: 'filters',
