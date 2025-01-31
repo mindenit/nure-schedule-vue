@@ -41,16 +41,8 @@ const authors = [
 
 const donations = [
   {
-    name: 'Монобанка',
-    url: 'https://send.monobank.ua/jar/5tHDuV8dfg'
-  },
-  {
-    name: 'Монобаза',
-    url: 'https://base.monobank.ua/DHfiSksgyjSYDT'
-  },
-  {
-    name: 'Ko-fi',
-    url: 'https://ko-fi.com/mindenit'
+    name: 'Телеграм',
+    url: 'https://t.me/mindenit'
   }
 ]
 </script>
@@ -80,10 +72,7 @@ const donations = [
       </ul>
     </section>
     <section class="Wrapper">
-      <Title variant="large" class="!mb-0 text-center">Підтримати</Title>
-      <Title variant="medium" class="text-center"
-        >Підтримайте нас, аби прискороти розробку нової функціональності</Title
-      >
+      <Title variant="large" class="!mb-0 text-center">Звʼязатися з нами</Title>
       <div class="flex w-full items-center justify-center gap-4 max-sm:flex-col">
         <a v-for="({ name, url }, index) in donations" :key="index" :href="url" target="_blank">
           <Button variant="outlined" class="w-[156px]">{{ name }}</Button>
