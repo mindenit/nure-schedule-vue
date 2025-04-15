@@ -5,5 +5,5 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "4001:8080"
+      - "4174:8080"
     restart: always
