@@ -55,7 +55,7 @@ const getDayPairs = (date: string, pairs: Schedule[]) => {
   }
 
   const filtered = pairs.filter((pair) => {
-    return dayjsClient.unix(pair.startedAt).format(DATE_FORMAT) === date
+    return dayjsClient(pair.startedAt).format(DATE_FORMAT) === date
   })
 
   cache.set(date, filtered)
@@ -71,7 +71,8 @@ const getPairsByTime = (time: string, pairs: Schedule[]) => {
   }
 
   const filtered = pairs.filter((pair) => {
-    return toTime(pair.startedAt) === time
+    const pairTime = dayjsClient(pair.startedAt).format('HH:mm')
+    return pairTime === time
   })
 
   cache.set(time, filtered)
