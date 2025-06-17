@@ -28,30 +28,6 @@ useSeoMeta({
   ogTitle: title,
   ogDescription: description
 })
-
-// const { data, isLoading } = useQuery({
-//   queryKey: ['user', authStore.tokens?.accessToken],
-//   async queryFn() {
-//     try {
-//       const user = await nurekit.users.info({
-//         accessToken: authStore.tokens?.accessToken as string
-//       })
-
-//       schedulesStore.recentSchedules = user.schedules
-
-//       if (!schedulesStore.activeSchedule?.name) {
-//         const activeSchedule = schedulesStore.recentSchedules[0]
-
-//         schedulesStore.activeSchedule = activeSchedule
-//       }
-
-//       return user
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   },
-//   enabled: authStore.isAuthorized
-// })
 </script>
 
 <template>

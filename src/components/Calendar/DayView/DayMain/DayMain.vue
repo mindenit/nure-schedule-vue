@@ -5,10 +5,10 @@ import { Title } from '@/components/ui/Title'
 import { DAY_WITH_MONTH_FORMAT } from '@/core/constants'
 import { dayjsClient } from '@/libs/dayjs'
 import { Icon } from '@iconify/vue'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { computed } from 'vue'
 
-const props = defineProps<{ activeDate: string; pairs: ISchedule[] }>()
+const props = defineProps<{ activeDate: string; pairs: Schedule[] }>()
 
 const title = computed(() => {
   return dayjsClient(props.activeDate).locale('uk').format(DAY_WITH_MONTH_FORMAT)

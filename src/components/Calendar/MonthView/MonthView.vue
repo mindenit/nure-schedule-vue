@@ -6,7 +6,7 @@ import { getDayPairs } from '@/core/utils'
 import { toMonthName } from '@/core/utils/dayjs'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { Dayjs } from 'dayjs'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { RadioGroupRoot } from 'radix-vue'
 import { computed, ref } from 'vue'
 import { DateSelector } from './DateSelector'
@@ -14,7 +14,7 @@ import { MonthAside } from './MonthAside'
 import { MonthDay } from './MonthDay'
 import { MonthHeaders } from './MonthHeaders'
 
-defineProps<{ pairs: ISchedule[] }>()
+defineProps<{ pairs: Schedule[] }>()
 
 const { selectedDate, monthDays: days, today, selectDate } = useCalendar()
 

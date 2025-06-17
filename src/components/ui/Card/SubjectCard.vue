@@ -2,18 +2,18 @@
 import { Title } from '@/components/ui/Title'
 import type { SubjectShortType } from '@/core/types'
 import { getCardDetails, getCardIcon, toTime } from '@/core/utils'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { computed, toRefs } from 'vue'
 import { CardAvatar } from '.'
 
 interface Props {
-  pair: ISchedule
+  pair: Schedule
   isFullWidth?: boolean
 }
 
 const props = defineProps<Props>()
 
-const { type, startTime, endTime, subject, auditory } = toRefs(props.pair)
+const { type, startedAt, endedAt, subject, auditorium } = toRefs(props.pair)
 
 const { avatarColor, subjectType } = getCardDetails(type.value as SubjectShortType)
 
@@ -22,11 +22,11 @@ const avatarIcon = computed(() => {
 })
 
 const start = computed(() => {
-  return toTime(startTime.value)
+  return toTime(startedAt.value)
 })
 
 const end = computed(() => {
-  return toTime(endTime.value)
+  return toTime(endedAt.value)
 })
 </script>
 
@@ -36,7 +36,7 @@ const end = computed(() => {
       <CardAvatar :letters="avatarIcon" :color="avatarColor" as-icon />
       <div class="flex flex-col gap-y-1">
         <Title variant="medium">
-          {{ start }}-{{ end }} {{ auditory }}
+          {{ start }}-{{ end }} {{ auditorium.name }}
           {{ subjectType }}
         </Title>
         <Title variant="big">{{ subject.title }}</Title>

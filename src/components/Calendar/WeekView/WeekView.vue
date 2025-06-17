@@ -2,11 +2,11 @@
 import { Title } from '@/components/ui/Title'
 import { useCalendar } from '@/core/composables'
 import { Icon } from '@iconify/vue'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { WeekGrid } from './Grid'
 import { WeekHeader } from './Header'
 
-defineProps<{ pairs: ISchedule[] }>()
+defineProps<{ pairs: Schedule[] }>()
 
 const { weekDays: days } = useCalendar()
 </script>

@@ -4,12 +4,12 @@ import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/compon
 import { Title } from '@/components/ui/Title'
 import { toDayWithMonth } from '@/core/utils'
 import { Icon } from '@iconify/vue'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { computed } from 'vue'
 
 const props = defineProps<{
   activeDate: string
-  pairs: ISchedule[]
+  pairs: Schedule[]
 }>()
 
 const title = computed(() => toDayWithMonth(props.activeDate))

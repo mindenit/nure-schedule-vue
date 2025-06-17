@@ -2,10 +2,10 @@
 import type { CalendarDay } from '@/core/types'
 import { WeekTimeline } from '../Timeline'
 import { WeekEventsColumn } from '../EventColumn'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { getDayPairs } from '@/core/utils'
 
-defineProps<{ days: CalendarDay[]; pairs: ISchedule[] }>()
+defineProps<{ days: CalendarDay[]; pairs: Schedule[] }>()
 </script>
 <template>
   <div class="WeekGrid">

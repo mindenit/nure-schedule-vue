@@ -1,6 +1,6 @@
 import { dayjsClient } from '@/libs/dayjs'
 import { nurekit } from '@/libs/nurekit'
-import type { IGroup, ISchedule, ITeacher } from 'nurekit'
+import type { Group, Schedule, Teacher } from 'nurekit'
 import { DATE_FORMAT } from '../constants'
 import type {
   ConvertFn,
@@ -21,41 +21,41 @@ const getSchedule = async ({ type, ...rest }: ScheduleQueryFn) => {
   }
 }
 
-const getTeacherSchedule = async ({ name, startTime, endTime }: ScheduleFnArgs) => {
+const getTeacherSchedule = async ({ id, startedAt, endedAt }: ScheduleFnArgs) => {
   return nurekit.teachers.getSchedule({
-    startTime,
-    endTime,
-    teacherName: name
+    startedAt,
+    endedAt,
+    id
   })
 }
 
-const getGroupSchedule = async ({ name, startTime, endTime }: ScheduleFnArgs) => {
+const getGroupSchedule = async ({ id, startedAt, endedAt }: ScheduleFnArgs) => {
   const schedule = await nurekit.groups.getSchedule({
-    startTime,
-    endTime,
-    groupName: name
+    startedAt,
+    endedAt,
+    id
   })
 
   return schedule
 }
 
-const getAuditoriumSchedule = async ({ name, startTime, endTime }: ScheduleFnArgs) => {
+const getAuditoriumSchedule = async ({ id, startedAt, endedAt }: ScheduleFnArgs) => {
   return nurekit.auditoriums.getSchedule({
-    startTime,
-    endTime,
-    auditoriumName: name
+    startedAt,
+    endedAt,
+    id
   })
 }
 
-const getDayPairs = (date: string, pairs: ISchedule[]) => {
-  const cache = new Map<string, ISchedule[]>()
+const getDayPairs = (date: string, pairs: Schedule[]) => {
+  const cache = new Map<string, Schedule[]>()
 
   if (cache.has(date)) {
-    return cache.get(date) as ISchedule[]
+    return cache.get(date) as Schedule[]
   }
 
   const filtered = pairs.filter((pair) => {
-    return dayjsClient.unix(pair.startTime).format(DATE_FORMAT) === date
+    return dayjsClient.unix(pair.startedAt).format(DATE_FORMAT) === date
   })
 
   cache.set(date, filtered)
@@ -63,15 +63,15 @@ const getDayPairs = (date: string, pairs: ISchedule[]) => {
   return filtered
 }
 
-const getPairsByTime = (time: string, pairs: ISchedule[]) => {
-  const cache = new Map<string, ISchedule[]>()
+const getPairsByTime = (time: string, pairs: Schedule[]) => {
+  const cache = new Map<string, Schedule[]>()
 
   if (cache.has(time)) {
-    return cache.get(time) as ISchedule[]
+    return cache.get(time) as Schedule[]
   }
 
   const filtered = pairs.filter((pair) => {
-    return toTime(pair.startTime) === time
+    return toTime(pair.startedAt) === time
   })
 
   cache.set(time, filtered)
@@ -79,15 +79,15 @@ const getPairsByTime = (time: string, pairs: ISchedule[]) => {
   return filtered
 }
 
-const stringifyGroups = (groups: IGroup[]) => {
+const stringifyGroups = (groups: Group[]) => {
   return groups.map((group) => group.name).join(', ')
 }
 
-const stringifyTeachers = (teachers: ITeacher[]) => {
+const stringifyTeachers = (teachers: Teacher[]) => {
   return teachers.map((teacher) => teacher.fullName).join(', ')
 }
 
-const toICS = (schedule: ISchedule[]): Blob => {
+const toICS = (schedule: Schedule[]): Blob => {
   let ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\n'
 
   for (const pair of schedule) {
@@ -98,9 +98,9 @@ const toICS = (schedule: ISchedule[]): Blob => {
 
     ics += 'BEGIN:VEVENT\n'
     ics += `SUMMARY:${title}\n`
-    ics += `DTSTART:${toICVFormat(pair.startTime)}\n`
-    ics += `DTEND:${toICVFormat(pair.endTime)}\n`
-    ics += `LOCATION:${pair.auditory}\n`
+    ics += `DTSTART:${toICVFormat(pair.startedAt)}\n`
+    ics += `DTEND:${toICVFormat(pair.endedAt)}\n`
+    ics += `LOCATION:${pair.auditorium.name}\n`
     ics += `DESCRIPTION:${description}\n`
     ics += `CATEGORIES:${category}\n`
     ics += 'END:VEVENT\n'
@@ -112,7 +112,7 @@ const toICS = (schedule: ISchedule[]): Blob => {
 }
 
 const convertSchedule = async (
-  { type, name }: ExportableScheduleArgs,
+  { type, id }: ExportableScheduleArgs,
   convertFn: ConvertFn
 ): Promise<Blob> => {
   const now = new Date()
@@ -120,11 +120,14 @@ const convertSchedule = async (
   const firstSeptember = new Date(year, 8, 1)
   const newSemester = now > firstSeptember
 
+  if (id === undefined) {
+    throw new Error('ID is required for exporting schedule')
+  }
   const schedule = await getSchedule({
+    id,
     type,
-    name,
-    startTime: newSemester ? `${year}-09-01` : `${year - 1}-09-01`,
-    endTime: newSemester ? `${year + 1}-09-01` : `${year}-09-01`
+    startedAt: newSemester ? `${year}-09-01` : `${year - 1}-09-01`,
+    endedAt: newSemester ? `${year + 1}-09-01` : `${year}-09-01`
   })
 
   return convertFn(schedule)

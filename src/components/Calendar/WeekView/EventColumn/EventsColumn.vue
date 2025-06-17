@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { WeekEventCell } from '../EventCell'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { getPairsByTime, getTimeline } from '@/core/utils'
 
-defineProps<{ pairs: ISchedule[] }>()
+defineProps<{ pairs: Schedule[] }>()
 
 const timeline = getTimeline()
 </script>

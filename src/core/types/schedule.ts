@@ -1,4 +1,4 @@
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import type { Ref } from 'vue'
 
 type ScheduleType = 'teachers' | 'groups' | 'auditoriums'
@@ -20,19 +20,20 @@ interface ScheduleQueryFn extends ScheduleFnArgs {
 }
 
 interface ScheduleFnArgs {
-  name: string
-  startTime: string
-  endTime: string
+  id: number
+  startedAt: string
+  endedAt: string
 }
 
 interface ExportableScheduleArgs {
-  name: string
+  id?: number
+  name?: string
   type: ScheduleType
 }
 
 type SubjectShortType = 'Лк' | 'Лб' | 'Пз' | 'Конс' | 'Зал' | 'Екз'
 
-type ConvertFn = (schedule: ISchedule[]) => Blob
+type ConvertFn = (schedule: Schedule[]) => Blob
 
 export type {
   RecentSchedule,
