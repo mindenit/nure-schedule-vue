@@ -13,8 +13,6 @@ const checkers = usePasswordCheckers(password)
 const getIcon = (condition: Ref<boolean>) => {
   return condition.value ? 'ic:baseline-check' : 'ic:baseline-close'
 }
-
-console.log(checkers.lengthChecker.value)
 </script>
 <template>
   <div class="PasswordChecker">

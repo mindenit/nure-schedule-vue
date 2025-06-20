@@ -9,14 +9,12 @@ import { Button } from '../ui/Button'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '../ui/Dialog'
 import { SearchField } from '../ui/SearchField'
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../ui/Tabs'
-
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const { isGlobalError } = useGlobalError()
 const result = useDataQueries()
 const searchValue = ref('')
 const selectedTab = ref('groups')
-
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const deviceClass = computed(() => {
@@ -24,8 +22,6 @@ const deviceClass = computed(() => {
 })
 
 watchEffect(() => {
-  console.log(result.value.map((q) => q.isError))
-
   if (result.value.some((query) => query.isError)) {
     isGlobalError.value = true
   } else {
@@ -63,7 +59,7 @@ watchEffect(() => {
           </p>
           <NavigationView
             v-else-if="query.data"
-            :data="search(/* @ts-ignore */ query.data, searchValue, DIALOG_TABS[index].select)"
+            :data="search(query.data as any, searchValue, DIALOG_TABS[index].select)"
             :select="DIALOG_TABS[index].select"
             :type="DIALOG_TABS[index].value"
           />

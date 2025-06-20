@@ -44,8 +44,6 @@ watchEffect(() => {
 })
 
 const { downloadFile } = useDownload(toICS)
-
-console.log('data', data.value)
 </script>
 <template>
   <TabsRoot v-model="view" as-child>
