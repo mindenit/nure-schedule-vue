@@ -9,7 +9,7 @@ const type = computed(() => (props.pairs.length > 1 ? 'compact' : 'default'))
 </script>
 <template>
   <div class="ColumnItem">
-    <Event v-for="pair in pairs" :key="pair.id" :pair="pair" :type="type" />
+    <Event v-for="pair in pairs" :key="pair.startedAt" :pair="pair" :type="type" />
   </div>
 </template>
 <style lang="scss" scoped>

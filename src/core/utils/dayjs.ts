@@ -40,7 +40,11 @@ const toMonthName = (date: Dayjs) => {
   return capitalize(dayjsClient(date).locale('uk').format(LONG_MONTH_FORMAT))
 }
 
-const toTime = (dateTimeString: string) => {
+const toTime = (dateTimeString: string | number) => {
+  if (typeof dateTimeString === 'number') {
+    return dayjsClient.unix(dateTimeString).format('HH:mm')
+  }
+
   return dayjsClient(dateTimeString).format('HH:mm')
 }
 
