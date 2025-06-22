@@ -23,7 +23,7 @@ defineProps<{ title: string }>()
         rel="noopener noreferrer"
         class="text-black transition-all duration-200 hover:-mx-2 hover:-my-1 hover:rounded hover:bg-black/10 hover:px-2 hover:py-1 focus:outline-none"
       >
-        Доєжнатися
+        Доєднатися
       </a>
     </div>
     <slot></slot>
