@@ -1,4 +1,4 @@
-import type { IAuditorium, ISchedule, ITeacher } from 'nurekit'
+import type { Auditorium, Schedule, Teacher } from 'nurekit'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { LessonsFilter, SubjectShortType } from '../types'
@@ -7,8 +7,8 @@ import { flow } from '../utils'
 export const useFiltersStore = defineStore(
   'filters',
   () => {
-    const teachersFilter = ref<ITeacher[]>([])
-    const auditoriumsFilter = ref<IAuditorium[]>([])
+    const teachersFilter = ref<Teacher[]>([])
+    const auditoriumsFilter = ref<Auditorium[]>([])
     const lessonsFilter = ref<LessonsFilter[]>([])
 
     const addLessonsFilter = (lesson: LessonsFilter) => {
@@ -21,7 +21,7 @@ export const useFiltersStore = defineStore(
       }
     }
 
-    const addTeachersFilter = (teacher: ITeacher) => {
+    const addTeachersFilter = (teacher: Teacher) => {
       const exists = teachersFilter.value.some((t) => {
         return t.id === teacher.id
       })
@@ -33,7 +33,7 @@ export const useFiltersStore = defineStore(
       }
     }
 
-    const addAuditoriumFilter = (auditorium: IAuditorium) => {
+    const addAuditoriumFilter = (auditorium: Auditorium) => {
       const exists = auditoriumsFilter.value.some((a) => {
         return a.id === auditorium.id
       })
@@ -55,7 +55,7 @@ export const useFiltersStore = defineStore(
       }
     }
 
-    const removeTeacherFilter = (teacher: ITeacher) => {
+    const removeTeacherFilter = (teacher: Teacher) => {
       const removedItemIndex = teachersFilter.value.findIndex((t) => {
         return t.id === teacher.id
       })
@@ -65,7 +65,7 @@ export const useFiltersStore = defineStore(
       }
     }
 
-    const removeAuditoriumFilter = (auditorium: IAuditorium) => {
+    const removeAuditoriumFilter = (auditorium: Auditorium) => {
       const removedItemIndex = auditoriumsFilter.value.findIndex((a) => {
         return a.id === auditorium.id
       })
@@ -75,13 +75,13 @@ export const useFiltersStore = defineStore(
       }
     }
 
-    const applyLessonsFilter = (pairs: ISchedule[]) => {
+    const applyLessonsFilter = (pairs: Schedule[]) => {
       const exclusionArr = lessonsFilter.value.map((filter) => filter.type)
 
       return pairs.filter((pair) => !exclusionArr.includes(pair.type as SubjectShortType))
     }
 
-    const applyTeachersFilter = (pairs: ISchedule[]) => {
+    const applyTeachersFilter = (pairs: Schedule[]) => {
       const exclusionSet = new Set(teachersFilter.value.map((teacher) => teacher.id))
 
       return pairs.filter((pair) => {
@@ -95,9 +95,11 @@ export const useFiltersStore = defineStore(
       })
     }
 
-    const applyAuditoriumsFilter = (pairs: ISchedule[]) => {
+    const applyAuditoriumsFilter = (pairs: Schedule[]) => {
       return pairs.filter((pair) => {
-        return !auditoriumsFilter.value.map((auditorium) => auditorium.name).includes(pair.auditory)
+        return !auditoriumsFilter.value
+          .map((auditorium) => auditorium.name)
+          .includes(pair.auditorium.name)
       })
     }
 

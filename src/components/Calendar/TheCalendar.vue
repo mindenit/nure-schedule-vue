@@ -28,9 +28,9 @@ const { data, isLoading, isError } = useQuery({
   queryFn: async () => {
     return getSchedule({
       type: activeSchedule.value?.type as ScheduleType,
-      name: activeSchedule.value?.name as string,
-      startTime: firstDay.value,
-      endTime: lastDay.value
+      id: activeSchedule.value?.id as number,
+      startedAt: firstDay.value,
+      endedAt: lastDay.value
     })
   }
 })

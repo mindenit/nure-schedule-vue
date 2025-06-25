@@ -9,13 +9,13 @@ import { dayjsClient } from '@/libs/dayjs'
 import { Icon } from '@iconify/vue'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { Dayjs } from 'dayjs'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { RadioGroupItem, RadioGroupRoot } from 'radix-vue'
 import { computed, nextTick, onMounted, ref } from 'vue'
 import { DateSelector, DateSelectorItem } from './DateSelector'
 import { DayMain } from './DayMain'
 
-defineProps<{ pairs: ISchedule[] }>()
+defineProps<{ pairs: Schedule[] }>()
 
 const { selectedDate, monthDays: days, selectDate } = useCalendar()
 
@@ -102,7 +102,7 @@ onMounted(() => {
     <div v-else class="box-border flex w-full flex-col gap-4 pb-24">
       <DialogRoot
         v-for="(pair, index) in getDayPairs(radioStateSingle, pairs)"
-        :key="`${pair.startTime}-${pair.numberPair}-${index}`"
+        :key="`${pair.startedAt}-${pair.numberPair}-${index}`"
       >
         <DialogTrigger>
           <SubjectCard :pair="pair" />

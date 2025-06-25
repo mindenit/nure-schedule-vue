@@ -3,14 +3,14 @@ import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { CalendarDay } from '@/core/types'
 import { getPairsCountPlural } from '@/core/utils'
 import { dayjsClient } from '@/libs/dayjs'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { RadioGroupItem, useForwardProps, type RadioGroupItemProps } from 'radix-vue'
 import { computed } from 'vue'
 import { MobileDayDialog } from '../MobileDayDialog'
 
 interface Props extends RadioGroupItemProps {
   day: CalendarDay
-  pairs: ISchedule[]
+  pairs: Schedule[]
 }
 
 const props = defineProps<Props>()

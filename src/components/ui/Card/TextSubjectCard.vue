@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import { Title } from '@/components/ui/Title'
 import { stringifyGroups, stringifyTeachers, toDay, toDayWithMonth, toTime } from '@/core/utils'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { computed } from 'vue'
 
 interface Props {
-  pair: ISchedule
+  pair: Schedule
 }
 
 const props = defineProps<Props>()
 
-const weekday = computed(() => toDay(props.pair.startTime))
-const date = computed(() => toDayWithMonth(props.pair.startTime))
-const startTime = computed(() => toTime(props.pair.startTime))
+const weekday = computed(() => toDay(props.pair.startedAt))
+const date = computed(() => toDayWithMonth(props.pair.startedAt))
+const startTime = computed(() => toTime(props.pair.startedAt))
 
 const teachers = computed(() => stringifyTeachers(props.pair.teachers))
 const groups = computed(() => stringifyGroups(props.pair.groups))
@@ -21,7 +21,7 @@ const groups = computed(() => stringifyGroups(props.pair.groups))
   <div class="TextCardContainer">
     <Title variant="light">{{ weekday }} {{ date }} {{ startTime }}. {{ pair.type }}</Title>
     <Title variant="big">{{ pair.subject.title }}</Title>
-    <Title variant="medium">Авдиторія: {{ pair.auditory }}</Title>
+    <Title variant="medium">Авдиторія: {{ pair.auditorium.name }}</Title>
     <Title variant="medium" v-if="pair.teachers.length">Викладач(-і): {{ teachers }}</Title>
     <div class="flex flex-wrap gap-1">
       <Title variant="medium">Група(-и):</Title>

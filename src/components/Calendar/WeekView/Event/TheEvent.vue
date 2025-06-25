@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import type { EventType, SubjectShortType } from '@/core/types'
 import { computed } from 'vue'
 import { getPairColor, toTime } from '@/core/utils'
 import { TextSubjectCard } from '@/components/ui/Card'
 
-const props = defineProps<{ pair: ISchedule; type: EventType }>()
+const props = defineProps<{ pair: Schedule; type: EventType }>()
 
 const pairTime = computed(() => {
-  return `${toTime(props.pair.startTime)}-${toTime(props.pair.endTime)}`
+  return `${toTime(props.pair.startedAt)}-${toTime(props.pair.endedAt)}`
 })
 
 const pairColor = getPairColor(props.pair.type as SubjectShortType)

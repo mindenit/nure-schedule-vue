@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Dialog } from 'radix-vue/namespaced'
 import type { CalendarDay } from '@/core/types'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 import { Button } from '@/components/ui/Button'
 import { Icon } from '@iconify/vue'
 import { Title } from '@/components/ui/Title'
@@ -10,7 +10,7 @@ import { toDayWithMonth } from '@/core/utils'
 import { DialogContent, DialogHeader, DialogRoot, DialogTrigger } from '@/components/ui/Dialog'
 import { SubjectCard, TextSubjectCard } from '@/components/ui/Card'
 
-const props = defineProps<{ day: CalendarDay; pairs: ISchedule[] }>()
+const props = defineProps<{ day: CalendarDay; pairs: Schedule[] }>()
 
 const title = computed(() => toDayWithMonth(props.day.date))
 </script>

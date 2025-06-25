@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { Event } from '../Event'
-import type { ISchedule } from 'nurekit'
+import type { Schedule } from 'nurekit'
 
-const props = defineProps<{ pairs: ISchedule[] }>()
+const props = defineProps<{ pairs: Schedule[] }>()
 
 const type = computed(() => (props.pairs.length > 1 ? 'compact' : 'default'))
 </script>
 <template>
   <div class="ColumnItem">
-    <Event v-for="pair in pairs" :key="pair.startTime" :pair="pair" :type="type" />
+    <Event v-for="pair in pairs" :key="pair.startedAt" :pair="pair" :type="type" />
   </div>
 </template>
 <style lang="scss" scoped>
